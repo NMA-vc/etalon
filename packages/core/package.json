@@ -1,0 +1,26 @@
+{
+    "name": "etalon-core",
+    "version": "1.0.0",
+    "description": "Core vendor matching engine for ETALON privacy auditor",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "type": "module",
+    "scripts": {
+        "build": "tsup src/index.ts --format esm --dts --clean --external yaml",
+        "clean": "rm -rf dist"
+    },
+    "dependencies": {
+        "yaml": "^2.8.2"
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "keywords": [
+        "privacy",
+        "gdpr",
+        "tracker",
+        "audit"
+    ],
+    "license": "MIT"
+}

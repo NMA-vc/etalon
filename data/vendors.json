@@ -1,0 +1,3755 @@
+{
+    "version": "2.0.0",
+    "last_updated": "2026-02-11T10:00:00Z",
+    "vendors": [
+        {
+            "id": "ab-tasty",
+            "domains": [
+                "abtasty.com",
+                "try.abtasty.com"
+            ],
+            "name": "AB Tasty",
+            "company": "AB Tasty",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.abtasty.com/privacy-policy/",
+            "purpose": "A/B testing and personalization",
+            "data_collected": [
+                "cookies",
+                "click data",
+                "page views"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "vwo",
+                "optimizely"
+            ]
+        },
+        {
+            "id": "acuity",
+            "domains": [
+                "acuityscheduling.com",
+                "*.acuityscheduling.com"
+            ],
+            "name": "Acuity Scheduling",
+            "company": "Squarespace Inc.",
+            "category": "booking",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.squarespace.com/privacy",
+            "purpose": "Online appointment scheduling",
+            "data_collected": [
+                "name",
+                "email",
+                "appointment data"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "calendly"
+            ]
+        },
+        {
+            "id": "addtoany",
+            "domains": [
+                "addtoany.com",
+                "static.addtoany.com"
+            ],
+            "name": "AddToAny",
+            "company": "AddToAny",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.addtoany.com/privacy",
+            "purpose": "Social sharing buttons",
+            "data_collected": [
+                "share clicks",
+                "page URLs"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "sharethis"
+            ]
+        },
+        {
+            "id": "adobe-analytics",
+            "domains": [
+                "omtrdc.net",
+                "demdex.net",
+                "2o7.net",
+                "sc.omtrdc.net"
+            ],
+            "name": "Adobe Analytics",
+            "company": "Adobe Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.adobe.com/privacy/eu-dpa.html",
+            "purpose": "Enterprise web analytics",
+            "data_collected": [
+                "cookies",
+                "page views",
+                "user interactions",
+                "conversions"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "adobe-launch",
+            "domains": [
+                "adobedtm.com",
+                "assets.adobedtm.com",
+                "launch.adobe.com"
+            ],
+            "name": "Adobe Launch",
+            "company": "Adobe Inc.",
+            "category": "tag_manager",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.adobe.com/privacy/policy.html",
+            "purpose": "Tag management within Adobe Experience Platform",
+            "data_collected": [
+                "page views",
+                "events",
+                "rules"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "google-tag-manager",
+                "tealium"
+            ]
+        },
+        {
+            "id": "adobe-target",
+            "domains": [
+                "tt.omtrdc.net",
+                "mboxedge.tt.omtrdc.net"
+            ],
+            "name": "Adobe Target",
+            "company": "Adobe Inc.",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "purpose": "A/B testing and personalization",
+            "data_collected": [
+                "experiment assignments",
+                "user interactions"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "adroll",
+            "domains": [
+                "adroll.com",
+                "d.adroll.com",
+                "s.adroll.com"
+            ],
+            "name": "AdRoll",
+            "company": "NextRoll Inc.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "purpose": "Retargeting and display advertising",
+            "data_collected": [
+                "cookies",
+                "browsing behavior"
+            ],
+            "risk_score": 6
+        },
+        {
+            "id": "airship",
+            "domains": [
+                "airship.com",
+                "*.urbanairship.com"
+            ],
+            "name": "Airship",
+            "company": "Airship Group Inc.",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.airship.com/legal/privacy-center/",
+            "purpose": "Customer engagement and push notifications",
+            "data_collected": [
+                "device data",
+                "engagement",
+                "user attributes"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "onesignal"
+            ]
+        },
+        {
+            "id": "akamai",
+            "domains": [
+                "akamaized.net",
+                "akamai.net",
+                "akstat.io"
+            ],
+            "name": "Akamai",
+            "company": "Akamai Technologies Inc.",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "purpose": "CDN and web security",
+            "data_collected": [
+                "IP address",
+                "request headers"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "amazon-ads",
+            "domains": [
+                "amazon-adsystem.com",
+                "aax.amazon-adsystem.com",
+                "z-na.amazon-adsystem.com"
+            ],
+            "name": "Amazon Advertising",
+            "company": "Amazon.com Inc.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "purpose": "Advertising and conversion tracking",
+            "data_collected": [
+                "cookies",
+                "conversion data"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "amplitude",
+            "domains": [
+                "api.amplitude.com",
+                "cdn.amplitude.com",
+                "amplitude.com"
+            ],
+            "name": "Amplitude",
+            "company": "Amplitude Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://amplitude.com/dpa",
+            "privacy_policy": "https://amplitude.com/privacy",
+            "purpose": "Product analytics and behavioral tracking",
+            "data_collected": [
+                "events",
+                "user properties",
+                "device info"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "posthog",
+                "mixpanel"
+            ]
+        },
+        {
+            "id": "anchor",
+            "domains": [
+                "anchor.fm",
+                "*.anchor.fm"
+            ],
+            "name": "Anchor/Spotify for Podcasters",
+            "company": "Spotify AB",
+            "category": "video",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.spotify.com/legal/privacy-policy/",
+            "purpose": "Podcast creation and hosting",
+            "data_collected": [
+                "listening data",
+                "IP address"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "libsyn"
+            ]
+        },
+        {
+            "id": "apollo",
+            "domains": [
+                "apollo.io",
+                "*.apollo.io",
+                "app.apollo.io"
+            ],
+            "name": "Apollo.io",
+            "company": "Apollo.io Inc.",
+            "category": "b2b_intelligence",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.apollo.io/privacy-policy/",
+            "purpose": "B2B sales intelligence and engagement",
+            "data_collected": [
+                "contact info",
+                "company data",
+                "engagement data"
+            ],
+            "risk_score": 6,
+            "alternatives": [
+                "lusha"
+            ]
+        },
+        {
+            "id": "aws-cloudfront",
+            "domains": [
+                "cloudfront.net"
+            ],
+            "name": "AWS CloudFront",
+            "company": "Amazon Web Services Inc.",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "dpa_url": "https://d1.awsstatic.com/legal/aws-gdpr/AWS_GDPR_DPA.pdf",
+            "purpose": "Content delivery network",
+            "data_collected": [
+                "IP address",
+                "request headers"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "biocatch",
+            "domains": [
+                "biocatch.com",
+                "*.biocatch.com"
+            ],
+            "name": "BioCatch",
+            "company": "BioCatch Ltd.",
+            "category": "security",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.biocatch.com/privacy-policy",
+            "purpose": "Behavioral biometric authentication and fraud detection",
+            "data_collected": [
+                "keystroke dynamics",
+                "mouse movements",
+                "device orientation",
+                "behavioral patterns"
+            ],
+            "risk_score": 8,
+            "alternatives": []
+        },
+        {
+            "id": "braintree",
+            "domains": [
+                "braintreegateway.com",
+                "braintree-api.com",
+                "assets.braintreegateway.com"
+            ],
+            "name": "Braintree",
+            "company": "PayPal Holdings Inc.",
+            "category": "payments",
+            "gdpr_compliant": true,
+            "purpose": "Payment processing",
+            "data_collected": [
+                "payment information"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "bugsnag",
+            "domains": [
+                "bugsnag.com",
+                "notify.bugsnag.com",
+                "sessions.bugsnag.com"
+            ],
+            "name": "Bugsnag",
+            "company": "SmartBear Software Inc.",
+            "category": "error_tracking",
+            "gdpr_compliant": true,
+            "purpose": "Error monitoring and stability management",
+            "data_collected": [
+                "error data",
+                "device info"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "bunny-fonts",
+            "domains": [
+                "fonts.bunny.net"
+            ],
+            "name": "Bunny Fonts",
+            "company": "BunnyWay d.o.o.",
+            "category": "fonts",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://bunny.net/privacy",
+            "purpose": "Privacy-friendly Google Fonts alternative",
+            "data_collected": [],
+            "risk_score": 1
+        },
+        {
+            "id": "calendly",
+            "domains": [
+                "calendly.com",
+                "assets.calendly.com"
+            ],
+            "name": "Calendly",
+            "company": "Calendly LLC",
+            "category": "other",
+            "gdpr_compliant": true,
+            "purpose": "Scheduling and booking widget",
+            "data_collected": [
+                "name",
+                "email",
+                "scheduling data"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "chili-piper",
+            "domains": [
+                "chilipiper.com",
+                "*.chilipiper.com"
+            ],
+            "name": "Chili Piper",
+            "company": "Chili Piper Inc.",
+            "category": "booking",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.chilipiper.com/privacy-policy",
+            "purpose": "B2B meeting scheduling and routing",
+            "data_collected": [
+                "name",
+                "email",
+                "company data",
+                "calendar events"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "calendly"
+            ]
+        },
+        {
+            "id": "cj-affiliate",
+            "domains": [
+                "cj.com",
+                "*.cj.com",
+                "commission-junction.com"
+            ],
+            "name": "CJ Affiliate",
+            "company": "Publicis Groupe",
+            "category": "referral",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.cj.com/legal/privacy-policy",
+            "purpose": "Affiliate marketing network",
+            "data_collected": [
+                "cookies",
+                "clicks",
+                "conversions"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "shareasale",
+                "impact"
+            ]
+        },
+        {
+            "id": "clearbit",
+            "domains": [
+                "clearbit.com",
+                "*.clearbit.com",
+                "x.clearbitjs.com"
+            ],
+            "name": "Clearbit",
+            "company": "HubSpot Inc.",
+            "category": "b2b_intelligence",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://clearbit.com/privacy",
+            "purpose": "B2B data enrichment and visitor identification",
+            "data_collected": [
+                "company data",
+                "IP-based identification",
+                "firmographic data"
+            ],
+            "risk_score": 6,
+            "alternatives": [
+                "apollo"
+            ]
+        },
+        {
+            "id": "clevertap",
+            "domains": [
+                "clevertap.com",
+                "*.wzrkt.com"
+            ],
+            "name": "CleverTap",
+            "company": "CleverTap Pvt. Ltd.",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://clevertap.com/privacy-policy/",
+            "purpose": "Customer retention and engagement platform",
+            "data_collected": [
+                "user profiles",
+                "events",
+                "push tokens"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "moengage"
+            ]
+        },
+        {
+            "id": "cloudflare",
+            "domains": [
+                "cloudflare.com",
+                "cdnjs.cloudflare.com",
+                "challenges.cloudflare.com",
+                "static.cloudflareinsights.com"
+            ],
+            "name": "Cloudflare",
+            "company": "Cloudflare Inc.",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.cloudflare.com/cloudflare-customer-dpa/",
+            "privacy_policy": "https://www.cloudflare.com/privacypolicy/",
+            "purpose": "CDN, DDoS protection, and web analytics",
+            "data_collected": [
+                "IP address",
+                "request headers"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "cloudflare-turnstile",
+            "domains": [
+                "challenges.cloudflare.com/turnstile"
+            ],
+            "name": "Cloudflare Turnstile",
+            "company": "Cloudflare Inc.",
+            "category": "security",
+            "gdpr_compliant": true,
+            "purpose": "CAPTCHA alternative for bot protection",
+            "data_collected": [
+                "browser signals"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "cognito-forms",
+            "domains": [
+                "cognitoforms.com",
+                "*.cognitoforms.com"
+            ],
+            "name": "Cognito Forms",
+            "company": "Cognito LLC",
+            "category": "forms",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.cognitoforms.com/policies/privacy",
+            "purpose": "Form builder with payment processing",
+            "data_collected": [
+                "form responses",
+                "payment data"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "jotform"
+            ]
+        },
+        {
+            "id": "commanders-act",
+            "domains": [
+                "commandersact.com",
+                "cdn.tagcommander.com"
+            ],
+            "name": "Commanders Act",
+            "company": "Commanders Act",
+            "category": "tag_manager",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.commandersact.com/en/privacy/",
+            "purpose": "European tag management and customer data platform",
+            "data_collected": [
+                "events",
+                "page views"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "tealium"
+            ]
+        },
+        {
+            "id": "convert",
+            "domains": [
+                "convert.com",
+                "cdn-4.convertexperiments.com"
+            ],
+            "name": "Convert",
+            "company": "Convert Insights Inc.",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.convert.com/privacy-policy/",
+            "purpose": "Privacy-focused A/B testing",
+            "data_collected": [
+                "cookies",
+                "events"
+            ],
+            "risk_score": 2,
+            "alternatives": [
+                "vwo"
+            ]
+        },
+        {
+            "id": "cookiebot",
+            "domains": [
+                "cookiebot.com",
+                "consent.cookiebot.com",
+                "consentcdn.cookiebot.com"
+            ],
+            "name": "Cookiebot",
+            "company": "Usercentrics A/S",
+            "category": "consent",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.cookiebot.com/en/privacy-policy/",
+            "purpose": "Cookie consent and compliance management",
+            "data_collected": [
+                "consent preferences"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "cookiehub",
+            "domains": [
+                "cookiehub.eu",
+                "cdn.cookiehub.eu",
+                "cookiehub.net",
+                "cdn.cookiehub.net"
+            ],
+            "name": "CookieHub",
+            "company": "CookieHub ehf.",
+            "category": "consent",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.cookiehub.com/privacy-policy",
+            "purpose": "Cookie consent management and compliance",
+            "data_collected": [
+                "consent preferences",
+                "cookie categories"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "cookiepro",
+            "domains": [
+                "cookiepro.com",
+                "cdn.cookiepro.com"
+            ],
+            "name": "CookiePro",
+            "company": "OneTrust LLC",
+            "category": "consent",
+            "gdpr_compliant": true,
+            "purpose": "Cookie consent management",
+            "data_collected": [
+                "consent preferences"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "courier",
+            "domains": [
+                "courier.com",
+                "api.courier.com"
+            ],
+            "name": "Courier",
+            "company": "Courier Inc.",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.courier.com/privacy-policy",
+            "purpose": "Multi-channel notification orchestration",
+            "data_collected": [
+                "notification data",
+                "delivery status"
+            ],
+            "risk_score": 2,
+            "alternatives": [
+                "magicbell"
+            ]
+        },
+        {
+            "id": "crazy-egg",
+            "domains": [
+                "crazyegg.com",
+                "script.crazyegg.com",
+                "dnn506yrbagrg.cloudfront.net"
+            ],
+            "name": "Crazy Egg",
+            "company": "Crazy Egg Inc.",
+            "category": "heatmaps",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.crazyegg.com/privacy",
+            "purpose": "Heatmaps and scroll tracking",
+            "data_collected": [
+                "mouse movements",
+                "clicks",
+                "scrolls"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "crisp",
+            "domains": [
+                "crisp.chat",
+                "client.crisp.chat"
+            ],
+            "name": "Crisp",
+            "company": "Crisp IM SAS",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "dpa_url": "https://crisp.chat/en/privacy/",
+            "purpose": "Live chat and customer support",
+            "data_collected": [
+                "conversation data",
+                "user agent"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "criteo",
+            "domains": [
+                "static.criteo.net",
+                "dis.criteo.com",
+                "sslwidget.criteo.com"
+            ],
+            "name": "Criteo",
+            "company": "Criteo SA",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.criteo.com/privacy/",
+            "purpose": "Retargeting and display advertising",
+            "data_collected": [
+                "cookies",
+                "browsing behavior",
+                "purchase data"
+            ],
+            "risk_score": 7
+        },
+        {
+            "id": "datadog-rum",
+            "domains": [
+                "browser-intake-datadoghq.com",
+                "rum.browser-intake-datadoghq.com",
+                "datadog-api.com"
+            ],
+            "name": "Datadog RUM",
+            "company": "Datadog Inc.",
+            "category": "error_tracking",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.datadoghq.com/legal/data-processing-addendum/",
+            "purpose": "Real user monitoring and performance",
+            "data_collected": [
+                "performance metrics",
+                "user sessions",
+                "errors"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "demandbase",
+            "domains": [
+                "demandbase.com",
+                "*.demandbase.com",
+                "tag.demandbase.com"
+            ],
+            "name": "Demandbase",
+            "company": "Demandbase Inc.",
+            "category": "b2b_intelligence",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.demandbase.com/privacy-policy/",
+            "purpose": "B2B account identification and targeting",
+            "data_collected": [
+                "company data",
+                "IP address",
+                "firmographic data",
+                "browsing behavior"
+            ],
+            "risk_score": 7,
+            "alternatives": [
+                "sixsense"
+            ]
+        },
+        {
+            "id": "discord-widget",
+            "domains": [
+                "discord.com",
+                "cdn.discordapp.com",
+                "widget.discord.io"
+            ],
+            "name": "Discord Widget",
+            "company": "Discord Inc.",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://discord.com/privacy",
+            "purpose": "Discord server widget and embeds",
+            "data_collected": [
+                "server data",
+                "member counts"
+            ],
+            "risk_score": 3,
+            "alternatives": []
+        },
+        {
+            "id": "disqus",
+            "domains": [
+                "disqus.com",
+                "disquscdn.com",
+                "c.disquscdn.com"
+            ],
+            "name": "Disqus",
+            "company": "Disqus Inc.",
+            "category": "social",
+            "gdpr_compliant": true,
+            "purpose": "Comments and community engagement",
+            "data_collected": [
+                "user identity",
+                "comments",
+                "browsing behavior"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "doodle",
+            "domains": [
+                "doodle.com",
+                "*.doodle.com"
+            ],
+            "name": "Doodle",
+            "company": "Doodle AG",
+            "category": "booking",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://doodle.com/en/privacy-policy/",
+            "purpose": "Group scheduling and polling",
+            "data_collected": [
+                "name",
+                "email",
+                "availability data"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "calendly"
+            ]
+        },
+        {
+            "id": "doubleclick",
+            "domains": [
+                "doubleclick.net",
+                "ad.doubleclick.net",
+                "stats.g.doubleclick.net"
+            ],
+            "name": "DoubleClick",
+            "company": "Google LLC",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "dpa_url": "https://privacy.google.com/businesses/processorterms/",
+            "purpose": "Ad serving and tracking",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "ad interactions"
+            ],
+            "risk_score": 7,
+            "alternatives": []
+        },
+        {
+            "id": "drift",
+            "domains": [
+                "drift.com",
+                "js.driftt.com",
+                "event.drift.com"
+            ],
+            "name": "Drift",
+            "company": "Salesloft Inc.",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.drift.com/privacy-policy/",
+            "purpose": "Conversational marketing and live chat",
+            "data_collected": [
+                "user identity",
+                "conversation data",
+                "browsing behavior"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "dune-analytics",
+            "domains": [
+                "dune.com",
+                "*.dune.com"
+            ],
+            "name": "Dune Analytics",
+            "company": "Dune Analytics Inc.",
+            "category": "web3",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://dune.com/privacy",
+            "purpose": "Blockchain data analytics",
+            "data_collected": [
+                "query data",
+                "IP address"
+            ],
+            "risk_score": 3,
+            "alternatives": []
+        },
+        {
+            "id": "etherscan",
+            "domains": [
+                "etherscan.io",
+                "*.etherscan.io",
+                "api.etherscan.io"
+            ],
+            "name": "Etherscan",
+            "company": "Etherscan.io",
+            "category": "web3",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://etherscan.io/privacyPolicy",
+            "purpose": "Ethereum blockchain explorer",
+            "data_collected": [
+                "wallet lookup data",
+                "IP address"
+            ],
+            "risk_score": 3,
+            "alternatives": []
+        },
+        {
+            "id": "facebook-pixel",
+            "domains": [
+                "facebook.com",
+                "www.facebook.com",
+                "connect.facebook.net",
+                "pixel.facebook.com"
+            ],
+            "name": "Facebook Pixel",
+            "company": "Meta Platforms Inc.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.facebook.com/legal/terms/dataprocessing",
+            "privacy_policy": "https://www.facebook.com/policy.php",
+            "purpose": "Conversion tracking, retargeting, and audience building",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "browsing behavior",
+                "device info"
+            ],
+            "risk_score": 7,
+            "alternatives": []
+        },
+        {
+            "id": "facebook-sdk",
+            "domains": [
+                "graph.facebook.com",
+                "staticxx.facebook.com"
+            ],
+            "name": "Facebook SDK",
+            "company": "Meta Platforms Inc.",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.facebook.com/policy.php",
+            "purpose": "Social login, sharing, and comments",
+            "data_collected": [
+                "cookies",
+                "user profile",
+                "social interactions"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "fastly",
+            "domains": [
+                "fastly.com",
+                "fastly.net",
+                "global.fastly.net"
+            ],
+            "name": "Fastly",
+            "company": "Fastly Inc.",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "purpose": "CDN and edge computing",
+            "data_collected": [
+                "IP address",
+                "request headers"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "fathom",
+            "domains": [
+                "usefathom.com",
+                "cdn.usefathom.com"
+            ],
+            "name": "Fathom Analytics",
+            "company": "Conva Ventures Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://usefathom.com/privacy/",
+            "purpose": "Privacy-first website analytics",
+            "data_collected": [
+                "page views",
+                "referrer"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "firebase-messaging",
+            "domains": [
+                "fcm.googleapis.com",
+                "firebase.google.com"
+            ],
+            "name": "Firebase Cloud Messaging",
+            "company": "Google LLC",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "Push notification delivery for web and mobile",
+            "data_collected": [
+                "device tokens",
+                "message data"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "onesignal"
+            ]
+        },
+        {
+            "id": "formstack",
+            "domains": [
+                "formstack.com",
+                "*.formstack.com"
+            ],
+            "name": "Formstack",
+            "company": "Formstack LLC",
+            "category": "forms",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.formstack.com/privacy-policy",
+            "purpose": "Workflow automation and forms",
+            "data_collected": [
+                "form data",
+                "IP address"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "typeform",
+                "jotform"
+            ]
+        },
+        {
+            "id": "foursquare",
+            "domains": [
+                "foursquare.com",
+                "api.foursquare.com"
+            ],
+            "name": "Foursquare",
+            "company": "Foursquare Labs Inc.",
+            "category": "maps",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://foursquare.com/legal/privacy",
+            "purpose": "Location intelligence and venue data",
+            "data_collected": [
+                "location data",
+                "venue visits",
+                "device data"
+            ],
+            "risk_score": 6,
+            "alternatives": [
+                "google-maps"
+            ]
+        },
+        {
+            "id": "freshdesk",
+            "domains": [
+                "freshdesk.com",
+                "wchat.freshchat.com",
+                "assetscdn-wchat.freshchat.com"
+            ],
+            "name": "Freshdesk / Freshchat",
+            "company": "Freshworks Inc.",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "purpose": "Customer support and live chat",
+            "data_collected": [
+                "conversation data",
+                "user identity"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "fullstory",
+            "domains": [
+                "fullstory.com",
+                "rs.fullstory.com",
+                "edge.fullstory.com"
+            ],
+            "name": "FullStory",
+            "company": "FullStory Inc.",
+            "category": "heatmaps",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.fullstory.com/legal/dpa/",
+            "purpose": "Session replay and digital experience analytics",
+            "data_collected": [
+                "session recordings",
+                "clicks",
+                "user interactions"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "google-ads",
+            "domains": [
+                "googleads.g.doubleclick.net",
+                "googleadservices.com",
+                "www.googleadservices.com",
+                "pagead2.googlesyndication.com"
+            ],
+            "name": "Google Ads",
+            "company": "Google LLC",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "dpa_url": "https://privacy.google.com/businesses/processorterms/",
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "Advertising conversion tracking and remarketing",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "browsing behavior",
+                "conversion data"
+            ],
+            "risk_score": 6,
+            "alternatives": []
+        },
+        {
+            "id": "google-adsense",
+            "domains": [
+                "googlesyndication.com",
+                "tpc.googlesyndication.com"
+            ],
+            "name": "Google AdSense",
+            "company": "Google LLC",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "purpose": "Display advertising network",
+            "data_collected": [
+                "cookies",
+                "browsing behavior",
+                "ad interactions"
+            ],
+            "risk_score": 6
+        },
+        {
+            "id": "google-analytics",
+            "domains": [
+                "google-analytics.com",
+                "www.google-analytics.com",
+                "ssl.google-analytics.com",
+                "analytics.google.com"
+            ],
+            "name": "Google Analytics",
+            "company": "Google LLC",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://privacy.google.com/businesses/processorterms/",
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "Web analytics and user behavior tracking",
+            "data_collected": [
+                "IP address",
+                "cookies",
+                "page views",
+                "user agent",
+                "demographics"
+            ],
+            "retention_period": "26 months (configurable)",
+            "last_verified": "2025-01-15",
+            "risk_score": 3,
+            "alternatives": [
+                "plausible",
+                "fathom",
+                "matomo"
+            ]
+        },
+        {
+            "id": "google-fonts",
+            "domains": [
+                "fonts.googleapis.com",
+                "fonts.gstatic.com"
+            ],
+            "name": "Google Fonts",
+            "company": "Google LLC",
+            "category": "fonts",
+            "gdpr_compliant": false,
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "Web font delivery",
+            "data_collected": [
+                "IP address",
+                "user agent",
+                "referrer"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "self-hosted fonts",
+                "bunny-fonts"
+            ]
+        },
+        {
+            "id": "google-forms",
+            "domains": [
+                "docs.google.com/forms"
+            ],
+            "name": "Google Forms",
+            "company": "Google LLC",
+            "category": "forms",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "Free form and survey builder",
+            "data_collected": [
+                "form responses",
+                "Google account data"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "typeform"
+            ]
+        },
+        {
+            "id": "google-maps",
+            "domains": [
+                "maps.googleapis.com",
+                "maps.google.com",
+                "maps.gstatic.com"
+            ],
+            "name": "Google Maps",
+            "company": "Google LLC",
+            "category": "other",
+            "gdpr_compliant": true,
+            "purpose": "Maps and location services",
+            "data_collected": [
+                "IP address",
+                "location queries"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "google-recaptcha",
+            "domains": [
+                "www.google.com/recaptcha",
+                "recaptcha.net",
+                "www.recaptcha.net",
+                "www.gstatic.com/recaptcha"
+            ],
+            "name": "Google reCAPTCHA",
+            "company": "Google LLC",
+            "category": "security",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "Bot detection and spam prevention",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "browser fingerprint",
+                "mouse movements"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "hcaptcha",
+                "turnstile"
+            ]
+        },
+        {
+            "id": "google-tag-manager",
+            "domains": [
+                "googletagmanager.com",
+                "www.googletagmanager.com"
+            ],
+            "name": "Google Tag Manager",
+            "company": "Google LLC",
+            "category": "tag_manager",
+            "gdpr_compliant": true,
+            "dpa_url": "https://privacy.google.com/businesses/processorterms/",
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "Tag management and script loading orchestration",
+            "data_collected": [
+                "page views",
+                "events"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "segment"
+            ]
+        },
+        {
+            "id": "gravatar",
+            "domains": [
+                "gravatar.com",
+                "secure.gravatar.com",
+                "s.gravatar.com"
+            ],
+            "name": "Gravatar",
+            "company": "Automattic Inc.",
+            "category": "other",
+            "gdpr_compliant": true,
+            "purpose": "Avatar/profile image service",
+            "data_collected": [
+                "email hash",
+                "IP address"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "growthbook",
+            "domains": [
+                "growthbook.io",
+                "cdn.growthbook.io"
+            ],
+            "name": "GrowthBook",
+            "company": "GrowthBook",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.growthbook.io/privacy",
+            "purpose": "Open-source feature flagging and A/B testing",
+            "data_collected": [
+                "feature evaluations"
+            ],
+            "risk_score": 1,
+            "alternatives": [
+                "launchdarkly"
+            ]
+        },
+        {
+            "id": "hcaptcha",
+            "domains": [
+                "hcaptcha.com",
+                "assets.hcaptcha.com",
+                "js.hcaptcha.com",
+                "newassets.hcaptcha.com"
+            ],
+            "name": "hCaptcha",
+            "company": "Intuition Machines Inc.",
+            "category": "security",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.hcaptcha.com/privacy",
+            "purpose": "Bot detection and CAPTCHA",
+            "data_collected": [
+                "browser signals",
+                "IP address"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "heap",
+            "domains": [
+                "heapanalytics.com",
+                "cdn.heapanalytics.com",
+                "heap.io"
+            ],
+            "name": "Heap",
+            "company": "Heap Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://heap.io/privacy",
+            "purpose": "Auto-capture analytics",
+            "data_collected": [
+                "clicks",
+                "page views",
+                "form interactions",
+                "user sessions"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "hotjar",
+            "domains": [
+                "hotjar.com",
+                "static.hotjar.com",
+                "script.hotjar.com",
+                "vars.hotjar.com"
+            ],
+            "name": "Hotjar",
+            "company": "Hotjar Ltd.",
+            "category": "heatmaps",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.hotjar.com/legal/support/dpa/",
+            "privacy_policy": "https://www.hotjar.com/legal/policies/privacy/",
+            "purpose": "Heatmaps, session recordings, and user feedback",
+            "data_collected": [
+                "mouse movements",
+                "clicks",
+                "scrolls",
+                "form interactions"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "microsoft-clarity",
+                "posthog"
+            ]
+        },
+        {
+            "id": "hotmart",
+            "domains": [
+                "hotmart.com",
+                "*.hotmart.com"
+            ],
+            "name": "Hotmart",
+            "company": "Hotmart B.V.",
+            "category": "referral",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.hotmart.com/legal/privacy",
+            "purpose": "LatAm digital product marketplace and affiliate platform",
+            "data_collected": [
+                "customer data",
+                "purchase data",
+                "affiliate data"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "impact"
+            ]
+        },
+        {
+            "id": "hubspot",
+            "domains": [
+                "hubspot.com",
+                "js.hs-scripts.com",
+                "js.hs-analytics.net",
+                "js.hsforms.net",
+                "js.hscollectedforms.net",
+                "track.hubspot.com",
+                "forms.hubspot.com"
+            ],
+            "name": "HubSpot",
+            "company": "HubSpot Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://legal.hubspot.com/dpa",
+            "privacy_policy": "https://legal.hubspot.com/privacy-policy",
+            "purpose": "Marketing analytics, forms, and CRM tracking",
+            "data_collected": [
+                "page views",
+                "form submissions",
+                "user identity",
+                "email interactions"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "hyperpay",
+            "domains": [
+                "hyperpay.com",
+                "*.hyperpay.com"
+            ],
+            "name": "HyperPay",
+            "company": "HyperPay Ltd.",
+            "category": "payments",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.hyperpay.com/privacy-policy/",
+            "purpose": "MENA online payment gateway",
+            "data_collected": [
+                "payment data",
+                "personal info"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "paytabs"
+            ]
+        },
+        {
+            "id": "impact",
+            "domains": [
+                "impact.com",
+                "*.impactradius.com",
+                "app.impact.com"
+            ],
+            "name": "Impact",
+            "company": "Impact Tech Inc.",
+            "category": "referral",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://impact.com/privacy-policy/",
+            "purpose": "Partnership and affiliate management",
+            "data_collected": [
+                "clicks",
+                "conversions",
+                "cookies",
+                "referral data"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "shareasale",
+                "partnerstack"
+            ]
+        },
+        {
+            "id": "instagram",
+            "domains": [
+                "instagram.com",
+                "www.instagram.com",
+                "scontent.cdninstagram.com"
+            ],
+            "name": "Instagram Embeds",
+            "company": "Meta Platforms Inc.",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://help.instagram.com/519522125107875",
+            "purpose": "Social media embedding",
+            "data_collected": [
+                "cookies",
+                "IP address"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "intercom",
+            "domains": [
+                "intercom.io",
+                "widget.intercom.io",
+                "api-iam.intercom.io",
+                "js.intercomcdn.com"
+            ],
+            "name": "Intercom",
+            "company": "Intercom Inc.",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.intercom.com/legal/data-processing-agreement",
+            "privacy_policy": "https://www.intercom.com/legal/privacy",
+            "purpose": "Live chat, customer messaging, and support",
+            "data_collected": [
+                "user identity",
+                "conversation data",
+                "browsing behavior"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "jotform",
+            "domains": [
+                "jotform.com",
+                "*.jotform.com",
+                "submit.jotform.com"
+            ],
+            "name": "JotForm",
+            "company": "JotForm Inc.",
+            "category": "forms",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.jotform.com/privacy/",
+            "purpose": "Online form builder",
+            "data_collected": [
+                "form responses",
+                "IP address",
+                "cookies"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "typeform"
+            ]
+        },
+        {
+            "id": "jsdelivr",
+            "domains": [
+                "cdn.jsdelivr.net"
+            ],
+            "name": "jsDelivr",
+            "company": "jsDelivr",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net",
+            "purpose": "Open-source CDN for npm and GitHub",
+            "data_collected": [
+                "IP address"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "judge-me",
+            "domains": [
+                "judge.me",
+                "*.judge.me"
+            ],
+            "name": "Judge.me",
+            "company": "Judge.me Ltd.",
+            "category": "other",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://judge.me/privacy",
+            "purpose": "Product review platform",
+            "data_collected": [
+                "review data",
+                "customer info",
+                "email"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "yotpo"
+            ]
+        },
+        {
+            "id": "kakao-pixel",
+            "domains": [
+                "kakao.com",
+                "*.kakao.com",
+                "t1.kakaocdn.net"
+            ],
+            "name": "Kakao Pixel",
+            "company": "Kakao Corp.",
+            "category": "advertising",
+            "gdpr_compliant": false,
+            "privacy_policy": "https://www.kakao.com/policy/privacy",
+            "purpose": "Korean ad tracking and conversion measurement",
+            "data_collected": [
+                "cookies",
+                "conversions",
+                "device data",
+                "browsing behavior"
+            ],
+            "risk_score": 7,
+            "retention_period": "180 days",
+            "alternatives": []
+        },
+        {
+            "id": "kameleoon",
+            "domains": [
+                "kameleoon.com",
+                "static.kameleoon.com"
+            ],
+            "name": "Kameleoon",
+            "company": "Kameleoon SAS",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.kameleoon.com/en/privacy-policy",
+            "purpose": "AI-powered A/B testing and personalization",
+            "data_collected": [
+                "cookies",
+                "user behavior",
+                "segments"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "optimizely",
+                "vwo"
+            ]
+        },
+        {
+            "id": "klaviyo",
+            "domains": [
+                "klaviyo.com",
+                "static.klaviyo.com",
+                "a.]klaviyo.com"
+            ],
+            "name": "Klaviyo",
+            "company": "Klaviyo Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "purpose": "Email and SMS marketing analytics",
+            "data_collected": [
+                "browsing behavior",
+                "purchase data",
+                "email engagement"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "kore-ai",
+            "domains": [
+                "kore.ai",
+                "*.kore.ai"
+            ],
+            "name": "Kore.ai",
+            "company": "Kore.ai Inc.",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://kore.ai/privacy-policy/",
+            "purpose": "Enterprise AI chatbot platform",
+            "data_collected": [
+                "chat data",
+                "user queries",
+                "interaction logs"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "liveperson"
+            ]
+        },
+        {
+            "id": "launchdarkly",
+            "domains": [
+                "app.launchdarkly.com",
+                "events.launchdarkly.com",
+                "clientsdk.launchdarkly.com"
+            ],
+            "name": "LaunchDarkly",
+            "company": "LaunchDarkly Inc.",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "dpa_url": "https://launchdarkly.com/policies/data-processing-addendum/",
+            "purpose": "Feature flags and progressive delivery",
+            "data_collected": [
+                "feature flag evaluations",
+                "user context"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "libsyn",
+            "domains": [
+                "libsyn.com",
+                "*.libsynpro.com"
+            ],
+            "name": "Libsyn",
+            "company": "Liberated Syndication",
+            "category": "video",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://libsyn.com/privacy-policy/",
+            "purpose": "Podcast hosting and distribution",
+            "data_collected": [
+                "downloads",
+                "IP address",
+                "user agent"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "anchor"
+            ]
+        },
+        {
+            "id": "linkedin-insight",
+            "domains": [
+                "snap.licdn.com",
+                "px.ads.linkedin.com",
+                "www.linkedin.com/px"
+            ],
+            "name": "LinkedIn Insight Tag",
+            "company": "LinkedIn Corporation",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "dpa_url": "https://legal.linkedin.com/dpa",
+            "privacy_policy": "https://www.linkedin.com/legal/privacy-policy",
+            "purpose": "Conversion tracking and audience targeting for LinkedIn ads",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "page views",
+                "professional info"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "linkedin-widgets",
+            "domains": [
+                "platform.linkedin.com",
+                "badges.linkedin.com"
+            ],
+            "name": "LinkedIn Widgets",
+            "company": "LinkedIn Corporation",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.linkedin.com/legal/privacy-policy",
+            "purpose": "Share buttons and profile badges",
+            "data_collected": [
+                "cookies",
+                "IP address"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "livechat",
+            "domains": [
+                "livechatinc.com",
+                "cdn.livechatinc.com",
+                "secure.livechatinc.com"
+            ],
+            "name": "LiveChat",
+            "company": "LiveChat Inc.",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.livechat.com/legal/privacy-policy/",
+            "purpose": "Live chat support",
+            "data_collected": [
+                "conversation data",
+                "user agent"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "liveperson",
+            "domains": [
+                "liveperson.com",
+                "*.liveperson.net",
+                "lpcdn.lpsnmedia.net"
+            ],
+            "name": "LivePerson",
+            "company": "LivePerson Inc.",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.liveperson.com/policies/privacy",
+            "purpose": "AI-powered conversational platform",
+            "data_collected": [
+                "chat transcripts",
+                "user data",
+                "behavioral data"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "intercom"
+            ]
+        },
+        {
+            "id": "logrocket",
+            "domains": [
+                "logrocket.com",
+                "cdn.lr-ingest.io",
+                "r.lr-ingest.io"
+            ],
+            "name": "LogRocket",
+            "company": "LogRocket Inc.",
+            "category": "heatmaps",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://logrocket.com/privacy",
+            "purpose": "Session replay and frontend monitoring",
+            "data_collected": [
+                "session recordings",
+                "network requests",
+                "console logs"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "lucky-orange",
+            "domains": [
+                "luckyorange.com",
+                "cdn.luckyorange.com",
+                "cs.luckyorange.com"
+            ],
+            "name": "Lucky Orange",
+            "company": "Lucky Orange LLC",
+            "category": "heatmaps",
+            "gdpr_compliant": true,
+            "purpose": "Heatmaps, session recordings, and surveys",
+            "data_collected": [
+                "mouse movements",
+                "clicks",
+                "form data"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "lusha",
+            "domains": [
+                "lusha.com",
+                "*.lusha.com"
+            ],
+            "name": "Lusha",
+            "company": "Lusha Systems Inc.",
+            "category": "b2b_intelligence",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.lusha.com/privacy-policy/",
+            "purpose": "B2B contact enrichment",
+            "data_collected": [
+                "contact info",
+                "company data",
+                "phone numbers",
+                "email addresses"
+            ],
+            "risk_score": 7,
+            "alternatives": [
+                "apollo"
+            ]
+        },
+        {
+            "id": "magicbell",
+            "domains": [
+                "magicbell.com",
+                "api.magicbell.com"
+            ],
+            "name": "MagicBell",
+            "company": "MagicBell Inc.",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.magicbell.com/privacy-policy",
+            "purpose": "In-app notification inbox",
+            "data_collected": [
+                "notification data",
+                "user preferences"
+            ],
+            "risk_score": 2,
+            "alternatives": [
+                "courier"
+            ]
+        },
+        {
+            "id": "mailchimp",
+            "domains": [
+                "mailchimp.com",
+                "chimpstatic.com",
+                "list-manage.com",
+                "mc.us1.list-manage.com"
+            ],
+            "name": "Mailchimp",
+            "company": "Intuit Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://mailchimp.com/legal/data-processing-addendum/",
+            "purpose": "Email marketing tracking and forms",
+            "data_collected": [
+                "email addresses",
+                "open rates",
+                "click data"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "mapbox",
+            "domains": [
+                "mapbox.com",
+                "api.mapbox.com",
+                "*.tiles.mapbox.com"
+            ],
+            "name": "Mapbox",
+            "company": "Mapbox Inc.",
+            "category": "maps",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.mapbox.com/legal/privacy",
+            "purpose": "Custom map rendering and geolocation",
+            "data_collected": [
+                "location data",
+                "map interactions",
+                "API usage"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "google-maps"
+            ]
+        },
+        {
+            "id": "marketo",
+            "domains": [
+                "marketo.net",
+                "munchkin.marketo.net",
+                "mktoresp.com"
+            ],
+            "name": "Marketo",
+            "company": "Adobe Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "purpose": "Marketing automation and lead tracking",
+            "data_collected": [
+                "page views",
+                "form submissions",
+                "user identity"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "matomo",
+            "domains": [
+                "matomo.cloud",
+                "cdn.matomo.cloud"
+            ],
+            "name": "Matomo",
+            "company": "InnoCraft Ltd.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://matomo.org/matomo-cloud-dpa/",
+            "purpose": "Open-source web analytics",
+            "data_collected": [
+                "page views",
+                "events",
+                "IP address (anonymizable)"
+            ],
+            "risk_score": 2,
+            "alternatives": [
+                "plausible",
+                "fathom"
+            ]
+        },
+        {
+            "id": "media-net",
+            "domains": [
+                "media.net",
+                "contextual.media.net",
+                "static.media.net"
+            ],
+            "name": "Media.net",
+            "company": "Media.net Advertising FZ-LLC",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "purpose": "Contextual advertising",
+            "data_collected": [
+                "cookies",
+                "page content"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "medium-widget",
+            "domains": [
+                "medium.com",
+                "cdn-images-1.medium.com"
+            ],
+            "name": "Medium Embed",
+            "company": "A Medium Corporation",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://policy.medium.com/medium-privacy-policy-f03bf92035c9",
+            "purpose": "Medium article embedding",
+            "data_collected": [
+                "cookies",
+                "reading data"
+            ],
+            "risk_score": 3,
+            "alternatives": []
+        },
+        {
+            "id": "mercadopago",
+            "domains": [
+                "mercadopago.com",
+                "*.mercadopago.com",
+                "sdk.mercadopago.com"
+            ],
+            "name": "Mercado Pago",
+            "company": "MercadoLibre Inc.",
+            "category": "payments",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.mercadopago.com/privacypolicy",
+            "purpose": "Latin American payment platform",
+            "data_collected": [
+                "payment data",
+                "personal info",
+                "transaction history"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "stripe"
+            ]
+        },
+        {
+            "id": "meta-pixel",
+            "domains": [
+                "tr.facebook.com",
+                "tr.snapchat.com"
+            ],
+            "name": "Meta Conversion API",
+            "company": "Meta Platforms Inc.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "purpose": "Server-side conversion tracking",
+            "data_collected": [
+                "conversion events",
+                "hashed user data"
+            ],
+            "risk_score": 6
+        },
+        {
+            "id": "metamask",
+            "domains": [
+                "metamask.io",
+                "*.metamask.io"
+            ],
+            "name": "MetaMask",
+            "company": "ConsenSys Software Inc.",
+            "category": "web3",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://metamask.io/privacy.html",
+            "purpose": "Ethereum wallet and dApp browser",
+            "data_collected": [
+                "wallet address",
+                "transaction data",
+                "browser data"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "walletconnect"
+            ]
+        },
+        {
+            "id": "microsoft-ads",
+            "domains": [
+                "bat.bing.com",
+                "bing.com/action"
+            ],
+            "name": "Microsoft Advertising (Bing UET)",
+            "company": "Microsoft Corporation",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "purpose": "Conversion tracking for Microsoft/Bing ads",
+            "data_collected": [
+                "cookies",
+                "page views",
+                "conversions"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "microsoft-clarity",
+            "domains": [
+                "clarity.ms",
+                "www.clarity.ms"
+            ],
+            "name": "Microsoft Clarity",
+            "company": "Microsoft Corporation",
+            "category": "heatmaps",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA",
+            "privacy_policy": "https://privacy.microsoft.com/en-us/privacystatement",
+            "purpose": "Free heatmaps and session recordings",
+            "data_collected": [
+                "mouse movements",
+                "clicks",
+                "scrolls"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "mixpanel",
+            "domains": [
+                "api.mixpanel.com",
+                "cdn.mxpnl.com",
+                "mixpanel.com"
+            ],
+            "name": "Mixpanel",
+            "company": "Mixpanel Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://mixpanel.com/legal/dpa/",
+            "privacy_policy": "https://mixpanel.com/legal/privacy-policy/",
+            "purpose": "Product analytics and user behavior tracking",
+            "data_collected": [
+                "events",
+                "user properties",
+                "device info"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "posthog",
+                "amplitude"
+            ]
+        },
+        {
+            "id": "moengage",
+            "domains": [
+                "moengage.com",
+                "*.moengage.com",
+                "cdn.moengage.com"
+            ],
+            "name": "MoEngage",
+            "company": "MoEngage Inc.",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.moengage.com/privacy-policy/",
+            "purpose": "Customer engagement and analytics",
+            "data_collected": [
+                "user data",
+                "events",
+                "device info"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "clevertap"
+            ]
+        },
+        {
+            "id": "mouseflow",
+            "domains": [
+                "mouseflow.com",
+                "cdn.mouseflow.com",
+                "o2.mouseflow.com"
+            ],
+            "name": "Mouseflow",
+            "company": "Mouseflow ApS",
+            "category": "heatmaps",
+            "gdpr_compliant": true,
+            "dpa_url": "https://mouseflow.com/legal/dpa/",
+            "purpose": "Session replay and heatmaps",
+            "data_collected": [
+                "mouse movements",
+                "clicks",
+                "form interactions"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "naver",
+            "domains": [
+                "naver.com",
+                "*.naver.com",
+                "wcs.naver.com"
+            ],
+            "name": "Naver Analytics",
+            "company": "Naver Corporation",
+            "category": "analytics",
+            "gdpr_compliant": false,
+            "privacy_policy": "https://policy.naver.com/policy/privacy_en.html",
+            "purpose": "Korean web analytics and advertising",
+            "data_collected": [
+                "page views",
+                "cookies",
+                "user behavior",
+                "IP address"
+            ],
+            "risk_score": 6,
+            "alternatives": [
+                "google-analytics"
+            ]
+        },
+        {
+            "id": "newrelic",
+            "domains": [
+                "js-agent.newrelic.com",
+                "bam.nr-data.net",
+                "bam-cell.nr-data.net"
+            ],
+            "name": "New Relic Browser",
+            "company": "New Relic Inc.",
+            "category": "error_tracking",
+            "gdpr_compliant": true,
+            "dpa_url": "https://newrelic.com/termsandconditions/dataprocessingaddendum",
+            "purpose": "Browser performance monitoring",
+            "data_collected": [
+                "performance metrics",
+                "errors",
+                "page load times"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "onesignal",
+            "domains": [
+                "onesignal.com",
+                "cdn.onesignal.com",
+                "*.os.tc"
+            ],
+            "name": "OneSignal",
+            "company": "OneSignal Inc.",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://onesignal.com/privacy_policy",
+            "purpose": "Push notification delivery and engagement",
+            "data_collected": [
+                "device tokens",
+                "engagement data",
+                "user segments"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "pusher",
+                "firebase-messaging"
+            ]
+        },
+        {
+            "id": "onetrust",
+            "domains": [
+                "onetrust.com",
+                "cdn.cookielaw.org",
+                "optanon.blob.core.windows.net",
+                "cookie-cdn.cookiepro.com"
+            ],
+            "name": "OneTrust",
+            "company": "OneTrust LLC",
+            "category": "consent",
+            "gdpr_compliant": true,
+            "purpose": "Cookie consent management",
+            "data_collected": [
+                "consent preferences",
+                "IP address"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "opensea",
+            "domains": [
+                "opensea.io",
+                "*.opensea.io",
+                "api.opensea.io"
+            ],
+            "name": "OpenSea",
+            "company": "Ozone Networks Inc.",
+            "category": "web3",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://opensea.io/privacy",
+            "purpose": "NFT marketplace and embeds",
+            "data_collected": [
+                "wallet address",
+                "transaction data",
+                "browsing behavior"
+            ],
+            "risk_score": 5,
+            "alternatives": []
+        },
+        {
+            "id": "optimizely",
+            "domains": [
+                "optimizely.com",
+                "cdn.optimizely.com",
+                "logx.optimizely.com"
+            ],
+            "name": "Optimizely",
+            "company": "Optimizely Inc.",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.optimizely.com/legal/dpa/",
+            "purpose": "A/B testing and experimentation",
+            "data_collected": [
+                "cookies",
+                "experiment assignments",
+                "conversion data"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "osano",
+            "domains": [
+                "cmp.osano.com",
+                "disclosure.osano.com"
+            ],
+            "name": "Osano",
+            "company": "Osano Inc.",
+            "category": "consent",
+            "gdpr_compliant": true,
+            "purpose": "Consent management platform",
+            "data_collected": [
+                "consent preferences"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "outbrain",
+            "domains": [
+                "outbrain.com",
+                "widgets.outbrain.com",
+                "log.outbrain.com"
+            ],
+            "name": "Outbrain",
+            "company": "Outbrain Inc.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.outbrain.com/privacy/",
+            "purpose": "Content recommendation and native advertising",
+            "data_collected": [
+                "cookies",
+                "browsing behavior"
+            ],
+            "risk_score": 6
+        },
+        {
+            "id": "pardot",
+            "domains": [
+                "pardot.com",
+                "pi.pardot.com",
+                "go.pardot.com"
+            ],
+            "name": "Pardot (Salesforce)",
+            "company": "Salesforce Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "purpose": "B2B marketing automation",
+            "data_collected": [
+                "page views",
+                "form submissions",
+                "email engagement"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "partnerstack",
+            "domains": [
+                "partnerstack.com",
+                "*.partnerstack.com"
+            ],
+            "name": "PartnerStack",
+            "company": "PartnerStack Inc.",
+            "category": "referral",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://partnerstack.com/privacy",
+            "purpose": "Partner ecosystem platform",
+            "data_collected": [
+                "referral data",
+                "conversions",
+                "partner info"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "impact"
+            ]
+        },
+        {
+            "id": "paypal",
+            "domains": [
+                "paypal.com",
+                "www.paypal.com",
+                "www.paypalobjects.com",
+                "t.paypal.com"
+            ],
+            "name": "PayPal",
+            "company": "PayPal Holdings Inc.",
+            "category": "payments",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.paypal.com/webapps/mpp/ua/privacy-full",
+            "purpose": "Payment processing",
+            "data_collected": [
+                "payment information",
+                "IP address"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "paytabs",
+            "domains": [
+                "paytabs.com",
+                "*.paytabs.com"
+            ],
+            "name": "PayTabs",
+            "company": "PayTabs Holding Company",
+            "category": "payments",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://site.paytabs.com/en/privacy-policy/",
+            "purpose": "MENA payment processing",
+            "data_collected": [
+                "payment data",
+                "personal info",
+                "transaction history"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "stripe"
+            ]
+        },
+        {
+            "id": "pinterest",
+            "domains": [
+                "ct.pinterest.com",
+                "widgets.pinterest.com",
+                "assets.pinterest.com"
+            ],
+            "name": "Pinterest Tag",
+            "company": "Pinterest Inc.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://policy.pinterest.com/en/privacy-policy",
+            "purpose": "Conversion tracking for Pinterest ads",
+            "data_collected": [
+                "cookies",
+                "conversion data"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "piwik-pro",
+            "domains": [
+                "piwik.pro",
+                "*.piwik.pro"
+            ],
+            "name": "Piwik PRO",
+            "company": "Piwik PRO",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://piwik.pro/privacy-policy/",
+            "purpose": "Privacy-compliant analytics suite",
+            "data_collected": [
+                "page views",
+                "events",
+                "user attributes"
+            ],
+            "risk_score": 2,
+            "alternatives": [
+                "matomo",
+                "plausible"
+            ]
+        },
+        {
+            "id": "plausible",
+            "domains": [
+                "plausible.io"
+            ],
+            "name": "Plausible Analytics",
+            "company": "Plausible Insights O\u00dc",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://plausible.io/dpa",
+            "privacy_policy": "https://plausible.io/data-policy",
+            "purpose": "Privacy-friendly web analytics (no cookies)",
+            "data_collected": [
+                "page views",
+                "referrer",
+                "country"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "posthog",
+            "domains": [
+                "app.posthog.com",
+                "us.posthog.com",
+                "eu.posthog.com"
+            ],
+            "name": "PostHog",
+            "company": "PostHog Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://posthog.com/dpa",
+            "purpose": "Product analytics, feature flags, session replay",
+            "data_collected": [
+                "events",
+                "session recordings",
+                "user properties"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "pushengage",
+            "domains": [
+                "pushengage.com",
+                "clientcdn.pushengage.com"
+            ],
+            "name": "PushEngage",
+            "company": "PushEngage Inc.",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.pushengage.com/privacy-policy/",
+            "purpose": "Web push notification platform",
+            "data_collected": [
+                "subscriber data",
+                "engagement",
+                "device info"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "onesignal"
+            ]
+        },
+        {
+            "id": "pusher",
+            "domains": [
+                "pusher.com",
+                "*.pusher.com",
+                "*.pusherapp.com"
+            ],
+            "name": "Pusher",
+            "company": "Pusher Ltd.",
+            "category": "push",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://pusher.com/legal/privacy-policy",
+            "purpose": "Real-time messaging and push notifications",
+            "data_collected": [
+                "connection data",
+                "messages"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "onesignal"
+            ]
+        },
+        {
+            "id": "qualtrics",
+            "domains": [
+                "qualtrics.com",
+                "*.qualtrics.com",
+                "siteintercept.qualtrics.com"
+            ],
+            "name": "Qualtrics",
+            "company": "Qualtrics International",
+            "category": "forms",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.qualtrics.com/privacy-statement/",
+            "purpose": "Experience management and surveys",
+            "data_collected": [
+                "survey responses",
+                "behavioral data",
+                "user attributes"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "surveymonkey"
+            ]
+        },
+        {
+            "id": "quantcast",
+            "domains": [
+                "quantserve.com",
+                "pixel.quantserve.com",
+                "quantcast.com"
+            ],
+            "name": "Quantcast",
+            "company": "Quantcast Corporation",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "purpose": "Audience measurement and targeted advertising",
+            "data_collected": [
+                "cookies",
+                "browsing behavior",
+                "demographics"
+            ],
+            "risk_score": 6
+        },
+        {
+            "id": "rakuten",
+            "domains": [
+                "rakuten.co.jp",
+                "*.rakuten-static.com",
+                "grp01.id.rakuten.co.jp"
+            ],
+            "name": "Rakuten",
+            "company": "Rakuten Group Inc.",
+            "category": "advertising",
+            "gdpr_compliant": false,
+            "privacy_policy": "https://privacy.rakuten.co.jp/",
+            "purpose": "Japanese e-commerce and advertising",
+            "data_collected": [
+                "cookies",
+                "purchase data",
+                "browsing behavior"
+            ],
+            "risk_score": 5,
+            "alternatives": []
+        },
+        {
+            "id": "recaptcha-enterprise",
+            "domains": [
+                "recaptchaenterprise.googleapis.com"
+            ],
+            "name": "reCAPTCHA Enterprise",
+            "company": "Google LLC",
+            "category": "security",
+            "gdpr_compliant": true,
+            "purpose": "Enterprise bot detection",
+            "data_collected": [
+                "browser signals",
+                "interactions"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "reddit-pixel",
+            "domains": [
+                "alb.reddit.com",
+                "redditmedia.com"
+            ],
+            "name": "Reddit Pixel",
+            "company": "Reddit Inc.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.reddit.com/policies/privacy-policy",
+            "purpose": "Conversion tracking for Reddit ads",
+            "data_collected": [
+                "cookies",
+                "IP address"
+            ],
+            "risk_score": 4
+        },
+        {
+            "id": "referralcandy",
+            "domains": [
+                "referralcandy.com",
+                "*.referralcandy.com"
+            ],
+            "name": "ReferralCandy",
+            "company": "ReferralCandy Pte. Ltd.",
+            "category": "referral",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.referralcandy.com/privacy-policy",
+            "purpose": "Referral marketing for e-commerce",
+            "data_collected": [
+                "customer data",
+                "referral data",
+                "purchase data"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "rewardful"
+            ]
+        },
+        {
+            "id": "rewardful",
+            "domains": [
+                "rewardful.com",
+                "*.getrewardful.com"
+            ],
+            "name": "Rewardful",
+            "company": "Rewardful",
+            "category": "referral",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.rewardful.com/privacy",
+            "purpose": "Affiliate tracking for SaaS",
+            "data_collected": [
+                "referral cookies",
+                "conversion data"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "partnerstack"
+            ]
+        },
+        {
+            "id": "rollbar",
+            "domains": [
+                "rollbar.com",
+                "api.rollbar.com",
+                "cdn.rollbar.com"
+            ],
+            "name": "Rollbar",
+            "company": "Rollbar Inc.",
+            "category": "error_tracking",
+            "gdpr_compliant": true,
+            "purpose": "Error monitoring and deployment tracking",
+            "data_collected": [
+                "error data",
+                "user agent"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "rudderstack",
+            "domains": [
+                "rudderstack.com",
+                "cdn.rudderlabs.com",
+                "api.rudderlabs.com"
+            ],
+            "name": "RudderStack",
+            "company": "RudderStack Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "purpose": "Open-source customer data platform",
+            "data_collected": [
+                "events",
+                "user identities"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "segment",
+            "domains": [
+                "api.segment.io",
+                "cdn.segment.com",
+                "segment.com"
+            ],
+            "name": "Segment",
+            "company": "Twilio Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.twilio.com/legal/data-protection-addendum",
+            "privacy_policy": "https://segment.com/legal/privacy/",
+            "purpose": "Customer data platform and analytics routing",
+            "data_collected": [
+                "events",
+                "user identities",
+                "device info"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "rudderstack",
+                "jitsu"
+            ]
+        },
+        {
+            "id": "sentry",
+            "domains": [
+                "sentry.io",
+                "browser.sentry-cdn.com",
+                "js.sentry-cdn.com",
+                "o0.ingest.sentry.io"
+            ],
+            "name": "Sentry",
+            "company": "Functional Software Inc.",
+            "category": "error_tracking",
+            "gdpr_compliant": true,
+            "dpa_url": "https://sentry.io/legal/dpa/",
+            "privacy_policy": "https://sentry.io/privacy/",
+            "purpose": "Error monitoring and performance tracking",
+            "data_collected": [
+                "error stack traces",
+                "user agent",
+                "IP address"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "shareasale",
+            "domains": [
+                "shareasale.com",
+                "*.shareasale.com"
+            ],
+            "name": "ShareASale",
+            "company": "Awin Ltd.",
+            "category": "referral",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.shareasale.com/PrivacyPolicy.pdf",
+            "purpose": "Affiliate marketing network",
+            "data_collected": [
+                "cookies",
+                "clicks",
+                "conversions",
+                "commission data"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "impact",
+                "cj-affiliate"
+            ]
+        },
+        {
+            "id": "sharethis",
+            "domains": [
+                "sharethis.com",
+                "*.sharethis.com",
+                "t.sharethis.com"
+            ],
+            "name": "ShareThis",
+            "company": "ShareThis Inc.",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://sharethis.com/privacy/",
+            "purpose": "Social sharing buttons with data collection",
+            "data_collected": [
+                "browsing behavior",
+                "cookies",
+                "device data",
+                "share activity"
+            ],
+            "risk_score": 7,
+            "alternatives": [
+                "addtoany"
+            ]
+        },
+        {
+            "id": "shopify",
+            "domains": [
+                "cdn.shopify.com",
+                "monorail-edge.shopifysvc.com",
+                "v.shopify.com"
+            ],
+            "name": "Shopify",
+            "company": "Shopify Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.shopify.com/legal/privacy",
+            "purpose": "E-commerce platform and analytics",
+            "data_collected": [
+                "page views",
+                "cart data",
+                "purchase data"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "shopify-analytics",
+            "domains": [
+                "shopify.com",
+                "cdn.shopify.com",
+                "monorail-edge.shopifysvc.com"
+            ],
+            "name": "Shopify Analytics",
+            "company": "Shopify Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.shopify.com/legal/privacy",
+            "purpose": "E-commerce analytics and tracking",
+            "data_collected": [
+                "purchase data",
+                "browsing behavior",
+                "cart data",
+                "customer info"
+            ],
+            "risk_score": 4,
+            "alternatives": []
+        },
+        {
+            "id": "sitespect",
+            "domains": [
+                "sitespect.com",
+                "*.sitespect.net"
+            ],
+            "name": "SiteSpect",
+            "company": "SiteSpect Inc.",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.sitespect.com/privacy-policy/",
+            "purpose": "Server-side A/B testing",
+            "data_collected": [
+                "cookies",
+                "page views"
+            ],
+            "risk_score": 2,
+            "alternatives": [
+                "optimizely"
+            ]
+        },
+        {
+            "id": "sixsense",
+            "domains": [
+                "6sense.com",
+                "*.6sense.com",
+                "j.6sc.co"
+            ],
+            "name": "6sense",
+            "company": "6sense Insights Inc.",
+            "category": "b2b_intelligence",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://6sense.com/privacy-policy/",
+            "purpose": "B2B intent data and account-based marketing",
+            "data_collected": [
+                "company data",
+                "IP-based identification",
+                "intent signals",
+                "browsing behavior"
+            ],
+            "risk_score": 7,
+            "alternatives": [
+                "demandbase"
+            ]
+        },
+        {
+            "id": "snapchat-pixel",
+            "domains": [
+                "sc-static.net",
+                "tr.snapchat.com"
+            ],
+            "name": "Snapchat Pixel",
+            "company": "Snap Inc.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://snap.com/en-US/privacy/privacy-policy",
+            "purpose": "Conversion tracking for Snapchat ads",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "conversion data"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "soundcloud",
+            "domains": [
+                "soundcloud.com",
+                "w.soundcloud.com",
+                "api-v2.soundcloud.com"
+            ],
+            "name": "SoundCloud Embeds",
+            "company": "SoundCloud Limited",
+            "category": "other",
+            "gdpr_compliant": true,
+            "purpose": "Audio embedding",
+            "data_collected": [
+                "cookies",
+                "IP address"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "split-io",
+            "domains": [
+                "cdn.split.io",
+                "events.split.io",
+                "streaming.split.io"
+            ],
+            "name": "Split.io",
+            "company": "Split Software Inc.",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "purpose": "Feature flags and experimentation",
+            "data_collected": [
+                "feature flag evaluations",
+                "events"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "spotify-embed",
+            "domains": [
+                "open.spotify.com",
+                "embed.spotify.com"
+            ],
+            "name": "Spotify Embeds",
+            "company": "Spotify AB",
+            "category": "other",
+            "gdpr_compliant": true,
+            "purpose": "Music and podcast embedding",
+            "data_collected": [
+                "cookies",
+                "listening data"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "spotify-widget",
+            "domains": [
+                "open.spotify.com",
+                "embed.spotify.com"
+            ],
+            "name": "Spotify Embed",
+            "company": "Spotify AB",
+            "category": "video",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.spotify.com/legal/privacy-policy/",
+            "purpose": "Spotify content embedding",
+            "data_collected": [
+                "listening data",
+                "cookies"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "soundcloud"
+            ]
+        },
+        {
+            "id": "statsig",
+            "domains": [
+                "api.statsig.com",
+                "featuregates.org"
+            ],
+            "name": "Statsig",
+            "company": "Statsig Inc.",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "purpose": "Feature flags and product experimentation",
+            "data_collected": [
+                "events",
+                "experiment assignments"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "stripe",
+            "domains": [
+                "stripe.com",
+                "js.stripe.com",
+                "m.stripe.com",
+                "m.stripe.network",
+                "q.stripe.com"
+            ],
+            "name": "Stripe",
+            "company": "Stripe Inc.",
+            "category": "payments",
+            "gdpr_compliant": true,
+            "dpa_url": "https://stripe.com/legal/dpa",
+            "privacy_policy": "https://stripe.com/privacy",
+            "purpose": "Payment processing",
+            "data_collected": [
+                "payment information",
+                "IP address",
+                "device fingerprint"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "substack",
+            "domains": [
+                "substack.com",
+                "substackcdn.com",
+                "substack-post-media.s3.amazonaws.com"
+            ],
+            "name": "Substack",
+            "company": "Substack Inc.",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://substack.com/privacy",
+            "purpose": "Newsletter platform embedding and content delivery",
+            "data_collected": [
+                "IP address",
+                "cookies",
+                "reading behavior"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "sumo",
+            "domains": [
+                "sumo.com",
+                "load.sumo.com",
+                "sumo-logger.herokuapp.com"
+            ],
+            "name": "Sumo",
+            "company": "Sumo Group Inc.",
+            "category": "analytics",
+            "gdpr_compliant": true,
+            "purpose": "Email capture and site analytics",
+            "data_collected": [
+                "email addresses",
+                "page views"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "super-so",
+            "domains": [
+                "super.so",
+                "assets.super.so",
+                "assets-v2.super.so",
+                "images.spr.so"
+            ],
+            "name": "Super.so",
+            "company": "Super Technologies Inc.",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://super.so/privacy",
+            "purpose": "Website builder and hosting platform (Notion-based)",
+            "data_collected": [
+                "IP address",
+                "page views"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "surveymonkey",
+            "domains": [
+                "surveymonkey.com",
+                "*.surveymonkey.com"
+            ],
+            "name": "SurveyMonkey",
+            "company": "Momentive Inc.",
+            "category": "forms",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.surveymonkey.com/mp/legal/privacy/",
+            "purpose": "Survey creation and analysis",
+            "data_collected": [
+                "survey responses",
+                "IP address",
+                "cookies"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "qualtrics",
+                "typeform"
+            ]
+        },
+        {
+            "id": "taboola",
+            "domains": [
+                "cdn.taboola.com",
+                "trc.taboola.com",
+                "api.taboola.com"
+            ],
+            "name": "Taboola",
+            "company": "Taboola.com Ltd.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.taboola.com/policies/privacy-policy",
+            "purpose": "Content recommendation and native advertising",
+            "data_collected": [
+                "cookies",
+                "browsing behavior"
+            ],
+            "risk_score": 6
+        },
+        {
+            "id": "tapfiliate",
+            "domains": [
+                "tapfiliate.com",
+                "*.tapfiliate.com"
+            ],
+            "name": "Tapfiliate",
+            "company": "Tapfiliate B.V.",
+            "category": "referral",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://tapfiliate.com/privacy-policy/",
+            "purpose": "Affiliate tracking software",
+            "data_collected": [
+                "referral data",
+                "conversions",
+                "cookies"
+            ],
+            "risk_score": 3,
+            "alternatives": [
+                "rewardful"
+            ]
+        },
+        {
+            "id": "tealium",
+            "domains": [
+                "tealium.com",
+                "tags.tiqcdn.com",
+                "collect.tealiumiq.com",
+                "datacloud.tealiumiq.com"
+            ],
+            "name": "Tealium",
+            "company": "Tealium Inc.",
+            "category": "tag_manager",
+            "gdpr_compliant": true,
+            "dpa_url": "https://tealium.com/dpa/",
+            "purpose": "Tag management and customer data platform",
+            "data_collected": [
+                "page views",
+                "events",
+                "user data"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "telegram-widget",
+            "domains": [
+                "telegram.org",
+                "t.me",
+                "core.telegram.org"
+            ],
+            "name": "Telegram Widget",
+            "company": "Telegram FZ-LLC",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://telegram.org/privacy",
+            "purpose": "Telegram chat and channel embeds",
+            "data_collected": [
+                "user data",
+                "messages"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "whatsapp-widget"
+            ]
+        },
+        {
+            "id": "telr",
+            "domains": [
+                "telr.com",
+                "*.telr.com"
+            ],
+            "name": "Telr",
+            "company": "Telr Online Payment",
+            "category": "payments",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://telr.com/privacy-policy/",
+            "purpose": "MENA payment processing",
+            "data_collected": [
+                "payment data",
+                "personal info"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "paytabs"
+            ]
+        },
+        {
+            "id": "tidio",
+            "domains": [
+                "tidio.co",
+                "code.tidio.co",
+                "widget-v4.tidiochat.com"
+            ],
+            "name": "Tidio",
+            "company": "Tidio LLC",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "purpose": "Live chat and chatbot",
+            "data_collected": [
+                "conversation data",
+                "user agent"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "tiktok-pixel",
+            "domains": [
+                "analytics.tiktok.com",
+                "an.tiktok.com"
+            ],
+            "name": "TikTok Pixel",
+            "company": "ByteDance Ltd.",
+            "category": "advertising",
+            "gdpr_compliant": false,
+            "privacy_policy": "https://www.tiktok.com/legal/privacy-policy",
+            "purpose": "Ad conversion tracking and retargeting",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "device fingerprint",
+                "browsing behavior"
+            ],
+            "risk_score": 8,
+            "alternatives": []
+        },
+        {
+            "id": "twitter-pixel",
+            "domains": [
+                "t.co",
+                "analytics.twitter.com",
+                "static.ads-twitter.com",
+                "ads-api.twitter.com"
+            ],
+            "name": "Twitter/X Pixel",
+            "company": "X Corp.",
+            "category": "advertising",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://twitter.com/en/privacy",
+            "purpose": "Conversion tracking for Twitter ads",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "conversion data"
+            ],
+            "risk_score": 5
+        },
+        {
+            "id": "twitter-widgets",
+            "domains": [
+                "platform.twitter.com",
+                "syndication.twitter.com"
+            ],
+            "name": "Twitter/X Widgets",
+            "company": "X Corp.",
+            "category": "social",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://twitter.com/en/privacy",
+            "purpose": "Embedded tweets and follow buttons",
+            "data_collected": [
+                "cookies",
+                "IP address"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "typeform",
+            "domains": [
+                "typeform.com",
+                "embed.typeform.com",
+                "renderer-assets.typeform.com"
+            ],
+            "name": "Typeform",
+            "company": "TYPEFORM SL",
+            "category": "other",
+            "gdpr_compliant": true,
+            "purpose": "Form and survey embedding",
+            "data_collected": [
+                "form responses",
+                "user agent"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "typekit",
+            "domains": [
+                "use.typekit.net",
+                "p.typekit.net"
+            ],
+            "name": "Adobe Fonts (Typekit)",
+            "company": "Adobe Inc.",
+            "category": "fonts",
+            "gdpr_compliant": true,
+            "purpose": "Web font delivery",
+            "data_collected": [
+                "IP address",
+                "page views"
+            ],
+            "risk_score": 2
+        },
+        {
+            "id": "umeng",
+            "domains": [
+                "umeng.com",
+                "*.umeng.com",
+                "log.umsns.com"
+            ],
+            "name": "Umeng Analytics",
+            "company": "Alibaba Group",
+            "category": "analytics",
+            "gdpr_compliant": false,
+            "privacy_policy": "https://www.umeng.com/policy",
+            "purpose": "Chinese mobile and web analytics",
+            "data_collected": [
+                "device data",
+                "location",
+                "app usage",
+                "IMEI",
+                "IP address"
+            ],
+            "risk_score": 8,
+            "alternatives": [
+                "google-analytics"
+            ]
+        },
+        {
+            "id": "uniswap",
+            "domains": [
+                "uniswap.org",
+                "app.uniswap.org",
+                "*.uniswap.org"
+            ],
+            "name": "Uniswap",
+            "company": "Uniswap Labs",
+            "category": "web3",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://uniswap.org/privacy-policy",
+            "purpose": "Decentralized exchange widget",
+            "data_collected": [
+                "wallet address",
+                "swap data",
+                "IP address"
+            ],
+            "risk_score": 5,
+            "alternatives": []
+        },
+        {
+            "id": "unpkg",
+            "domains": [
+                "unpkg.com"
+            ],
+            "name": "unpkg",
+            "company": "unpkg",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "purpose": "CDN for npm packages",
+            "data_collected": [
+                "IP address"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "usercentrics",
+            "domains": [
+                "usercentrics.eu",
+                "app.usercentrics.eu",
+                "v2.usercentrics.eu"
+            ],
+            "name": "Usercentrics",
+            "company": "Usercentrics GmbH",
+            "category": "consent",
+            "gdpr_compliant": true,
+            "purpose": "Consent management platform",
+            "data_collected": [
+                "consent preferences"
+            ],
+            "risk_score": 1
+        },
+        {
+            "id": "vimeo",
+            "domains": [
+                "vimeo.com",
+                "player.vimeo.com",
+                "f.vimeocdn.com",
+                "i.vimeocdn.com"
+            ],
+            "name": "Vimeo",
+            "company": "Vimeo Inc.",
+            "category": "video",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://vimeo.com/privacy",
+            "purpose": "Video hosting and embedding",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "viewing data"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "vwo",
+            "domains": [
+                "dev.visualwebsiteoptimizer.com",
+                "d5nxst8fruw4z.cloudfront.net"
+            ],
+            "name": "VWO",
+            "company": "Wingify Software Pvt. Ltd.",
+            "category": "ab_testing",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://vwo.com/privacy-policy/",
+            "purpose": "A/B testing and conversion optimization",
+            "data_collected": [
+                "cookies",
+                "experiment data",
+                "user interactions"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "walletconnect",
+            "domains": [
+                "walletconnect.com",
+                "*.walletconnect.org",
+                "bridge.walletconnect.org"
+            ],
+            "name": "WalletConnect",
+            "company": "WalletConnect Inc.",
+            "category": "web3",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://walletconnect.com/privacy",
+            "purpose": "Wallet connection protocol for dApps",
+            "data_collected": [
+                "wallet address",
+                "session data"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "metamask"
+            ]
+        },
+        {
+            "id": "wechat-widget",
+            "domains": [
+                "weixin.qq.com",
+                "res.wx.qq.com",
+                "open.weixin.qq.com"
+            ],
+            "name": "WeChat Widget",
+            "company": "Tencent Holdings Ltd.",
+            "category": "social",
+            "gdpr_compliant": false,
+            "privacy_policy": "https://www.wechat.com/en/privacy_policy.html",
+            "purpose": "WeChat social sharing and login",
+            "data_collected": [
+                "user profile",
+                "social connections",
+                "device data",
+                "IP address"
+            ],
+            "risk_score": 8,
+            "alternatives": []
+        },
+        {
+            "id": "whatsapp-widget",
+            "domains": [
+                "wa.me",
+                "api.whatsapp.com",
+                "web.whatsapp.com"
+            ],
+            "name": "WhatsApp Widget",
+            "company": "Meta Platforms Inc.",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.whatsapp.com/legal/privacy-policy",
+            "purpose": "WhatsApp chat widget for customer support",
+            "data_collected": [
+                "phone number",
+                "chat messages"
+            ],
+            "risk_score": 5,
+            "alternatives": [
+                "telegram-widget"
+            ]
+        },
+        {
+            "id": "wistia",
+            "domains": [
+                "wistia.com",
+                "fast.wistia.com",
+                "fast.wistia.net",
+                "embedwistia-a.akamaihd.net"
+            ],
+            "name": "Wistia",
+            "company": "Wistia Inc.",
+            "category": "video",
+            "gdpr_compliant": true,
+            "purpose": "Business video hosting and analytics",
+            "data_collected": [
+                "viewing data",
+                "engagement metrics"
+            ],
+            "risk_score": 3
+        },
+        {
+            "id": "yahoo-japan",
+            "domains": [
+                "yahoo.co.jp",
+                "yjtag.yahoo.co.jp",
+                "*.yimg.jp"
+            ],
+            "name": "Yahoo Japan",
+            "company": "LY Corporation",
+            "category": "advertising",
+            "gdpr_compliant": false,
+            "privacy_policy": "https://privacy.yahoo.co.jp/",
+            "purpose": "Japanese advertising and analytics",
+            "data_collected": [
+                "cookies",
+                "browsing behavior",
+                "conversion data"
+            ],
+            "risk_score": 5,
+            "alternatives": []
+        },
+        {
+            "id": "yellow-ai",
+            "domains": [
+                "yellow.ai",
+                "*.yellow.ai",
+                "cloud.yellow.ai"
+            ],
+            "name": "Yellow.ai",
+            "company": "Yellow.ai",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://yellow.ai/privacy-policy/",
+            "purpose": "Conversational AI for customer support",
+            "data_collected": [
+                "chat data",
+                "customer info",
+                "interaction data"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "kore-ai"
+            ]
+        },
+        {
+            "id": "yotpo",
+            "domains": [
+                "yotpo.com",
+                "*.yotpo.com",
+                "staticw2.yotpo.com"
+            ],
+            "name": "Yotpo",
+            "company": "Yotpo Ltd.",
+            "category": "other",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://www.yotpo.com/privacy-policy/",
+            "purpose": "Reviews, UGC, and loyalty for e-commerce",
+            "data_collected": [
+                "review data",
+                "customer info",
+                "purchase data"
+            ],
+            "risk_score": 4,
+            "alternatives": []
+        },
+        {
+            "id": "youtube",
+            "domains": [
+                "youtube.com",
+                "www.youtube.com",
+                "youtube-nocookie.com",
+                "youtu.be",
+                "ytimg.com",
+                "i.ytimg.com"
+            ],
+            "name": "YouTube Embeds",
+            "company": "Google LLC",
+            "category": "video",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "Video embedding and playback",
+            "data_collected": [
+                "cookies",
+                "IP address",
+                "viewing history"
+            ],
+            "risk_score": 4,
+            "alternatives": [
+                "self-hosted video",
+                "vimeo"
+            ]
+        },
+        {
+            "id": "zendesk",
+            "domains": [
+                "zendesk.com",
+                "static.zdassets.com",
+                "ekr.zdassets.com",
+                "v2.zopim.com"
+            ],
+            "name": "Zendesk",
+            "company": "Zendesk Inc.",
+            "category": "chat",
+            "gdpr_compliant": true,
+            "dpa_url": "https://www.zendesk.com/company/data-processing-form/",
+            "purpose": "Customer support and live chat widget",
+            "data_collected": [
+                "user identity",
+                "conversation data",
+                "browsing context"
+            ],
+            "risk_score": 3
+        }
+    ],
+    "categories": [
+        {
+            "id": "analytics",
+            "name": "Analytics",
+            "description": "Tools for measuring website traffic and user behavior",
+            "risk_level": "medium"
+        },
+        {
+            "id": "advertising",
+            "name": "Advertising",
+            "description": "Ad networks, retargeting pixels, and conversion tracking",
+            "risk_level": "high"
+        },
+        {
+            "id": "social",
+            "name": "Social Media",
+            "description": "Social media widgets, share buttons, and embeds",
+            "risk_level": "medium"
+        },
+        {
+            "id": "cdn",
+            "name": "CDN",
+            "description": "Content delivery networks and static asset hosting",
+            "risk_level": "low"
+        },
+        {
+            "id": "payments",
+            "name": "Payments",
+            "description": "Payment processing and checkout services",
+            "risk_level": "low"
+        },
+        {
+            "id": "chat",
+            "name": "Chat & Support",
+            "description": "Live chat widgets and customer support tools",
+            "risk_level": "medium"
+        },
+        {
+            "id": "heatmaps",
+            "name": "Heatmaps & Session Replay",
+            "description": "Visual analytics, heatmaps, and session recording tools",
+            "risk_level": "medium"
+        },
+        {
+            "id": "ab_testing",
+            "name": "A/B Testing",
+            "description": "Experimentation, feature flags, and optimization platforms",
+            "risk_level": "low"
+        },
+        {
+            "id": "error_tracking",
+            "name": "Error Tracking",
+            "description": "Error monitoring, crash reporting, and performance tools",
+            "risk_level": "low"
+        },
+        {
+            "id": "tag_manager",
+            "name": "Tag Management",
+            "description": "Tag management systems for loading third-party scripts",
+            "risk_level": "medium"
+        },
+        {
+            "id": "consent",
+            "name": "Consent Management",
+            "description": "Cookie consent and privacy preference management platforms",
+            "risk_level": "low"
+        },
+        {
+            "id": "video",
+            "name": "Video",
+            "description": "Video hosting and embedding services",
+            "risk_level": "medium"
+        },
+        {
+            "id": "fonts",
+            "name": "Fonts",
+            "description": "Web font delivery services",
+            "risk_level": "low"
+        },
+        {
+            "id": "security",
+            "name": "Security",
+            "description": "CAPTCHA, bot detection, and security services",
+            "risk_level": "low"
+        },
+        {
+            "id": "other",
+            "name": "Other",
+            "description": "Other third-party services and embeds",
+            "risk_level": "low"
+        },
+        {
+            "id": "push",
+            "name": "Push Notifications",
+            "description": "Push notification delivery and engagement platforms",
+            "risk_level": "medium"
+        },
+        {
+            "id": "forms",
+            "name": "Forms & Surveys",
+            "description": "Form builders, survey tools, and data collection platforms",
+            "risk_level": "medium"
+        },
+        {
+            "id": "referral",
+            "name": "Referral & Affiliate",
+            "description": "Affiliate networks, referral tracking, and partnership platforms",
+            "risk_level": "medium"
+        },
+        {
+            "id": "booking",
+            "name": "Booking & Scheduling",
+            "description": "Appointment scheduling and booking tools",
+            "risk_level": "low"
+        },
+        {
+            "id": "maps",
+            "name": "Maps & Location",
+            "description": "Map embedding and location intelligence services",
+            "risk_level": "medium"
+        },
+        {
+            "id": "web3",
+            "name": "Web3 & Crypto",
+            "description": "Blockchain wallets, DEX widgets, and crypto analytics",
+            "risk_level": "medium"
+        },
+        {
+            "id": "b2b_intelligence",
+            "name": "B2B Intelligence",
+            "description": "Business data enrichment, intent data, and account identification",
+            "risk_level": "high"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+# OPTIC Configuration Example
+# Save as optic.yaml in your project root
+# https://github.com/nma-vc/optic
+
+version: "1.0"
+
+# Vendors/domains you've reviewed and approved
+allowlist:
+  - vendor_id: google-analytics
+    reason: "Required for business analytics — consent collected via CookieHub"
+    approved_by: "legal@company.com"
+    approved_date: "2025-01-15"
+
+  - vendor_id: sentry
+    reason: "Error monitoring — no PII collected"
+    approved_by: "engineering@company.com"
+
+  - domain: cdn.shopify.com
+    reason: "Shopify CDN for static assets, not tracking"
+
+# Scan settings
+scan:
+  timeout: 30000
+  wait_for_network_idle: true
+  # user_agent: "OpticScanner/1.0"
+  # viewport:
+  #   width: 1920
+  #   height: 1080
+
+# Notification settings (future)
+# notify:
+#   slack_webhook: "https://hooks.slack.com/..."
+#   email: "privacy@company.com"

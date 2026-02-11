@@ -1,0 +1,44 @@
+{
+    "name": "etalon",
+    "version": "1.0.0",
+    "description": "ETALON — Privacy audit tool for websites. Scan any site for trackers and GDPR compliance.",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "type": "module",
+    "bin": {
+        "etalon": "./dist/index.js",
+        "etalon-audit": "./dist/index.js"
+    },
+    "scripts": {
+        "build": "tsup",
+        "clean": "rm -rf dist",
+        "postinstall": "npx playwright install chromium || true"
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "dependencies": {
+        "etalon-core": "*",
+        "chalk": "^5.3.0",
+        "commander": "^12.0.0",
+        "ora": "^8.0.0",
+        "playwright": "^1.42.0",
+        "yaml": "^2.3.0"
+    },
+    "keywords": [
+        "privacy",
+        "gdpr",
+        "tracker",
+        "audit",
+        "scanner",
+        "compliance",
+        "cookies",
+        "mcp"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/NMA-vc/etalon"
+    }
+}

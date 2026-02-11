@@ -1,0 +1,593 @@
+{
+    "npm": {
+        "@sentry/browser": {
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        "@sentry/node": {
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        "@sentry/nextjs": {
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        "@sentry/react": {
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        "react-ga4": {
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        "react-ga": {
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        "@analytics/google-analytics": {
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        "mixpanel-browser": {
+            "vendorId": "mixpanel",
+            "severity": "medium"
+        },
+        "mixpanel": {
+            "vendorId": "mixpanel",
+            "severity": "medium"
+        },
+        "@amplitude/analytics-browser": {
+            "vendorId": "amplitude",
+            "severity": "medium"
+        },
+        "amplitude-js": {
+            "vendorId": "amplitude",
+            "severity": "medium"
+        },
+        "@segment/analytics-next": {
+            "vendorId": "segment",
+            "severity": "medium"
+        },
+        "analytics-node": {
+            "vendorId": "segment",
+            "severity": "medium"
+        },
+        "posthog-js": {
+            "vendorId": "posthog",
+            "severity": "medium"
+        },
+        "posthog-node": {
+            "vendorId": "posthog",
+            "severity": "medium"
+        },
+        "@heap/heap-node-sdk": {
+            "vendorId": "heap",
+            "severity": "medium"
+        },
+        "heap-api": {
+            "vendorId": "heap",
+            "severity": "medium"
+        },
+        "react-facebook-pixel": {
+            "vendorId": "facebook-pixel",
+            "severity": "high"
+        },
+        "react-facebook-login": {
+            "vendorId": "facebook-sdk",
+            "severity": "medium"
+        },
+        "@next/third-parties": {
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        "react-hotjar": {
+            "vendorId": "hotjar",
+            "severity": "medium"
+        },
+        "@hotjar/browser": {
+            "vendorId": "hotjar",
+            "severity": "medium"
+        },
+        "fullstory-browser-sdk": {
+            "vendorId": "fullstory",
+            "severity": "medium"
+        },
+        "@fullstory/browser": {
+            "vendorId": "fullstory",
+            "severity": "medium"
+        },
+        "logrocket": {
+            "vendorId": "logrocket",
+            "severity": "medium"
+        },
+        "logrocket-react": {
+            "vendorId": "logrocket",
+            "severity": "medium"
+        },
+        "@microsoft/clarity": {
+            "vendorId": "microsoft-clarity",
+            "severity": "medium"
+        },
+        "intercom-client": {
+            "vendorId": "intercom",
+            "severity": "medium"
+        },
+        "react-intercom-hook": {
+            "vendorId": "intercom",
+            "severity": "medium"
+        },
+        "crisp-sdk-web": {
+            "vendorId": "crisp",
+            "severity": "low"
+        },
+        "@stripe/stripe-js": {
+            "vendorId": "stripe",
+            "severity": "low"
+        },
+        "stripe": {
+            "vendorId": "stripe",
+            "severity": "low"
+        },
+        "@paypal/paypal-js": {
+            "vendorId": "paypal",
+            "severity": "low"
+        },
+        "react-google-recaptcha": {
+            "vendorId": "google-recaptcha",
+            "severity": "low"
+        },
+        "@google-cloud/recaptcha-enterprise": {
+            "vendorId": "google-recaptcha",
+            "severity": "low"
+        },
+        "@hcaptcha/react-hcaptcha": {
+            "vendorId": "hcaptcha",
+            "severity": "low"
+        },
+        "react-player": {
+            "vendorId": "youtube",
+            "severity": "low"
+        },
+        "@tiktok/business-api-sdk": {
+            "vendorId": "tiktok-pixel",
+            "severity": "high"
+        },
+        "tiktok-pixel": {
+            "vendorId": "tiktok-pixel",
+            "severity": "high"
+        },
+        "react-linkedin-insight": {
+            "vendorId": "linkedin-insight",
+            "severity": "medium"
+        },
+        "react-twitter-widgets": {
+            "vendorId": "twitter-widgets",
+            "severity": "low"
+        },
+        "@optimizely/react-sdk": {
+            "vendorId": "optimizely",
+            "severity": "low"
+        },
+        "launchdarkly-js-client-sdk": {
+            "vendorId": "launchdarkly",
+            "severity": "low"
+        },
+        "@datadog/browser-rum": {
+            "vendorId": "datadog-rum",
+            "severity": "medium"
+        },
+        "dd-trace": {
+            "vendorId": "datadog-rum",
+            "severity": "medium"
+        },
+        "rollbar": {
+            "vendorId": "rollbar",
+            "severity": "low"
+        },
+        "@rollbar/react": {
+            "vendorId": "rollbar",
+            "severity": "low"
+        },
+        "@bugsnag/js": {
+            "vendorId": "bugsnag",
+            "severity": "low"
+        },
+        "@bugsnag/browser": {
+            "vendorId": "bugsnag",
+            "severity": "low"
+        },
+        "cookiehub": {
+            "vendorId": "cookiehub",
+            "severity": "low"
+        }
+    },
+    "pypi": {
+        "sentry-sdk": {
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        "google-analytics-data": {
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        "django-analytical": {
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        "mixpanel": {
+            "vendorId": "mixpanel",
+            "severity": "medium"
+        },
+        "amplitude-analytics": {
+            "vendorId": "amplitude",
+            "severity": "medium"
+        },
+        "analytics-python": {
+            "vendorId": "segment",
+            "severity": "medium"
+        },
+        "posthog": {
+            "vendorId": "posthog",
+            "severity": "medium"
+        },
+        "facebook-business": {
+            "vendorId": "facebook-pixel",
+            "severity": "high"
+        },
+        "stripe": {
+            "vendorId": "stripe",
+            "severity": "low"
+        },
+        "paypalrestsdk": {
+            "vendorId": "paypal",
+            "severity": "low"
+        },
+        "rollbar": {
+            "vendorId": "rollbar",
+            "severity": "low"
+        },
+        "bugsnag": {
+            "vendorId": "bugsnag",
+            "severity": "low"
+        },
+        "datadog": {
+            "vendorId": "datadog-rum",
+            "severity": "medium"
+        },
+        "ddtrace": {
+            "vendorId": "datadog-rum",
+            "severity": "medium"
+        },
+        "django-crispy-forms": {
+            "vendorId": null,
+            "severity": "info"
+        },
+        "flask-talisman": {
+            "vendorId": null,
+            "severity": "info"
+        },
+        "hotjar": {
+            "vendorId": "hotjar",
+            "severity": "medium"
+        },
+        "intercom-python": {
+            "vendorId": "intercom",
+            "severity": "medium"
+        }
+    },
+    "cargo": {
+        "sentry": {
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        "sentry-actix": {
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        "sentry-tower": {
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        "stripe-rust": {
+            "vendorId": "stripe",
+            "severity": "low"
+        },
+        "async-stripe": {
+            "vendorId": "stripe",
+            "severity": "low"
+        },
+        "google-analytics": {
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        "plausible-rs": {
+            "vendorId": "plausible",
+            "severity": "low"
+        }
+    },
+    "envVars": {
+        "GA_TRACKING_ID": {
+            "vendorId": "google-analytics",
+            "severity": "info"
+        },
+        "GA_MEASUREMENT_ID": {
+            "vendorId": "google-analytics",
+            "severity": "info"
+        },
+        "GOOGLE_ANALYTICS_ID": {
+            "vendorId": "google-analytics",
+            "severity": "info"
+        },
+        "NEXT_PUBLIC_GA_ID": {
+            "vendorId": "google-analytics",
+            "severity": "info"
+        },
+        "NEXT_PUBLIC_GA_MEASUREMENT_ID": {
+            "vendorId": "google-analytics",
+            "severity": "info"
+        },
+        "GTM_ID": {
+            "vendorId": "google-tag-manager",
+            "severity": "info"
+        },
+        "GOOGLE_TAG_MANAGER_ID": {
+            "vendorId": "google-tag-manager",
+            "severity": "info"
+        },
+        "NEXT_PUBLIC_GTM_ID": {
+            "vendorId": "google-tag-manager",
+            "severity": "info"
+        },
+        "SENTRY_DSN": {
+            "vendorId": "sentry",
+            "severity": "info"
+        },
+        "NEXT_PUBLIC_SENTRY_DSN": {
+            "vendorId": "sentry",
+            "severity": "info"
+        },
+        "FACEBOOK_PIXEL_ID": {
+            "vendorId": "facebook-pixel",
+            "severity": "info"
+        },
+        "FB_PIXEL_ID": {
+            "vendorId": "facebook-pixel",
+            "severity": "info"
+        },
+        "NEXT_PUBLIC_FB_PIXEL_ID": {
+            "vendorId": "facebook-pixel",
+            "severity": "info"
+        },
+        "MIXPANEL_TOKEN": {
+            "vendorId": "mixpanel",
+            "severity": "info"
+        },
+        "NEXT_PUBLIC_MIXPANEL_TOKEN": {
+            "vendorId": "mixpanel",
+            "severity": "info"
+        },
+        "AMPLITUDE_API_KEY": {
+            "vendorId": "amplitude",
+            "severity": "info"
+        },
+        "SEGMENT_WRITE_KEY": {
+            "vendorId": "segment",
+            "severity": "info"
+        },
+        "POSTHOG_API_KEY": {
+            "vendorId": "posthog",
+            "severity": "info"
+        },
+        "NEXT_PUBLIC_POSTHOG_KEY": {
+            "vendorId": "posthog",
+            "severity": "info"
+        },
+        "HOTJAR_ID": {
+            "vendorId": "hotjar",
+            "severity": "info"
+        },
+        "NEXT_PUBLIC_HOTJAR_ID": {
+            "vendorId": "hotjar",
+            "severity": "info"
+        },
+        "FULLSTORY_ORG_ID": {
+            "vendorId": "fullstory",
+            "severity": "info"
+        },
+        "LOGROCKET_APP_ID": {
+            "vendorId": "logrocket",
+            "severity": "info"
+        },
+        "INTERCOM_APP_ID": {
+            "vendorId": "intercom",
+            "severity": "info"
+        },
+        "CRISP_WEBSITE_ID": {
+            "vendorId": "crisp",
+            "severity": "info"
+        },
+        "STRIPE_SECRET_KEY": {
+            "vendorId": "stripe",
+            "severity": "info"
+        },
+        "STRIPE_PUBLISHABLE_KEY": {
+            "vendorId": "stripe",
+            "severity": "info"
+        },
+        "TIKTOK_PIXEL_ID": {
+            "vendorId": "tiktok-pixel",
+            "severity": "info"
+        },
+        "LINKEDIN_PARTNER_ID": {
+            "vendorId": "linkedin-insight",
+            "severity": "info"
+        },
+        "TWITTER_PIXEL_ID": {
+            "vendorId": "twitter-pixel",
+            "severity": "info"
+        },
+        "DATADOG_CLIENT_TOKEN": {
+            "vendorId": "datadog-rum",
+            "severity": "info"
+        },
+        "DD_CLIENT_TOKEN": {
+            "vendorId": "datadog-rum",
+            "severity": "info"
+        },
+        "ROLLBAR_ACCESS_TOKEN": {
+            "vendorId": "rollbar",
+            "severity": "info"
+        },
+        "BUGSNAG_API_KEY": {
+            "vendorId": "bugsnag",
+            "severity": "info"
+        },
+        "OPTIMIZELY_SDK_KEY": {
+            "vendorId": "optimizely",
+            "severity": "info"
+        },
+        "LAUNCHDARKLY_SDK_KEY": {
+            "vendorId": "launchdarkly",
+            "severity": "info"
+        },
+        "RECAPTCHA_SITE_KEY": {
+            "vendorId": "google-recaptcha",
+            "severity": "info"
+        },
+        "HCAPTCHA_SITE_KEY": {
+            "vendorId": "hcaptcha",
+            "severity": "info"
+        },
+        "CLARITY_PROJECT_ID": {
+            "vendorId": "microsoft-clarity",
+            "severity": "info"
+        }
+    },
+    "htmlPatterns": [
+        {
+            "pattern": "googletagmanager.com/gtag/js",
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        {
+            "pattern": "googletagmanager.com/gtm.js",
+            "vendorId": "google-tag-manager",
+            "severity": "medium"
+        },
+        {
+            "pattern": "connect.facebook.net/en_US/fbevents.js",
+            "vendorId": "facebook-pixel",
+            "severity": "high"
+        },
+        {
+            "pattern": "fbq('init'",
+            "vendorId": "facebook-pixel",
+            "severity": "high"
+        },
+        {
+            "pattern": "static.hotjar.com",
+            "vendorId": "hotjar",
+            "severity": "medium"
+        },
+        {
+            "pattern": "clarity.ms/tag",
+            "vendorId": "microsoft-clarity",
+            "severity": "medium"
+        },
+        {
+            "pattern": "analytics.tiktok.com",
+            "vendorId": "tiktok-pixel",
+            "severity": "high"
+        },
+        {
+            "pattern": "snap.licdn.com/li.lms-analytics",
+            "vendorId": "linkedin-insight",
+            "severity": "medium"
+        },
+        {
+            "pattern": "cdn.segment.com/analytics.js",
+            "vendorId": "segment",
+            "severity": "medium"
+        },
+        {
+            "pattern": "widget.intercom.io",
+            "vendorId": "intercom",
+            "severity": "medium"
+        },
+        {
+            "pattern": "js.sentry-cdn.com",
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        {
+            "pattern": "browser.sentry-cdn.com",
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        {
+            "pattern": "cdn.lr-ingest.io",
+            "vendorId": "logrocket",
+            "severity": "medium"
+        },
+        {
+            "pattern": "plausible.io/js/plausible.js",
+            "vendorId": "plausible",
+            "severity": "low"
+        },
+        {
+            "pattern": "cdn.usefathom.com",
+            "vendorId": "fathom",
+            "severity": "low"
+        }
+    ],
+    "importPatterns": [
+        {
+            "pattern": "gtag",
+            "language": "javascript",
+            "vendorId": "google-analytics",
+            "severity": "medium"
+        },
+        {
+            "pattern": "ReactPixel",
+            "language": "javascript",
+            "vendorId": "facebook-pixel",
+            "severity": "high"
+        },
+        {
+            "pattern": "fbq",
+            "language": "javascript",
+            "vendorId": "facebook-pixel",
+            "severity": "high"
+        },
+        {
+            "pattern": "from 'mixpanel'",
+            "language": "python",
+            "vendorId": "mixpanel",
+            "severity": "medium"
+        },
+        {
+            "pattern": "import sentry_sdk",
+            "language": "python",
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        {
+            "pattern": "sentry_sdk.init",
+            "language": "python",
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        {
+            "pattern": "use sentry",
+            "language": "rust",
+            "vendorId": "sentry",
+            "severity": "low"
+        },
+        {
+            "pattern": "sentry::init",
+            "language": "rust",
+            "vendorId": "sentry",
+            "severity": "low"
+        }
+    ]
+}

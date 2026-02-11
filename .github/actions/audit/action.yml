@@ -1,0 +1,39 @@
+name: 'ETALON Privacy Audit'
+description: 'Scan code for privacy violations and GDPR compliance issues, post results to PR'
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  fail-on:
+    description: 'Severity level to fail on: critical, high, medium, low'
+    required: false
+    default: 'high'
+  comment-pr:
+    description: 'Post results as PR comment'
+    required: false
+    default: 'true'
+  github-token:
+    description: 'GitHub token for posting comments'
+    required: false
+    default: ${{ github.token }}
+  baseline-ref:
+    description: 'Git ref to compare against (default: main)'
+    required: false
+    default: 'main'
+
+outputs:
+  high-count:
+    description: 'Number of high severity findings'
+  medium-count:
+    description: 'Number of medium severity findings'
+  low-count:
+    description: 'Number of low severity findings'
+  added-count:
+    description: 'Number of new findings in this PR'
+  should-block:
+    description: 'Whether PR should be blocked'
+
+runs:
+  using: 'node20'
+  main: 'index.js'

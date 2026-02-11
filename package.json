@@ -1,0 +1,34 @@
+{
+    "name": "etalon",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Privacy audit tool built for AI coding agents and developers",
+    "workspaces": [
+        "packages/core",
+        "packages/cli",
+        "packages/mcp-server"
+    ],
+    "scripts": {
+        "build": "npm run build --workspaces --if-present",
+        "clean": "npm run clean --workspaces --if-present && rm -rf node_modules",
+        "lint": "eslint 'packages/*/src/**/*.ts'",
+        "lint:fix": "eslint 'packages/*/src/**/*.ts' --fix",
+        "format": "prettier --write 'packages/*/src/**/*.ts'",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "devDependencies": {
+        "@types/node": "^25.2.3",
+        "@typescript-eslint/eslint-plugin": "^7.0.0",
+        "@typescript-eslint/parser": "^7.0.0",
+        "eslint": "^8.57.0",
+        "prettier": "^3.2.0",
+        "tsup": "^8.0.0",
+        "typescript": "^5.4.0",
+        "vitest": "^1.3.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "license": "MIT"
+}

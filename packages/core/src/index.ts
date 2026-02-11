@@ -1,0 +1,86 @@
+export { VendorRegistry } from './vendor-registry.js';
+export { extractDomain, getParentDomains, isFirstParty, normalizeUrl } from './domain-utils.js';
+export {
+    auditProject,
+    detectStack,
+    scanCode,
+    scanSchemas,
+    scanConfigs,
+    scanServerTracking,
+    scanCnameCloaking,
+    formatAuditSarif,
+    diffReports,
+    shouldBlock,
+    enrichFindings,
+    getBlameForLine,
+    isGitRepo,
+    groupByAuthor,
+    enrichWithGdpr,
+    GDPR_RULE_MAP,
+    calculateScore,
+    gradeColor,
+    generateBadgeSvg,
+    badgeUrl,
+    badgeMarkdown,
+    generatePatches,
+    applyPatches,
+    fixableRules,
+    loadCustomRules,
+    scanWithCustomRules,
+    analyzeDataFlow,
+    toMermaid,
+    toTextSummary,
+    generatePolicy,
+} from './audit/index.js';
+export type {
+    Vendor,
+    VendorCategory,
+    Category,
+    VendorDatabase,
+    ScanRequest,
+    ScanReport,
+    ScanSummary,
+    NetworkRequest,
+    DetectedVendor,
+    UnknownDomain,
+    RiskLevel,
+    Recommendation,
+    OpticConfig,
+    SiteConfig,
+    AllowlistEntry,
+    NotificationConfig,
+    ScanConfig,
+} from './types.js';
+export type {
+    AuditReport,
+    AuditFinding,
+    AuditSummary,
+    FindingSeverity,
+    FindingCategory,
+    StackInfo,
+    BlameInfo,
+    DiffResult,
+    GdprReference,
+    ComplianceScore,
+    ComplianceGrade,
+} from './audit/types.js';
+export type {
+    FilePatch,
+} from './audit/auto-fixer.js';
+export type {
+    CustomRule,
+    CustomPattern,
+} from './audit/plugin-loader.js';
+export type {
+    DataFlowMap,
+    FlowNode,
+    FlowEdge,
+    FlowNodeType,
+} from './audit/data-flow-analyzer.js';
+export type {
+    GeneratedPolicy,
+    PolicySection,
+    PolicyVendorEntry,
+    PolicyInput,
+    PolicyGeneratorInput,
+} from './audit/policy-generator.js';
