@@ -50,7 +50,7 @@ export function InstallSteps() {
                 {/* Step 1 */}
                 <div>
                     <p className="text-sm text-muted-foreground mb-2 font-medium">1. Install the CLI</p>
-                    <div className="flex items-center gap-3 bg-zinc-900 rounded-lg px-4 py-3 border border-zinc-800">
+                    <div className="flex items-center gap-3 bg-zinc-900 rounded-lg px-4 py-3 border border-zinc-800 text-left">
                         <span className="text-emerald-400 font-mono text-sm select-none flex-shrink-0">$</span>
                         <code className="flex-1 text-zinc-100 font-mono text-sm overflow-x-auto">
                             {COMMANDS.step1}
@@ -62,7 +62,7 @@ export function InstallSteps() {
                 {/* Step 2 */}
                 <div>
                     <p className="text-sm text-muted-foreground mb-2 font-medium">2. Run in your project</p>
-                    <div className="flex items-center gap-3 bg-zinc-900 rounded-lg px-4 py-3 border border-zinc-800">
+                    <div className="flex items-center gap-3 bg-zinc-900 rounded-lg px-4 py-3 border border-zinc-800 text-left">
                         <span className="text-emerald-400 font-mono text-sm select-none flex-shrink-0">$</span>
                         <code className="flex-1 text-zinc-100 font-mono text-sm overflow-x-auto">
                             {COMMANDS.step2}
