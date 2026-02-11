@@ -8,7 +8,7 @@ import { SkillsSection } from "@/components/skills-section";
 import { AIFeatures } from "@/components/ai-features";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { InstallSteps } from "@/components/install-steps";
+import { InstallSteps, InstallCommand } from "@/components/install-steps";
 
 /* ═══════════════════════════════════════════════════════════
    ETALON · Landing Page — "Secure Clarity" Design
@@ -248,7 +248,7 @@ function HeroTerminalTabs() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-32">
+    <section className="relative overflow-hidden pt-32 pb-10 md:pt-40 md:pb-16">
       {/* Background glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[rgb(26,107,122)] opacity-[0.06] blur-[120px] rounded-full" />
@@ -277,76 +277,7 @@ function Hero() {
           Built for <strong className="text-zinc-800 dark:text-zinc-200">Claude Code</strong>, <strong className="text-zinc-800 dark:text-zinc-200">Cursor</strong>, <strong className="text-zinc-800 dark:text-zinc-200">Antigravity</strong>, and AI workflows.
         </p>
 
-        {/* Agent Logos */}
-        <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
-          <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Works with</span>
-          <div className="flex gap-3 flex-wrap justify-center">
-            {['Claude Code', 'Cursor', 'Windsurf', 'Cline', 'Antigravity', 'Aider'].map(agent => (
-              <div key={agent} className="px-4 py-2 bg-white dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700 shadow-sm">
-                <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{agent}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* CTA buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#get-started"
-            className="inline-flex items-center gap-2 h-12 px-8 rounded-lg bg-primary text-primary-foreground font-semibold text-base shadow-lg shadow-primary/20 dark:shadow-[0_0_20px_rgb(26_107_122/0.3)] hover:dark:shadow-[0_0_30px_rgb(26_107_122/0.5)] transition-all"
-          >
-            Get Started Free
-            <IconArrowRight className="w-4 h-4" />
-          </a>
-          <a
-            href="#mcp-server"
-            className="inline-flex items-center gap-2 h-12 px-8 rounded-lg border border-border bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-semibold text-base transition-colors"
-          >
-            Install MCP Server
-          </a>
-          <a
-            href="https://github.com/NMA-vc/etalon"
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-2 h-12 px-8 rounded-lg border-2 border-zinc-300 dark:border-zinc-700 hover:border-zinc-400 dark:hover:border-zinc-600 font-semibold text-base transition-colors"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
-            View on GitHub
-          </a>
-        </div>
-
-        {/* Terminal preview — AI-focused */}
-        <div className="mx-auto mt-16 max-w-3xl">
-          <div className="rounded-xl border border-zinc-200 dark:border-border/60 bg-zinc-950 shadow-2xl shadow-black/20 dark:shadow-black/40 overflow-hidden">
-            {/* Tab bar */}
-            <div className="flex items-center border-b border-zinc-800 bg-zinc-900/80">
-              <div className="flex gap-1.5 px-4 py-3">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <div className="w-3 h-3 rounded-full bg-green-500/80" />
-              </div>
-              <span className="text-zinc-500 text-xs font-mono ml-2">terminal — AI agent can run this</span>
-            </div>
-            {/* Terminal body */}
-            <div className="p-5 font-mono text-sm leading-relaxed text-left min-h-[260px]">
-              <div className="flex gap-2 mb-1">
-                <span className="text-emerald-400">$</span>
-                <span className="text-zinc-100">npx etalon audit ./ --format json</span>
-              </div>
-              <div className="mt-4 text-zinc-400">
-                <p className="text-blue-400">// Machine-readable output for AI agents</p>
-                <p className="mt-2 text-zinc-300">{'{"violations": ['}</p>
-                <p className="text-zinc-300 ml-4">{'{"severity": "critical", "rule": "tracker-without-consent", "file": "src/tracking.ts:12"},'}</p>
-                <p className="text-zinc-300 ml-4">{'{"severity": "high", "rule": "insecure-cookie", "file": "src/auth/session.ts:45"},'}</p>
-                <p className="text-zinc-300 ml-4">{'{"severity": "medium", "rule": "pii-without-encryption", "file": "prisma/schema.prisma:23"}'}</p>
-                <p className="text-zinc-300">{']}'}</p>
-                <p className="mt-4 text-emerald-400">✓ AI agent can parse, prioritize, and auto-fix</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Two-step install */}
+        {/* Two-step install (Main Action) */}
         <InstallSteps />
       </div>
     </section>
@@ -528,7 +459,7 @@ function CommandsGrid() {
   ];
 
   return (
-    <section id="commands" className="py-24">
+    <section id="commands" className="pt-24 pb-8">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4 border-primary/30 text-primary">10 Commands</Badge>
@@ -666,7 +597,7 @@ function Pricing() {
   ];
 
   return (
-    <section id="pricing" className="py-24 border-t border-border/40">
+    <section id="pricing" className="pt-8 pb-24 border-t border-border/40">
       <div className="mx-auto max-w-6xl px-6">
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4 border-primary/30 text-primary">Pricing</Badge>
@@ -799,22 +730,10 @@ function CTA() {
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
               Ready to replace $23K in<br />compliance costs?
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-lg mx-auto">
+            <p className="mt-4 text-muted-foreground max-w-lg mx-auto mb-8">
               Install in 30 seconds. 10 commands. Complete GDPR coverage. No credit card required.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/login">
-                <Button size="lg" className="text-base h-12 px-8 gap-2 shadow-lg shadow-primary/20 dark:shadow-[0_0_20px_rgb(26_107_122/0.3)] dark:hover:shadow-[0_0_30px_rgb(26_107_122/0.5)] transition-shadow">
-                  Start Free Scan
-                  <IconArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button variant="ghost" size="lg" className="text-base h-12 px-8 text-muted-foreground">
-                  Schedule a Demo
-                </Button>
-              </Link>
-            </div>
+            <InstallCommand label="Install the CLI" command="npm install -g @etalon/cli" light={true} />
           </div>
         </div>
       </div>

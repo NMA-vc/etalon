@@ -27,7 +27,7 @@ export function Navbar() {
                             Log in
                         </Button>
                     </Link>
-                    <Link href="/login">
+                    <Link href="/register">
                         <Button size="sm" className="dark:shadow-[0_0_20px_rgb(26_107_122/0.3)] dark:hover:shadow-[0_0_30px_rgb(26_107_122/0.5)]">
                             Start Free Scan
                         </Button>
