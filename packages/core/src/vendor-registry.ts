@@ -158,6 +158,15 @@ export class VendorRegistry {
      */
     private static defaultPath(): string {
         const currentDir = dirname(fileURLToPath(import.meta.url));
-        return join(currentDir, '..', '..', '..', 'data', 'vendors.json');
+        // When built: dist/index.js -> ../data/vendors.json (package root)
+        // Fallback: monorepo root data/vendors.json
+        const packagePath = join(currentDir, '..', 'data', 'vendors.json');
+        const monorepoPath = join(currentDir, '..', '..', '..', 'data', 'vendors.json');
+        try {
+            readFileSync(packagePath, 'utf-8');
+            return packagePath;
+        } catch {
+            return monorepoPath;
+        }
     }
 }

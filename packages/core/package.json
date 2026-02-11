@@ -1,6 +1,6 @@
 {
   "name": "@etalon/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Core vendor matching engine for ETALON privacy auditor",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -14,6 +14,7 @@
   },
   "files": [
     "dist",
+    "data",
     "README.md"
   ],
   "keywords": [
