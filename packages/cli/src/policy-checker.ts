@@ -3,7 +3,7 @@ import {
     VendorRegistry,
     extractDomain,
     type DetectedVendor,
-} from 'etalon-core';
+} from '@etalon/core';
 import { scanSite } from './scanner.js';
 
 // ─── Types ────────────────────────────────────────────────────────

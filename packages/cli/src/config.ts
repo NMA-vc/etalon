@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
-import type { OpticConfig, AllowlistEntry } from 'etalon-core';
+import type { OpticConfig, AllowlistEntry } from '@etalon/core';
 
 const CONFIG_FILENAMES = ['etalon.yaml', 'etalon.yml', '.etalon.yaml', '.etalon.yml'];
 

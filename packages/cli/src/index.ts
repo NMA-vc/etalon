@@ -6,7 +6,7 @@ import {
     normalizeUrl, VendorRegistry, auditProject, formatAuditSarif,
     generateBadgeSvg, calculateScore, generatePatches, applyPatches,
     analyzeDataFlow, toMermaid, toTextSummary, generatePolicy,
-} from 'etalon-core';
+} from '@etalon/core';
 import { scanSite, type ScanOptions } from './scanner.js';
 import { formatText } from './formatters/text.js';
 import { formatJson } from './formatters/json.js';
@@ -18,12 +18,33 @@ import { runInit } from './commands/init.js';
 
 const VERSION = '1.0.0';
 
+function showBanner() {
+    const blue = chalk.hex('#3B82F6');
+    const dim = chalk.hex('#64748B');
+    const cyan = chalk.hex('#06B6D4');
+
+    console.log('');
+    console.log(blue.bold('  ███████╗████████╗ █████╗ ██╗      ██████╗ ███╗   ██╗'));
+    console.log(blue.bold('  ██╔════╝╚══██╔══╝██╔══██╗██║     ██╔═══██╗████╗  ██║'));
+    console.log(cyan.bold('  █████╗     ██║   ███████║██║     ██║   ██║██╔██╗ ██║'));
+    console.log(cyan.bold('  ██╔══╝     ██║   ██╔══██║██║     ██║   ██║██║╚██╗██║'));
+    console.log(blue.bold('  ███████╗   ██║   ██║  ██║███████╗╚██████╔╝██║ ╚████║'));
+    console.log(blue.bold('  ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝'));
+    console.log('');
+    console.log(dim(`  v${VERSION}  `) + chalk.white('Privacy audit tool for AI coding agents'));
+    console.log(dim('  Open-source GDPR compliance scanner  ') + cyan('etalon.nma.vc'));
+    console.log('');
+}
+
 const program = new Command();
 
 program
     .name('etalon')
     .description('ETALON — Open-source privacy auditor. Scan websites for trackers and GDPR compliance.')
-    .version(VERSION);
+    .version(VERSION)
+    .hook('preAction', () => {
+        showBanner();
+    });
 
 program
     .command('scan')
@@ -411,7 +432,7 @@ program
 
             // Step 2: Data flow analysis
             spinner.text = 'Analyzing data flows...';
-            const { collectFiles } = await import('etalon-core');
+            const { collectFiles } = await import('@etalon/core');
             let dataFlow;
             try {
                 // analyzeDataFlow needs file list
@@ -503,6 +524,12 @@ program
             const svg = generateBadgeSvg(score);
             writeFileSync(options.output, svg, 'utf-8');
             spinner.succeed(`Badge written to ${chalk.cyan(options.output)} — Grade: ${score.grade} (${score.score}/100)`);
+            console.log('');
+            console.log(chalk.bold('Shields.io badge for your README:'));
+            console.log(chalk.dim('─────────────────────────────────'));
+            const { badgeMarkdown: toBadgeMd } = await import('@etalon/core');
+            console.log(toBadgeMd(score.grade, score.score));
+            console.log('');
         } catch (error) {
             spinner.fail('Badge generation failed');
             if (error instanceof Error) console.error(`\nError: ${error.message}`);

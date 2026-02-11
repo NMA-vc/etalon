@@ -1,4 +1,4 @@
-import type { ScanReport } from 'etalon-core';
+import type { ScanReport } from '@etalon/core';
 
 /**
  * Format a scan report as SARIF 2.1.0 for CI/CD integration.

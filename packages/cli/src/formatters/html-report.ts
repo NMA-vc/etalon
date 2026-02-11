@@ -1,4 +1,4 @@
-import type { AuditReport, ComplianceGrade } from 'etalon-core';
+import type { AuditReport, ComplianceGrade } from '@etalon/core';
 
 // ─── HTML Report Generator ────────────────────────────────────────
 

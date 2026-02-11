@@ -4,7 +4,7 @@ import {
     extractDomain,
     isFirstParty,
     type NetworkRequest,
-} from 'etalon-core';
+} from '@etalon/core';
 
 // ─── Types ────────────────────────────────────────────────────────
 

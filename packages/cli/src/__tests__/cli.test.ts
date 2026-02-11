@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { loadConfig, isAllowed } from '../config.js';
 import { formatJson } from '../formatters/json.js';
 import { formatSarif } from '../formatters/sarif.js';
-import type { ScanReport } from 'etalon-core';
+import type { ScanReport } from '@etalon/core';
 
 // ─── Config tests ──────────────────────────────────────────────
 

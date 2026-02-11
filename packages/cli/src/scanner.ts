@@ -8,7 +8,7 @@ import {
     type DetectedVendor,
     type UnknownDomain,
     type Recommendation,
-} from 'etalon-core';
+} from '@etalon/core';
 
 const ETALON_VERSION = '1.0.0';
 

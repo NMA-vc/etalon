@@ -6,6 +6,7 @@ Free CLI for GDPR compliance. Built for Claude Code, Cursor, Antigravity, and AI
 
 [![CI](https://github.com/NMA-vc/etalon/actions/workflows/ci.yml/badge.svg)](https://github.com/NMA-vc/etalon/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/etalon.svg)](https://www.npmjs.com/package/etalon)
+[![ETALON Score](https://img.shields.io/badge/ETALON-A%20(97%2F100)-brightgreen?style=flat-square)](https://etalon.nma.vc)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/NMA-vc/etalon.svg?style=social)](https://github.com/NMA-vc/etalon)
 
@@ -262,12 +263,20 @@ etalon data-flow ./ --format mermaid
 
 ### `etalon badge [dir]` - Compliance Badge
 
-Generate an SVG compliance badge (grade + score) for your README.
+Generate an SVG compliance badge (grade + score) for your README. Also outputs a shields.io badge URL you can embed directly.
 
 ```bash
 etalon badge ./
 etalon badge ./ -o shields/privacy.svg
 ```
+
+**Add the ETALON Score badge to your README:**
+
+```markdown
+[![ETALON Score](https://img.shields.io/badge/ETALON-A%20(95%2F100)-brightgreen?style=flat-square)](https://etalon.nma.vc)
+```
+
+Grade colors: **A** = brightgreen, **B** = green, **C** = orange, **D** = red, **F** = critical
 
 ---
 

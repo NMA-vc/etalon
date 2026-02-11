@@ -6,7 +6,7 @@ import {
     ListResourcesRequestSchema,
     ReadResourceRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
-import { VendorRegistry } from 'etalon-core';
+import { VendorRegistry } from '@etalon/core';
 
 const registry = VendorRegistry.load();
 

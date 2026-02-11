@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import type { AuditReport, AuditFinding, ComplianceGrade } from 'etalon-core';
+import type { AuditReport, AuditFinding, ComplianceGrade } from '@etalon/core';
 
 const SEVERITY_ICONS: Record<string, string> = {
     critical: '🔴',

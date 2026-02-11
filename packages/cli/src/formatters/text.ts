@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import type { ScanReport, DetectedVendor, UnknownDomain } from 'etalon-core';
+import type { ScanReport, DetectedVendor, UnknownDomain } from '@etalon/core';
 
 /**
  * Format a scan report as a pretty-printed terminal string.
