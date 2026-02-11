@@ -53,7 +53,7 @@ program
     .option('-f, --format <format>', 'Output format: text, json, sarif', 'text')
     .option('-d, --deep', 'Deep scan: scroll page, interact with consent dialogs', false)
     .option('-t, --timeout <ms>', 'Navigation timeout in milliseconds', '30000')
-    .option('--no-idle', 'Do not wait for network idle')
+    .option('--idle', 'Wait for network idle (slower but more thorough)')
     .option('--config <path>', 'Path to etalon.yaml config file')
     .action(async (url: string, options: Record<string, string | boolean>) => {
         const normalizedUrl = normalizeUrl(url);
@@ -66,7 +66,7 @@ program
         const scanOptions: ScanOptions = {
             deep: options.deep as boolean,
             timeout: parseInt(options.timeout as string, 10),
-            waitForNetworkIdle: options.idle !== false,
+            waitForNetworkIdle: options.idle === true,
         };
 
         // Merge config file scan settings

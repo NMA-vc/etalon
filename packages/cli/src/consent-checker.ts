@@ -110,8 +110,8 @@ export async function checkConsent(url: string, options: { timeout?: number } = 
         });
 
         // Navigate
-        await page.goto(url, { waitUntil: 'networkidle', timeout });
-        await page.waitForTimeout(2000); // Extra settle time
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout });
+        await page.waitForTimeout(3000); // Extra settle time for scripts to fire
 
         // Detect consent banner
         const { bannerDetected, bannerType, rejectSelector } = await detectBanner(page);

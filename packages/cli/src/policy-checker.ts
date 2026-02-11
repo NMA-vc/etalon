@@ -139,7 +139,7 @@ async function findPolicyPage(page: Page, siteUrl: string): Promise<string | nul
 // ─── Policy Text Extraction ──────────────────────────────────────
 
 async function extractPolicyText(page: Page, policyUrl: string): Promise<string> {
-    await page.goto(policyUrl, { waitUntil: 'networkidle', timeout: 20000 });
+    await page.goto(policyUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
     await page.waitForTimeout(1000);
 
     const text = await page.evaluate(() => {
