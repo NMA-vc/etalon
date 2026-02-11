@@ -31,6 +31,7 @@ export {
     toMermaid,
     toTextSummary,
     generatePolicy,
+    collectFiles,
 } from './audit/index.js';
 export type {
     Vendor,
@@ -45,7 +46,7 @@ export type {
     UnknownDomain,
     RiskLevel,
     Recommendation,
-    OpticConfig,
+    EtalonConfig,
     SiteConfig,
     AllowlistEntry,
     NotificationConfig,
@@ -84,3 +85,72 @@ export type {
     PolicyInput,
     PolicyGeneratorInput,
 } from './audit/policy-generator.js';
+export { AutoFixEngine } from './auto-fix/index.js';
+export type {
+    FixTemplate,
+    FixResult,
+    FixSuggestion,
+    FixLocation,
+    SupportedFramework,
+} from './auto-fix/index.js';
+export {
+    checkPatterns,
+    matchSafePattern,
+    isSafeDomain,
+    checkFalsePositive,
+    filterFalsePositives,
+    evaluateContext,
+    adjustSeverityByContext,
+} from './patterns/index.js';
+export type {
+    SafePattern,
+    FalsePositiveRule,
+    FalsePositiveContext,
+    ContextRule,
+    ContextCheckInput,
+    ContextResult,
+    PatternCheckResult,
+} from './patterns/index.js';
+export {
+    detectProjectContext,
+    applyContextScoring,
+    adjustFindingSeverity,
+    getIndustryRule,
+    getRegionRule,
+    getUserRightsForRegion,
+} from './scoring/index.js';
+export type {
+    ProjectContext,
+    Industry,
+    Region,
+    DataSensitivity,
+    IndustryRule,
+    RegionRule,
+    ScoringContext,
+} from './scoring/index.js';
+export {
+    isTelemetryEnabled,
+    enableTelemetry,
+    disableTelemetry,
+    recordAuditEvent,
+    recordFixEvent,
+    reportFalsePositive,
+    getFeedbackSummary,
+    analyzePatterns,
+    getLearningStats,
+} from './intelligence/index.js';
+export type {
+    TelemetryEvent,
+    FalsePositiveReport,
+    FeedbackSummary,
+    LearnedPattern,
+    LearningStats,
+} from './intelligence/index.js';
+export {
+    runFrameworkDetection,
+    shouldSuppressFinding,
+} from './detection/index.js';
+export type {
+    DetectionResult,
+    FrameworkDetector,
+} from './detection/index.js';

@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { basename, relative, extname } from 'node:path';
 import type { AuditFinding, StackInfo } from './types.js';
 
@@ -70,7 +70,7 @@ const NEXTJS_CONFIG = new Set(['next.config.js', 'next.config.mjs', 'next.config
 export function scanCnameCloaking(
     files: string[],
     baseDir: string,
-    stack: StackInfo,
+    _stack: StackInfo,
 ): AuditFinding[] {
     const findings: AuditFinding[] = [];
 
@@ -118,7 +118,7 @@ export function scanCnameCloaking(
 
 // ─── DNS Config Scanning ───────────────────────────────────────────
 
-function scanDnsConfig(content: string, filePath: string, fileName: string): AuditFinding[] {
+function scanDnsConfig(content: string, filePath: string, _fileName: string): AuditFinding[] {
     const findings: AuditFinding[] = [];
     const lines = content.split('\n');
 
@@ -155,7 +155,7 @@ function isInfraFile(filePath: string, content: string): boolean {
     return false;
 }
 
-function scanIacFile(content: string, filePath: string, fileName: string): AuditFinding[] {
+function scanIacFile(content: string, filePath: string, _fileName: string): AuditFinding[] {
     const findings: AuditFinding[] = [];
     const lines = content.split('\n');
 

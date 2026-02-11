@@ -7,7 +7,7 @@ Thank you for your interest in contributing to ETALON! 🔍
 ```bash
 # Clone the repo
 git clone https://github.com/NMA-vc/etalon.git
-cd optic
+cd etalon
 
 # Install dependencies
 npm install
@@ -28,7 +28,7 @@ npm run build
 ## Project Structure
 
 ```
-optic/
+etalon/
 ├── packages/
 │   ├── core/          # Shared vendor matching engine
 │   ├── cli/           # CLI scanner (etalon on npm)

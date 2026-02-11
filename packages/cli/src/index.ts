@@ -6,6 +6,10 @@ import {
     normalizeUrl, VendorRegistry, auditProject, formatAuditSarif,
     generateBadgeSvg, calculateScore, generatePatches, applyPatches,
     analyzeDataFlow, toMermaid, toTextSummary, generatePolicy,
+    AutoFixEngine, applyContextScoring,
+    reportFalsePositive, getFeedbackSummary,
+    isTelemetryEnabled, enableTelemetry, disableTelemetry, recordAuditEvent,
+    analyzePatterns, getLearningStats, detectProjectContext,
 } from '@etalon/core';
 import { scanSite, type ScanOptions } from './scanner.js';
 import { formatText } from './formatters/text.js';
@@ -142,24 +146,92 @@ program
                 includeBlame,
             });
 
+            // Apply context-aware scoring (non-mutating — returns adjusted copies)
+            const scoring = applyContextScoring(report.findings, dir);
+            report.findings = scoring.adjustedFindings;
+            if (scoring.adjustments.length > 0 && format === 'text') {
+                spinner?.stop();
+                console.log(chalk.bold(`\n🎯 Context: ${scoring.projectContext.industry} / ${scoring.projectContext.region}`));
+                console.log(chalk.dim(`   ${scoring.adjustments.length} finding(s) had severity adjusted based on context`));
+                for (const adj of scoring.adjustments.slice(0, 5)) {
+                    console.log(`   ${chalk.dim(adj.finding_rule)}: ${adj.original_severity} → ${chalk.yellow(adj.adjusted_severity)} (${adj.reason})`);
+                }
+                if (scoring.adjustments.length > 5) {
+                    console.log(chalk.dim(`   ... and ${scoring.adjustments.length - 5} more`));
+                }
+            }
+
             spinner?.stop();
 
             // Auto-fix mode
             if (autoFix) {
+                // 1. Legacy patches (cookie-samesite, csp-unsafe-eval, etc.)
                 const patches = generatePatches(report.findings, dir);
-                if (patches.length === 0) {
-                    console.log(chalk.yellow('\nNo auto-fixable issues found.'));
-                } else {
-                    console.log(chalk.bold(`\n🔧 ${patches.length} auto-fixable issue(s):`));
+                if (patches.length > 0) {
+                    console.log(chalk.bold(`\n🔧 ${patches.length} config fix(es):`));
                     for (const p of patches) {
                         console.log(`  ${chalk.dim(p.file)}:${p.line} — ${p.description}`);
                         console.log(`    ${chalk.red('- ' + p.oldContent.trim())}`);
                         console.log(`    ${chalk.green('+ ' + p.newContent.trim())}`);
                     }
                     const applied = applyPatches(patches, dir);
-                    console.log(chalk.green(`\n✓ Applied ${applied} fix(es).`));
+                    console.log(chalk.green(`\n✓ Applied ${applied} config fix(es).`));
+                }
+
+                // 2. Tracker consent wrapping (new intelligence layer)
+                const engine = new AutoFixEngine();
+                const { readdirSync } = await import('node:fs');
+                const { join: joinPath } = await import('node:path');
+                const codeFiles: string[] = [];
+                const collectCodeFiles = (d: string) => {
+                    try {
+                        for (const entry of readdirSync(d, { withFileTypes: true })) {
+                            const full = joinPath(d, entry.name);
+                            if (entry.isDirectory()) {
+                                if (!['node_modules', '.git', 'dist', 'build', '.next', '__pycache__', 'target'].includes(entry.name)) {
+                                    collectCodeFiles(full);
+                                }
+                            } else if (/\.(tsx?|jsx?|vue|svelte|html)$/.test(entry.name)) {
+                                codeFiles.push(full);
+                            }
+                        }
+                    } catch { /* skip */ }
+                }
+                collectCodeFiles(dir);
+
+                const suggestions = engine.scanFiles(codeFiles);
+                if (suggestions.length > 0) {
+                    console.log(chalk.bold(`\n🛡️  ${suggestions.length} tracker consent fix(es) available:`));
+                    for (const s of suggestions) {
+                        console.log(`  ${chalk.cyan(s.tracker_name)} in ${chalk.dim(s.location.file)}:${s.location.line}`);
+                        console.log(`    ${chalk.dim(s.description)}`);
+                    }
+
+                    const hookPath = engine.generateConsentHook(dir);
+                    console.log(chalk.green(`\n✓ Generated consent hook: ${chalk.cyan(hookPath)}`));
+
+                    const result = engine.applyAllFixes(suggestions);
+                    console.log(chalk.green(`✓ Applied ${result.applied} tracker consent fix(es).`));
+                    if (result.failed > 0) {
+                        console.log(chalk.yellow(`⚠ ${result.failed} fix(es) could not be applied.`));
+                    }
+                }
+
+                if (patches.length === 0 && suggestions.length === 0) {
+                    console.log(chalk.yellow('\nNo auto-fixable issues found.'));
                 }
             }
+
+            // Record telemetry
+            recordAuditEvent({
+                total_findings: report.findings.length,
+                critical: report.summary.critical,
+                high: report.summary.high,
+                medium: report.summary.medium,
+                framework: scoring.projectContext.industry,
+                industry: scoring.projectContext.industry,
+                region: scoring.projectContext.region,
+            });
 
             switch (format) {
                 case 'json':
@@ -436,7 +508,7 @@ program
             let dataFlow;
             try {
                 // analyzeDataFlow needs file list
-                const files = (collectFiles as any)?.(dir) ?? [];
+                const files = collectFiles?.(dir) ?? [];
                 if (files.length > 0) {
                     dataFlow = analyzeDataFlow(files, dir);
                 }
@@ -546,11 +618,11 @@ program
         const spinner = ora('Analyzing data flows...').start();
         try {
             // Collect files (reuse audit's file collection)
-            const { readdirSync, statSync } = await import('node:fs');
+            const { readdirSync } = await import('node:fs');
             const { join, relative } = await import('node:path');
 
             const files: string[] = [];
-            function walk(d: string) {
+            const walk = (d: string) => {
                 for (const entry of readdirSync(d, { withFileTypes: true })) {
                     const full = join(d, entry.name);
                     if (entry.isDirectory()) {
@@ -584,6 +656,115 @@ program
             if (error instanceof Error) console.error(`\nError: ${error.message}`);
             process.exit(2);
         }
+    });
+
+// ─── Intelligence Layer Commands ──────────────────────────────────
+
+program
+    .command('report-fp')
+    .description('Report a false positive finding')
+    .requiredOption('--domain <domain>', 'Domain that was incorrectly flagged')
+    .requiredOption('--rule <rule>', 'Rule that triggered the false positive')
+    .option('--file <file>', 'File where the false positive was found')
+    .option('--reason <reason>', 'Why this is a false positive', 'Not a tracker')
+    .action((options: Record<string, string>) => {
+        const report = reportFalsePositive({
+            domain: options.domain,
+            rule: options.rule,
+            file: options.file,
+            reason: options.reason ?? 'Not a tracker',
+            suggested_action: 'whitelist_domain',
+        });
+        console.log(chalk.green(`✓ False positive reported: ${chalk.bold(report.id)}`));
+        console.log(chalk.dim(`  Domain: ${report.domain}`));
+        console.log(chalk.dim(`  Rule:   ${report.rule}`));
+        console.log(chalk.dim(`  Reason: ${report.reason}`));
+        console.log('');
+        console.log(chalk.dim('Reports help ETALON learn and reduce false positives over time.'));
+    });
+
+program
+    .command('telemetry')
+    .description('Manage anonymous usage telemetry')
+    .argument('<action>', 'enable, disable, or status')
+    .action((action: string) => {
+        switch (action) {
+            case 'enable':
+                enableTelemetry();
+                console.log(chalk.green('✓ Telemetry enabled.'));
+                console.log(chalk.dim('  Anonymous usage data helps improve ETALON for everyone.'));
+                console.log(chalk.dim('  No PII is ever collected. Set DO_NOT_TRACK=1 to override.'));
+                break;
+            case 'disable':
+                disableTelemetry();
+                console.log(chalk.yellow('✓ Telemetry disabled.'));
+                break;
+            case 'status':
+                console.log(`Telemetry: ${isTelemetryEnabled() ? chalk.green('enabled') : chalk.yellow('disabled')}`);
+                break;
+            default:
+                console.error(chalk.red(`Unknown action: ${action}. Use enable, disable, or status.`));
+                process.exit(1);
+        }
+    });
+
+program
+    .command('intelligence')
+    .description('Show intelligence engine status and learned patterns')
+    .argument('[dir]', 'Project directory for context detection', './')
+    .action((dir: string) => {
+        console.log(chalk.bold('ETALON Intelligence Engine'));
+        console.log(chalk.dim('═══════════════════════════════════════════════════'));
+        console.log('');
+
+        // Project context
+        const ctx = detectProjectContext(dir);
+        console.log(chalk.bold('🎯 Project Context'));
+        console.log(`  Industry:         ${chalk.cyan(ctx.industry)}`);
+        console.log(`  Region:           ${chalk.cyan(ctx.region)}`);
+        console.log(`  Data Sensitivity:  ${chalk.cyan(ctx.data_sensitivity)}`);
+        if (ctx.detected_signals.length > 0) {
+            console.log(chalk.dim('  Signals:'));
+            for (const s of ctx.detected_signals) {
+                console.log(chalk.dim(`    • ${s}`));
+            }
+        }
+        console.log('');
+
+        // Learning stats
+        const stats = getLearningStats();
+        console.log(chalk.bold('🧠 Learning Engine'));
+        console.log(`  Patterns learned:   ${chalk.cyan(String(stats.patterns_learned))}`);
+        console.log(`  Feedback processed: ${chalk.cyan(String(stats.feedback_processed))}`);
+        console.log(`  Impact:             ${chalk.cyan(stats.accuracy_improvement)}`);
+        console.log('');
+
+        // Feedback summary
+        const feedback = getFeedbackSummary();
+        if (feedback.total_reports > 0) {
+            console.log(chalk.bold('📊 False Positive Reports'));
+            console.log(`  Total reports:   ${feedback.total_reports}`);
+            if (feedback.suggested_whitelists.length > 0) {
+                console.log(chalk.dim('  Suggested whitelists (3+ reports):'));
+                for (const d of feedback.suggested_whitelists) {
+                    console.log(chalk.dim(`    • ${d}`));
+                }
+            }
+            console.log('');
+        }
+
+        // Learned patterns
+        const learned = analyzePatterns();
+        if (learned.length > 0) {
+            console.log(chalk.bold('📝 Learned Patterns'));
+            for (const p of learned) {
+                console.log(`  ${chalk.cyan(p.domain)} — ${p.suggested_action} (confidence: ${(p.confidence * 100).toFixed(0)}%)`);
+            }
+            console.log('');
+        }
+
+        console.log(chalk.dim('Telemetry: ') + (isTelemetryEnabled() ? chalk.green('enabled') : chalk.yellow('disabled')));
+        console.log('');
     });
 
 program.parse();

@@ -90,7 +90,7 @@ async function findPolicyPage(page: Page, siteUrl: string): Promise<string | nul
             const response = await page.goto(testUrl, { waitUntil: 'domcontentloaded', timeout: 10000 });
             if (response && response.status() >= 200 && response.status() < 400) {
                 // Check if the page has meaningful content (not a 404 with 200 status)
-                const bodyText = await page.evaluate(() => (globalThis as any).document.body?.innerText?.trim() ?? '');
+                const bodyText = await page.evaluate(() => document.body?.innerText?.trim() ?? '');
                 if (bodyText.length > 200) {
                     return testUrl;
                 }
@@ -144,11 +144,10 @@ async function extractPolicyText(page: Page, policyUrl: string): Promise<string>
 
     const text = await page.evaluate(() => {
         // Remove scripts, styles, nav, header elements for cleaner text
-        const doc = (globalThis as any).document;
-        const elementsToRemove = doc.querySelectorAll('script, style, nav, header, footer, iframe');
-        elementsToRemove.forEach((el: any) => el.remove());
+        const elementsToRemove = document.querySelectorAll('script, style, nav, header, footer, iframe');
+        elementsToRemove.forEach((el) => el.remove());
 
-        return doc.body?.innerText ?? '';
+        return document.body?.innerText ?? '';
     });
 
     // Normalize whitespace

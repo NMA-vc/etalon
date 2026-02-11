@@ -4,8 +4,8 @@ import type {
     AuditFinding,
     StackInfo,
     TrackerPatternDatabase,
-    FindingSeverity,
 } from './types.js';
+import { checkPatterns } from '../patterns/index.js';
 
 // File extensions to scan
 const CODE_EXTENSIONS = new Set([
@@ -83,7 +83,7 @@ export function scanCode(
         }
     }
 
-    return deduplicateFindings(findings);
+    return deduplicateFindings(filterFalsePositives(findings));
 }
 
 export function shouldScanFile(filePath: string): boolean {
@@ -574,6 +574,35 @@ function scanRustFile(
 }
 
 // ─── Deduplication ─────────────────────────────────────────────
+
+// ─── False Positive Filtering ──────────────────────────────────
+
+function filterFalsePositives(findings: AuditFinding[]): AuditFinding[] {
+    return findings.filter(f => {
+        // Extract domain from finding message or vendor ID for pattern checking
+        const domainHint = f.vendorId || '';
+        const lineContent = f.message || '';
+
+        // Check if the finding's domain matches a safe pattern
+        const patternResult = checkPatterns(domainHint);
+
+        // If it matches a safe pattern with high confidence, suppress
+        if (patternResult.is_safe && patternResult.confidence > 0.8) {
+            return false;
+        }
+
+        // Also check any domain-like strings in the message
+        const domainMatch = lineContent.match(/(?:[\w-]+\.)+[\w-]+/);
+        if (domainMatch) {
+            const msgResult = checkPatterns(domainMatch[0]);
+            if (msgResult.is_safe && msgResult.confidence > 0.8) {
+                return false;
+            }
+        }
+
+        return true;
+    });
+}
 
 function deduplicateFindings(findings: AuditFinding[]): AuditFinding[] {
     const seen = new Set<string>();

@@ -1,4 +1,4 @@
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import type { AuditFinding, BlameInfo } from './types.js';
 
 /**
@@ -6,7 +6,7 @@ import type { AuditFinding, BlameInfo } from './types.js';
  */
 export function isGitRepo(cwd?: string): boolean {
     try {
-        execSync('git rev-parse --git-dir', {
+        execFileSync('git', ['rev-parse', '--git-dir'], {
             stdio: 'ignore',
             cwd,
         });
@@ -25,8 +25,9 @@ export function getBlameForLine(
     cwd?: string,
 ): BlameInfo | null {
     try {
-        const output = execSync(
-            `git blame -L ${lineNumber},${lineNumber} --porcelain "${filePath}"`,
+        const output = execFileSync(
+            'git',
+            ['blame', '-L', `${lineNumber},${lineNumber}`, '--porcelain', '--', filePath],
             { encoding: 'utf-8', cwd },
         );
 

@@ -15,8 +15,8 @@ Add to `~/.config/claude/claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "optic": {
-      "command": "optic-mcp",
+    "etalon": {
+      "command": "etalon-mcp",
       "args": []
     }
   }
@@ -42,10 +42,10 @@ Restart Claude Desktop. You can now ask:
 
 | URI | Description |
 |-----|-------------|
-| `optic://registry/vendors` | All vendors |
-| `optic://registry/vendors/{category}` | Filter by category |
-| `optic://registry/vendors/compliant` | GDPR-compliant only |
-| `optic://registry/categories` | All categories |
+| `etalon://registry/vendors` | All vendors |
+| `etalon://registry/vendors/{category}` | Filter by category |
+| `etalon://registry/vendors/compliant` | GDPR-compliant only |
+| `etalon://registry/categories` | All categories |
 
 ## License
 

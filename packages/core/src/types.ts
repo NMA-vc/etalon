@@ -9,12 +9,14 @@ export interface Vendor {
     gdpr_compliant: boolean;
     dpa_url?: string;
     privacy_policy?: string;
-    purpose: string;
-    data_collected: string[];
+    purpose?: string;
+    data_collected?: string[];
     retention_period?: string;
     last_verified?: string;
     risk_score: number; // 1-10
     alternatives?: string[];
+    tier?: 'premium' | 'standard' | 'basic';
+    _import_metadata?: Record<string, unknown>;
 }
 
 export type VendorCategory =
@@ -39,6 +41,7 @@ export type VendorCategory =
     | 'maps'
     | 'web3'
     | 'b2b_intelligence'
+    | 'email_marketing'
     | 'other';
 
 export interface Category {
@@ -123,7 +126,7 @@ export interface Recommendation {
 
 // ─── Config Types ─────────────────────────────────────────────────
 
-export interface OpticConfig {
+export interface EtalonConfig {
     version: string;
     sites?: SiteConfig[];
     allowlist?: AllowlistEntry[];

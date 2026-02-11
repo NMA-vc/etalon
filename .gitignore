@@ -29,3 +29,14 @@ npm-debug.log*
 README.md.backup
 .vercel
 .env*.local
+data/imports/
+data/vendors-duckduckgo.json
+data/vendors-disconnect.json
+data/vendors-backup.json
+
+# Cloud (private SaaS)
+cloud/web/.env.local
+cloud/worker/.env.local
+cloud/web/.next/
+cloud/web/.vercel/
+cloud/worker/.vercel/

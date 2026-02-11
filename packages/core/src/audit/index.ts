@@ -2,8 +2,8 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { detectStack } from './stack-detector.js';
-import { scanCode, shouldScanFile } from './code-scanner.js';
-import { scanSchemas, getSchemaFilePatterns } from './schema-scanner.js';
+import { scanCode } from './code-scanner.js';
+import { scanSchemas } from './schema-scanner.js';
 import { scanConfigs } from './config-scanner.js';
 import { scanServerTracking } from './server-tracker-scanner.js';
 import { scanCnameCloaking } from './cname-cloaking-scanner.js';
@@ -152,7 +152,7 @@ const IGNORE_DIRS = new Set([
     '.vercel', '.output',
 ]);
 
-function collectFiles(dir: string, maxDepth = 8): string[] {
+export function collectFiles(dir: string, maxDepth = 8): string[] {
     const files: string[] = [];
 
     function walk(currentDir: string, depth: number): void {

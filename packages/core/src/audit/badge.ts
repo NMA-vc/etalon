@@ -1,4 +1,4 @@
-import type { ComplianceScore, ComplianceGrade } from './types.js';
+import type { ComplianceScore } from './types.js';
 import { gradeColor } from './scoring.js';
 
 /**

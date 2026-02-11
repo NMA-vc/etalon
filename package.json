@@ -6,16 +6,21 @@
     "workspaces": [
         "packages/core",
         "packages/cli",
-        "packages/mcp-server"
+        "packages/mcp-server",
+        "cloud/web",
+        "cloud/worker"
     ],
     "scripts": {
         "build": "npm run build --workspaces --if-present",
         "clean": "npm run clean --workspaces --if-present && rm -rf node_modules",
-        "lint": "eslint 'packages/*/src/**/*.ts'",
-        "lint:fix": "eslint 'packages/*/src/**/*.ts' --fix",
+        "lint": "eslint 'packages/*/src/**/*.ts' 'cloud/*/src/**/*.ts'",
+        "lint:fix": "eslint 'packages/*/src/**/*.ts' 'cloud/*/src/**/*.ts' --fix",
         "format": "prettier --write 'packages/*/src/**/*.ts'",
         "test": "vitest run",
-        "test:watch": "vitest"
+        "test:watch": "vitest",
+        "publish:core": "npm run build -w packages/core && npm publish -w packages/core --access public",
+        "publish:cli": "npm run build -w packages/core -w packages/cli && npm publish -w packages/cli --access public",
+        "deploy:worker": "cd cloud/worker && railway up --service etalon-worker"
     },
     "devDependencies": {
         "@types/node": "^25.2.3",

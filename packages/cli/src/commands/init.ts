@@ -66,9 +66,9 @@ const PRECOMMIT_HOOK = `#!/bin/sh
 # Installed by 'etalon init'
 
 # Get staged files
-STAGED_FILES=\$(git diff --cached --name-only --diff-filter=ACM)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
 
-if [ -z "\$STAGED_FILES" ]; then
+if [ -z "$STAGED_FILES" ]; then
   exit 0
 fi
 
@@ -87,7 +87,7 @@ npx etalon audit ./ --format json --severity high 2>/dev/null | node -e "
       process.exit(1);
     }
   } catch(e) { /* audit not available, allow commit */ }
-" \$STAGED_FILES
+" $STAGED_FILES
 `;
 
 const GITIGNORE_ADDITIONS = `
@@ -100,99 +100,99 @@ etalon-results.sarif
 // ─── Init Command ─────────────────────────────────────────────────
 
 export interface InitOptions {
-    ci?: 'github' | 'gitlab' | 'none';
-    precommit?: boolean;
-    force?: boolean;
+  ci?: 'github' | 'gitlab' | 'none';
+  precommit?: boolean;
+  force?: boolean;
 }
 
 export async function runInit(dir: string, options: InitOptions = {}): Promise<void> {
-    const ci = options.ci ?? 'github';
-    const precommit = options.precommit ?? true;
-    const force = options.force ?? false;
+  const ci = options.ci ?? 'github';
+  const precommit = options.precommit ?? true;
+  const force = options.force ?? false;
 
-    console.log('');
-    console.log(chalk.bold('🔧 ETALON Project Setup'));
-    console.log(chalk.dim('═══════════════════════════════════════════════════════'));
-    console.log('');
+  console.log('');
+  console.log(chalk.bold('🔧 ETALON Project Setup'));
+  console.log(chalk.dim('═══════════════════════════════════════════════════════'));
+  console.log('');
 
-    // 1. Create etalon.yaml
-    const yamlPath = join(dir, 'etalon.yaml');
-    if (!existsSync(yamlPath) || force) {
-        writeFileSync(yamlPath, ETALON_YAML, 'utf-8');
-        console.log(chalk.green('✓') + ` Created ${chalk.cyan('etalon.yaml')}`);
+  // 1. Create etalon.yaml
+  const yamlPath = join(dir, 'etalon.yaml');
+  if (!existsSync(yamlPath) || force) {
+    writeFileSync(yamlPath, ETALON_YAML, 'utf-8');
+    console.log(chalk.green('✓') + ` Created ${chalk.cyan('etalon.yaml')}`);
+  } else {
+    console.log(chalk.yellow('⊘') + ` ${chalk.cyan('etalon.yaml')} already exists (use --force to overwrite)`);
+  }
+
+  // 2. Create CI workflow
+  if (ci === 'github') {
+    const workflowDir = join(dir, '.github', 'workflows');
+    const workflowPath = join(workflowDir, 'etalon.yml');
+    if (!existsSync(workflowPath) || force) {
+      mkdirSync(workflowDir, { recursive: true });
+      writeFileSync(workflowPath, GITHUB_ACTION, 'utf-8');
+      console.log(chalk.green('✓') + ` Created ${chalk.cyan('.github/workflows/etalon.yml')}`);
     } else {
-        console.log(chalk.yellow('⊘') + ` ${chalk.cyan('etalon.yaml')} already exists (use --force to overwrite)`);
+      console.log(chalk.yellow('⊘') + ` ${chalk.cyan('.github/workflows/etalon.yml')} already exists`);
+    }
+  }
+
+  // 3. Create pre-commit hook
+  if (precommit) {
+    const hooksDir = join(dir, '.git', 'hooks');
+    const hookPath = join(hooksDir, 'pre-commit');
+
+    // Also create as a standalone script for Husky/lint-staged users
+    const etalonDir = join(dir, '.etalon');
+    const standalonePath = join(etalonDir, 'pre-commit.sh');
+    mkdirSync(etalonDir, { recursive: true });
+
+    if (!existsSync(standalonePath) || force) {
+      writeFileSync(standalonePath, PRECOMMIT_HOOK, { mode: 0o755 });
+      console.log(chalk.green('✓') + ` Created ${chalk.cyan('.etalon/pre-commit.sh')}`);
     }
 
-    // 2. Create CI workflow
-    if (ci === 'github') {
-        const workflowDir = join(dir, '.github', 'workflows');
-        const workflowPath = join(workflowDir, 'etalon.yml');
-        if (!existsSync(workflowPath) || force) {
-            mkdirSync(workflowDir, { recursive: true });
-            writeFileSync(workflowPath, GITHUB_ACTION, 'utf-8');
-            console.log(chalk.green('✓') + ` Created ${chalk.cyan('.github/workflows/etalon.yml')}`);
-        } else {
-            console.log(chalk.yellow('⊘') + ` ${chalk.cyan('.github/workflows/etalon.yml')} already exists`);
-        }
+    // Try to install into .git/hooks
+    if (existsSync(join(dir, '.git'))) {
+      mkdirSync(hooksDir, { recursive: true });
+      if (!existsSync(hookPath) || force) {
+        writeFileSync(hookPath, PRECOMMIT_HOOK, { mode: 0o755 });
+        console.log(chalk.green('✓') + ` Installed ${chalk.cyan('pre-commit hook')}`);
+      } else {
+        console.log(chalk.yellow('⊘') + ` pre-commit hook already exists (see ${chalk.cyan('.etalon/pre-commit.sh')})`);
+      }
+    } else {
+      console.log(chalk.dim('  (no .git directory — hook saved to .etalon/pre-commit.sh)'));
     }
+  }
 
-    // 3. Create pre-commit hook
-    if (precommit) {
-        const hooksDir = join(dir, '.git', 'hooks');
-        const hookPath = join(hooksDir, 'pre-commit');
+  // 4. Create .etalon/rules directory for custom rules
+  const rulesDir = join(dir, '.etalon', 'rules');
+  if (!existsSync(rulesDir)) {
+    mkdirSync(rulesDir, { recursive: true });
+    writeFileSync(join(rulesDir, '.gitkeep'), '', 'utf-8');
+    console.log(chalk.green('✓') + ` Created ${chalk.cyan('.etalon/rules/')} for custom rules`);
+  }
 
-        // Also create as a standalone script for Husky/lint-staged users
-        const etalonDir = join(dir, '.etalon');
-        const standalonePath = join(etalonDir, 'pre-commit.sh');
-        mkdirSync(etalonDir, { recursive: true });
-
-        if (!existsSync(standalonePath) || force) {
-            writeFileSync(standalonePath, PRECOMMIT_HOOK, { mode: 0o755 });
-            console.log(chalk.green('✓') + ` Created ${chalk.cyan('.etalon/pre-commit.sh')}`);
-        }
-
-        // Try to install into .git/hooks
-        if (existsSync(join(dir, '.git'))) {
-            mkdirSync(hooksDir, { recursive: true });
-            if (!existsSync(hookPath) || force) {
-                writeFileSync(hookPath, PRECOMMIT_HOOK, { mode: 0o755 });
-                console.log(chalk.green('✓') + ` Installed ${chalk.cyan('pre-commit hook')}`);
-            } else {
-                console.log(chalk.yellow('⊘') + ` pre-commit hook already exists (see ${chalk.cyan('.etalon/pre-commit.sh')})`);
-            }
-        } else {
-            console.log(chalk.dim('  (no .git directory — hook saved to .etalon/pre-commit.sh)'));
-        }
+  // 5. Update .gitignore
+  const gitignorePath = join(dir, '.gitignore');
+  if (existsSync(gitignorePath)) {
+    const content = await import('node:fs').then(fs => fs.readFileSync(gitignorePath, 'utf-8'));
+    if (!content.includes('etalon-report.html')) {
+      writeFileSync(gitignorePath, content + GITIGNORE_ADDITIONS, 'utf-8');
+      console.log(chalk.green('✓') + ` Updated ${chalk.cyan('.gitignore')}`);
     }
+  }
 
-    // 4. Create .etalon/rules directory for custom rules
-    const rulesDir = join(dir, '.etalon', 'rules');
-    if (!existsSync(rulesDir)) {
-        mkdirSync(rulesDir, { recursive: true });
-        writeFileSync(join(rulesDir, '.gitkeep'), '', 'utf-8');
-        console.log(chalk.green('✓') + ` Created ${chalk.cyan('.etalon/rules/')} for custom rules`);
-    }
-
-    // 5. Update .gitignore
-    const gitignorePath = join(dir, '.gitignore');
-    if (existsSync(gitignorePath)) {
-        const content = await import('node:fs').then(fs => fs.readFileSync(gitignorePath, 'utf-8'));
-        if (!content.includes('etalon-report.html')) {
-            writeFileSync(gitignorePath, content + GITIGNORE_ADDITIONS, 'utf-8');
-            console.log(chalk.green('✓') + ` Updated ${chalk.cyan('.gitignore')}`);
-        }
-    }
-
-    // Summary
-    console.log('');
-    console.log(chalk.dim('───────────────────────────────────────────────────────'));
-    console.log(chalk.bold('Next steps:'));
-    console.log(`  1. Review ${chalk.cyan('etalon.yaml')} and add approved vendors`);
-    console.log(`  2. Run ${chalk.cyan('etalon audit ./')} to scan your codebase`);
-    if (ci === 'github') {
-        console.log(`  3. Push to trigger the GitHub Action`);
-    }
-    console.log(`  4. Visit ${chalk.cyan('https://etalon.nma.vc/docs')} for full documentation`);
-    console.log('');
+  // Summary
+  console.log('');
+  console.log(chalk.dim('───────────────────────────────────────────────────────'));
+  console.log(chalk.bold('Next steps:'));
+  console.log(`  1. Review ${chalk.cyan('etalon.yaml')} and add approved vendors`);
+  console.log(`  2. Run ${chalk.cyan('etalon audit ./')} to scan your codebase`);
+  if (ci === 'github') {
+    console.log(`  3. Push to trigger the GitHub Action`);
+  }
+  console.log(`  4. Visit ${chalk.cyan('https://etalon.nma.vc/docs')} for full documentation`);
+  console.log('');
 }

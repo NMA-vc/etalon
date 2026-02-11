@@ -1,7 +1,6 @@
 import { VendorRegistry } from '../vendor-registry.js';
-import type { AuditReport, AuditFinding, StackInfo } from './types.js';
+import type { AuditReport } from './types.js';
 import type { DataFlowMap } from './data-flow-analyzer.js';
-import type { Vendor } from '../types.js';
 
 // ─── Types ────────────────────────────────────────────────────────
 
@@ -126,8 +125,8 @@ function mergeVendors(
             vendorName: vendor.name,
             company: vendor.company,
             category: vendor.category,
-            purpose: vendor.purpose,
-            dataCollected: vendor.data_collected,
+            purpose: vendor.purpose ?? '',
+            dataCollected: vendor.data_collected ?? [],
             privacyPolicyUrl: vendor.privacy_policy,
             dpaUrl: vendor.dpa_url,
             retentionPeriod: vendor.retention_period,

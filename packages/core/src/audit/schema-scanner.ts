@@ -1,4 +1,4 @@
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { relative } from 'node:path';
 import type { AuditFinding, StackInfo, PiiColumnPattern, FindingSeverity } from './types.js';
 

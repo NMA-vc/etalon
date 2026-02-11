@@ -60,7 +60,7 @@ function makeReport(findings: Array<{ severity: string }>): AuditReport {
     return {
         meta: { etalonVersion: '1.0.0', auditDate: '', auditDurationMs: 0, directory: '.', stack: { languages: ['typescript'], framework: 'none', orm: 'none', packageManager: 'npm', detectedFiles: [] } },
         summary: { totalFindings: findings.length, critical: 0, high: 0, medium: 0, low: 0, info: 0, trackerSdksFound: 0, piiColumnsFound: 0, configIssues: 0 },
-        findings: findings.map((f, i) => ({ id: `f${i}`, category: 'code' as const, severity: f.severity as any, title: '', message: '', file: '', rule: '' })),
+        findings: findings.map((f, i) => ({ id: `f${i}`, category: 'code' as const, severity: f.severity as 'critical' | 'high' | 'medium' | 'low' | 'info', title: '', message: '', file: '', rule: '' })),
         recommendations: [],
     };
 }
@@ -107,8 +107,8 @@ describe('Compliance Badge', () => {
     });
 
     it('generates markdown badge link', () => {
-        const md = badgeMarkdown('NMA-vc', 'etalon');
-        expect(md).toContain('etalon.nma.vc/badge/github/NMA-vc/etalon');
+        const md = badgeMarkdown('A', 95);
+        expect(md).toContain('ETALON');
         expect(md).toContain('![');
     });
 });

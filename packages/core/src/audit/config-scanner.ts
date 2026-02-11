@@ -311,7 +311,7 @@ function scanFlaskConfig(baseDir: string): AuditFinding[] {
 
 // ─── Cookie Configuration Scanning ─────────────────────────────
 
-function scanCookieConfig(content: string, filePath: string, stack: StackInfo): AuditFinding[] {
+function scanCookieConfig(content: string, filePath: string, _stack: StackInfo): AuditFinding[] {
     const findings: AuditFinding[] = [];
     const lines = content.split('\n');
 

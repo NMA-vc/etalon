@@ -12,22 +12,22 @@ npm install -g etalon
 
 ```bash
 # Scan a website
-optic scan https://example.com
+etalon scan https://example.com
 
 # JSON output
-optic scan https://example.com --format json
+etalon scan https://example.com --format json
 
 # SARIF for CI/CD (GitHub Code Scanning)
-optic scan https://example.com --format sarif
+etalon scan https://example.com --format sarif
 
 # Deep scan — scroll page, click consent dialogs
-optic scan https://example.com --deep
+etalon scan https://example.com --deep
 
 # Look up a single domain
-optic lookup google-analytics.com
+etalon lookup google-analytics.com
 
 # Registry stats
-optic info
+etalon info
 ```
 
 ## Options

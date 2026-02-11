@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
-import type { OpticConfig, AllowlistEntry } from '@etalon/core';
+import type { EtalonConfig, AllowlistEntry } from '@etalon/core';
 
 const CONFIG_FILENAMES = ['etalon.yaml', 'etalon.yml', '.etalon.yaml', '.etalon.yml'];
 
@@ -9,7 +9,7 @@ const CONFIG_FILENAMES = ['etalon.yaml', 'etalon.yml', '.etalon.yaml', '.etalon.
  * Load etalon.yaml config from the current directory or ancestors.
  * Returns null if no config file is found.
  */
-export function loadConfig(startDir?: string): OpticConfig | null {
+export function loadConfig(startDir?: string): EtalonConfig | null {
     const dir = startDir ?? process.cwd();
 
     for (const filename of CONFIG_FILENAMES) {
@@ -17,7 +17,7 @@ export function loadConfig(startDir?: string): OpticConfig | null {
         if (existsSync(filePath)) {
             try {
                 const raw = readFileSync(filePath, 'utf-8');
-                return parseYaml(raw) as OpticConfig;
+                return parseYaml(raw) as EtalonConfig;
             } catch (err) {
                 console.error(`Warning: Failed to parse ${filePath}: ${err}`);
                 return null;

@@ -1,0 +1,6 @@
+{
+    "buildCommand": "cd ../.. && npm run build -w packages/core && cd cloud/web && npm run build",
+    "installCommand": "cd ../.. && npm ci",
+    "framework": "nextjs",
+    "outputDirectory": ".next"
+}

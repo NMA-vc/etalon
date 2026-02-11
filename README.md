@@ -375,9 +375,9 @@ const policy = await generatePolicy('./src', {
 
 | Metric | Count |
 |--------|-------|
-| Known vendor profiles | **175+** |
-| Tracked domains | **475+** |
-| Vendor categories | **22** |
+| Known vendor profiles | **26,800+** |
+| Tracked domains | **111,000+** |
+| Vendor categories | **23** |
 | Tracker patterns (npm, pip, cargo, env, HTML, imports) | **137** |
 | PII field patterns | **36** |
 | Schema formats supported | **6** |
@@ -470,7 +470,7 @@ etalon/
 │   ├── cli/         # etalon CLI (10 commands)
 │   └── mcp-server/  # MCP server for AI assistants
 ├── data/
-│   ├── vendors.json          # 175+ vendors, 475+ domains
+│   ├── vendors.json          # 26,800+ vendors, 111,000+ domains
 │   └── tracker-patterns.json # 137 patterns
 └── templates/                # GDPR legal templates
 ```
