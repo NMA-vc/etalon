@@ -12,9 +12,9 @@ Free CLI for GDPR compliance. Built for Claude Code, Cursor, Antigravity, and AI
 
 ```bash
 # AI agents can run this automatically
-npx etalon audit ./ --format json
-npx etalon audit ./ --fix
-npx etalon generate-policy ./ --company "Acme"
+npx @etalon/cli audit ./ --format json
+npx @etalon/cli audit ./ --fix
+npx @etalon/cli generate-policy ./ --company "Acme"
 ```
 
 **Works with:** Claude Code • Cursor • Windsurf • Cline • Antigravity • Aider
@@ -76,7 +76,7 @@ Add to `claude_desktop_config.json`:
 
 ```bash
 # Install globally
-npm install -g etalon
+npm install -g @etalon/cli
 
 # Scan a website for trackers
 etalon scan https://example.com
@@ -94,7 +94,7 @@ etalon consent-check https://example.com
 Or use without installing:
 
 ```bash
-npx etalon scan https://example.com
+npx @etalon/cli scan https://example.com
 ```
 
 ---

@@ -1,13 +1,12 @@
 {
-  "name": "etalon",
-  "version": "1.0.0",
+  "name": "@etalon/cli",
+  "version": "1.0.1",
   "description": "ETALON \u2014 Privacy audit tool for websites. Scan any site for trackers and GDPR compliance.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
   "bin": {
-    "etalon": "./dist/index.js",
-    "etalon-audit": "./dist/index.js"
+    "etalon": "dist/index.js"
   },
   "scripts": {
     "build": "tsup",
