@@ -1,6 +1,6 @@
 {
     "version": "2.0.0",
-    "last_updated": "2026-02-11T10:00:00Z",
+    "last_updated": "2026-02-11T21:04:34.436Z",
     "vendors": [
         {
             "id": "ab-tasty",
@@ -1187,6 +1187,23 @@
             "alternatives": [
                 "typeform"
             ]
+        },
+        {
+            "id": "google-hosted-libraries",
+            "domains": [
+                "ajax.googleapis.com",
+                "googleapis.com"
+            ],
+            "name": "Google Hosted Libraries",
+            "company": "Google LLC",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://policies.google.com/privacy",
+            "purpose": "CDN for popular open-source JavaScript libraries",
+            "data_collected": [
+                "IP address"
+            ],
+            "risk_score": 1
         },
         {
             "id": "google-maps",
@@ -2434,7 +2451,7 @@
                 "plausible.io"
             ],
             "name": "Plausible Analytics",
-            "company": "Plausible Insights O\u00dc",
+            "company": "Plausible Insights OÜ",
             "category": "analytics",
             "gdpr_compliant": true,
             "dpa_url": "https://plausible.io/dpa",
@@ -3440,6 +3457,25 @@
             "alternatives": [
                 "metamask"
             ]
+        },
+        {
+            "id": "webflow-cdn",
+            "domains": [
+                "cdn.prod.website-files.com",
+                "assets-global.website-files.com",
+                "assets.website-files.com"
+            ],
+            "name": "Webflow CDN",
+            "company": "Webflow Inc.",
+            "category": "cdn",
+            "gdpr_compliant": true,
+            "privacy_policy": "https://webflow.com/legal/privacy",
+            "purpose": "Asset delivery for Webflow-hosted sites",
+            "data_collected": [
+                "IP address",
+                "request headers"
+            ],
+            "risk_score": 1
         },
         {
             "id": "wechat-widget",
