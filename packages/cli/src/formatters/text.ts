@@ -106,7 +106,7 @@ function formatVendorEntry(dv: DetectedVendor, compact = false): string[] {
     const riskColor = vendor.risk_score >= 6 ? chalk.red : vendor.risk_score >= 3 ? chalk.yellow : chalk.green;
 
     lines.push(
-        `${riskColor(vendor.domains[0].padEnd(35))} ${chalk.bold(vendor.name)}`
+        `${riskColor((vendor.domains?.[0] ?? 'unknown').padEnd(35))} ${chalk.bold(vendor.name)}`
     );
     lines.push(`├─ ${chalk.dim('Category:')}   ${vendor.category}`);
 
@@ -116,7 +116,7 @@ function formatVendorEntry(dv: DetectedVendor, compact = false): string[] {
             : chalk.red('Non-compliant');
         lines.push(`├─ ${chalk.dim('GDPR:')}       ${gdprStatus}`);
 
-        if (vendor.data_collected.length > 0) {
+        if (vendor.data_collected && vendor.data_collected.length > 0) {
             lines.push(`├─ ${chalk.dim('Data:')}       ${vendor.data_collected.join(', ')}`);
         }
 
