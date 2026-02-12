@@ -3,8 +3,8 @@ FROM node:22-slim AS builder
 
 WORKDIR /app
 
-COPY cloud/worker/package.json cloud/worker/package-lock.json* ./
-RUN npm ci
+COPY cloud/worker/package.json ./
+RUN npm install
 
 COPY cloud/worker/tsconfig.json ./
 COPY cloud/worker/src/ ./src/
@@ -42,8 +42,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-COPY cloud/worker/package.json cloud/worker/package-lock.json* ./
-RUN npm ci --omit=dev
+COPY cloud/worker/package.json ./
+RUN npm install --omit=dev
 
 # Install Playwright Chromium
 RUN npx playwright install chromium
