@@ -30,11 +30,13 @@ jobs:
         run: npm run build -w packages/cli
 
       - name: Publish @etalon/core
+        continue-on-error: true
         run: npm publish -w packages/core --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @etalon/cli
+        continue-on-error: true
         run: npm publish -w packages/cli --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
