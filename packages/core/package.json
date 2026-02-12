@@ -1,6 +1,6 @@
 {
   "name": "@etalon/core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Core vendor matching engine for ETALON privacy auditor",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -23,5 +23,9 @@
     "tracker",
     "audit"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NMA-vc/etalon"
+  },
   "license": "MIT"
 }

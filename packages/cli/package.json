@@ -23,7 +23,7 @@
     "ora": "^8.0.0",
     "playwright": "^1.42.0",
     "yaml": "^2.3.0",
-    "@etalon/core": "^1.0.1"
+    "@etalon/core": "^1.0.2"
   },
   "keywords": [
     "privacy",
