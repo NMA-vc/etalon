@@ -28,5 +28,9 @@
     "tracker",
     "audit"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NMA-vc/etalon"
+  },
   "license": "MIT"
 }

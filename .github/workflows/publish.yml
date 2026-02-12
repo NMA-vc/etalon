@@ -29,6 +29,9 @@ jobs:
       - name: Build CLI
         run: npm run build -w packages/cli
 
+      - name: Build MCP Server
+        run: npm run build -w packages/mcp-server
+
       - name: Publish @etalon/core
         continue-on-error: true
         run: npm publish -w packages/core --provenance --access public
@@ -38,5 +41,11 @@ jobs:
       - name: Publish @etalon/cli
         continue-on-error: true
         run: npm publish -w packages/cli --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish @etalon/mcp-server
+        continue-on-error: true
+        run: npm publish -w packages/mcp-server --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
