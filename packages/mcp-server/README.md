@@ -5,7 +5,7 @@ Expose the ETALON privacy vendor registry to AI agents via [Model Context Protoc
 ## Installation
 
 ```bash
-npm install -g etalon-mcp
+npm install -g @etalon/mcp-server
 ```
 
 ## Claude Desktop Setup
@@ -16,7 +16,7 @@ Add to `~/.config/claude/claude_desktop_config.json`:
 {
   "mcpServers": {
     "etalon": {
-      "command": "etalon-mcp",
+      "command": "etalon-mcp-server",
       "args": []
     }
   }
