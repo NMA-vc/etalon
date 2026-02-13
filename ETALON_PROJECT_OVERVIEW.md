@@ -6,11 +6,11 @@
 etalon/
 ├── packages/
 │   ├── core/          ← Shared library (Vendor Registry, Audit Engine, Policy Generator)
-│   ├── cli/           ← CLI tool (`etalon` command)
+│   ├── cli/           ← CLI tool (`etalon` command) — v1.1.0
 │   └── mcp-server/    ← MCP Server for AI agents
 ├── cloud/
-│   ├── web/           ← Next.js Dashboard (Vercel)
-│   └── worker/        ← Scan Worker (Railway)
+│   ├── web/           ← Next.js Dashboard (Vercel) — etalon.nma.vc
+│   └── worker/        ← Scan Worker (Railway) + Scheduled Scans
 └── data/
     └── vendors.json   ← 26,886 Vendors, 111,603 Domains, 23 Kategorien
 ```
@@ -19,15 +19,21 @@ etalon/
 
 ## 1. CLI-Features
 
-Das CLI hat **10 Commands**:
+Das CLI hat **16 Commands** (v1.1.0):
 
 | Command | Was es tut | Input | Methode |
 |---------|-----------|-------|---------|
 | `etalon scan <url>` | Website von außen scannen | URL | Playwright (Headless Browser), fängt Network Requests ab |
+| `etalon scan <url> --upload --site <id>` | Scan + Cloud Upload | URL + Site ID | Wie scan, plus Upload an `/api/ingest` |
 | `etalon audit [dir]` | Codebase scannen | Verzeichnis | Statische Analyse: Code, Schemas, Configs, Server-Tracking, CNAME Cloaking |
-| `etalon consent-check <url>` | Cookie-Consent testen | URL | Playwright: lädt Seite, erkennt CMP/Banner, klickt "Reject All", prüft ob Tracker danach noch feuern |
-| `etalon policy-check <url>` | Privacy Policy vs. Realität | URL | Scannt Website + liest Privacy Policy, cross-referenziert |
-| `etalon generate-policy [dir]` | GDPR Privacy Policy generieren | Verzeichnis + Company-Info | Code-Audit + Network-Scan + Data Flow → Markdown/HTML Policy |
+| `etalon push <url> [dir]` | Scan + Audit + Upload | URL + Verzeichnis | One-step combined command |
+| `etalon sites` | Cloud Sites auflisten | — | `GET /api/sites` mit API Key Auth |
+| `etalon auth login` | API Key speichern | API Key | Verifiziert gegen `/api/auth/verify`, speichert in `~/.etalon/config.json` |
+| `etalon auth logout` | API Key entfernen | — | Löscht `~/.etalon/config.json` |
+| `etalon auth status` | Auth-Status prüfen | — | Prüft ob Key vorhanden und gültig |
+| `etalon consent-check <url>` | Cookie-Consent testen | URL | Playwright: CMP/Banner erkennen, "Reject All" klicken, prüfen |
+| `etalon policy-check <url>` | Privacy Policy vs. Realität | URL | Scan + Privacy Policy cross-referenzieren |
+| `etalon generate-policy [dir]` | GDPR Privacy Policy generieren | Verzeichnis | Code-Audit + Network-Scan + Data Flow → Markdown/HTML Policy |
 | `etalon data-flow [dir]` | PII-Datenflüsse visualisieren | Verzeichnis | Statische Analyse → Text/Mermaid/JSON |
 | `etalon badge [dir]` | Compliance-Badge erzeugen | Verzeichnis | SVG Badge basierend auf Score |
 | `etalon init [dir]` | Projekt-Setup | Verzeichnis | Erzeugt `etalon.yaml`, GitHub Action, Pre-commit Hook |
@@ -57,7 +63,7 @@ Die **Codebase** statisch:
 ## 2. Output-Formate
 
 | Format | Command(s) | Details |
-|--------|-----------|---------|
+|--------|-----------|---------| 
 | **Text** | scan, audit, consent-check, policy-check | Colorized Terminal Output (chalk) |
 | **JSON** | scan, audit, consent-check, policy-check, data-flow | Strukturierter JSON-Export |
 | **SARIF** | scan, audit | GitHub Security Tab kompatibel |
@@ -119,16 +125,27 @@ GeneratedPolicy {
 |-----------|-------|--------|
 | **Dashboard** (`cloud/web/`) | Next.js + Supabase | ✅ Live auf `etalon.nma.vc` |
 | **Scan Worker** (`cloud/worker/`) | Node.js + Playwright auf Railway | ✅ Läuft |
+| **Scheduled Scans** | Cron im Worker (5-min Intervall) | ✅ Implementiert |
 | **API Routes** | Next.js API Routes | ✅ Live |
 | **Auth** | Supabase Auth (GitHub + Email) | ✅ Funktioniert |
 | **Stripe Billing** | Stripe Checkout + Webhooks | ✅ Konfiguriert (Test Mode) |
-| **API Keys** | `api_keys` Table mit Hash/Prefix | ✅ Schema vorhanden |
+| **API Keys** | `api_keys` Table mit SHA-256 Hash/Prefix | ✅ Vollständig |
+| **Trust Center** | Public page + Badge + Toggle | ✅ Live |
 
 ### API Routes:
 - `POST /api/scan` — Cloud Scan triggern
+- `POST /api/ingest` — CLI Scan-Ergebnisse hochladen
+- `GET /api/sites` — Sites auflisten (API Key Auth)
+- `PATCH /api/sites/[id]` — Site-Settings aktualisieren
+- `POST /api/auth/verify` — API Key verifizieren
+- `GET /api/badge/[slug]` — Dynamischer SVG Badge
+- `POST /api/api-keys` — API Key erstellen
 - `POST /api/stripe/checkout` — Checkout Session
 - `POST /api/stripe/portal` — Billing Portal
 - `POST /api/stripe/webhook` — Stripe Events
+
+### Public Pages:
+- `/trust/[slug]` — Öffentliche Trust Center Seite (Score, Vendors, Timeline)
 
 ### MCP Server
 **`@etalon/mcp-server` veröffentlicht auf npm.** 4 Tools + Resources:
@@ -168,18 +185,19 @@ CLI-Flags überschreiben Config: `--format`, `--severity`, `--timeout`, `--idle`
 
 ---
 
-## 6. Was EXISTIERT vs. was FEHLT
+## 6. Feature-Status
 
-### CLI → Cloud Sync
+### CLI → Cloud Sync ✅
 | Feature | Status |
 |---------|--------|
 | CLI lokal scannen | ✅ Existiert |
 | Cloud Scan via Dashboard | ✅ Worker pollt `scans` Table |
-| CLI → Cloud Upload (Scan-Ergebnisse hochladen) | ❌ **Fehlt** |
-| API Key Auth im CLI | ❌ **Fehlt** (API Keys Table existiert, aber CLI nutzt sie nicht) |
-| `etalon login` / `etalon push` Commands | ❌ **Fehlt** |
+| CLI → Cloud Upload (Scan-Ergebnisse hochladen) | ✅ `--upload` Flag + `/api/ingest` |
+| API Key Auth im CLI | ✅ `etalon auth login/logout/status` |
+| `etalon push` Command | ✅ Scan + Audit + Upload |
+| `etalon sites` Command | ✅ Sites auflisten |
 
-### Dashboard Integration
+### Dashboard Integration ✅
 | Feature | Status |
 |---------|--------|
 | Sites verwalten | ✅ CRUD vorhanden |
@@ -187,14 +205,14 @@ CLI-Flags überschreiben Config: `--format`, `--severity`, `--timeout`, `--idle`
 | Cloud Scan triggern | ✅ Funktioniert |
 | Alerts (new_tracker, score_drop) | ✅ Schema + Alert Generator |
 | Settings / Billing | ✅ Stripe integration |
-| API Key Management | ✅ UI vorhanden |
-| Scan-Vergleich (Diff) | ❌ **Fehlt** im Dashboard (Core hat `diffReports()`) |
-| Scheduled Scans (cron) | ❌ **Fehlt** (Schema hat `schedule` Feld, Worker hat kein Cron) |
+| API Key Management | ✅ UI + Generierung + Verification |
+| Trust Center Toggle | ✅ In Site Detail Page |
+| Scheduled Scans (cron) | ✅ Worker prüft alle 5 Min |
 
-### Public Trust Center
+### Public Trust Center ✅
 | Feature | Status |
 |---------|--------|
-| Trust Center Page | ❌ **Fehlt komplett** |
-| Public Badge/Widget | ✅ Badge-SVG wird generiert |
-| Public Scan Report Sharing | ❌ **Fehlt** |
-| Embeddable Privacy Score | ❌ **Fehlt** |
+| Trust Center Page | ✅ `/trust/[slug]` — Score, Vendors, Timeline |
+| Dynamic Badge | ✅ `/api/badge/[slug]` — SVG shields.io style |
+| Lead Capture Form | ✅ Request compliance report |
+| Embeddable Badge Code | ✅ Markdown + HTML Copy in Dashboard |
