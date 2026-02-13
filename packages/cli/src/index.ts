@@ -19,6 +19,7 @@ import { formatAuditText } from './formatters/audit-text.js';
 import { generateHtmlReport } from './formatters/html-report.js';
 import { loadConfig } from './config.js';
 import { runInit } from './commands/init.js';
+import { runLogin, runLogout, runStatus, loadCloudConfig, uploadScan } from './commands/cloud.js';
 
 const VERSION = '1.0.0';
 
@@ -59,6 +60,8 @@ program
     .option('-t, --timeout <ms>', 'Navigation timeout in milliseconds', '30000')
     .option('--idle', 'Wait for network idle (slower but more thorough)')
     .option('--config <path>', 'Path to etalon.yaml config file')
+    .option('--upload', 'Upload results to ETALON Cloud')
+    .option('--site <id>', 'Site ID for cloud upload (from dashboard)')
     .action(async (url: string, options: Record<string, string | boolean>) => {
         const normalizedUrl = normalizeUrl(url);
         const format = (options.format as string) ?? 'text';
@@ -104,6 +107,35 @@ program
                 default:
                     console.log(formatText(report));
                     break;
+            }
+
+            // Upload to cloud if --upload is set
+            if (options.upload) {
+                const siteId = options.site as string;
+                if (!siteId) {
+                    console.log('');
+                    console.log(chalk.red('❌ --site <id> is required when using --upload'));
+                    console.log(chalk.gray('   Get your site ID from: https://etalon.nma.vc/dashboard/sites'));
+                    process.exit(1);
+                }
+
+                const cloudConfig = loadCloudConfig();
+                if (!cloudConfig) {
+                    console.log('');
+                    console.log(chalk.red('❌ Not logged in. Run: etalon auth login'));
+                    process.exit(1);
+                }
+
+                const uploadSpinner = ora('Uploading to ETALON Cloud...').start();
+                const result = await uploadScan(cloudConfig, siteId, normalizedUrl, report, VERSION);
+
+                if (result.success) {
+                    uploadSpinner.succeed(`Uploaded! Grade: ${chalk.bold(result.grade)} (${result.score}/100)`);
+                    console.log(chalk.gray(`  View: ${result.dashboardUrl}`));
+                    console.log('');
+                } else {
+                    uploadSpinner.fail(`Upload failed: ${result.error}`);
+                }
             }
 
             // Exit with non-zero if high-risk trackers found (useful for CI)
@@ -765,6 +797,33 @@ program
 
         console.log(chalk.dim('Telemetry: ') + (isTelemetryEnabled() ? chalk.green('enabled') : chalk.yellow('disabled')));
         console.log('');
+    });
+
+// ─── Cloud Auth Commands ──────────────────────────────────────────
+
+const authCmd = program
+    .command('auth')
+    .description('Manage ETALON Cloud authentication');
+
+authCmd
+    .command('login')
+    .description('Login with API key from dashboard')
+    .action(async () => {
+        await runLogin();
+    });
+
+authCmd
+    .command('logout')
+    .description('Logout and remove stored API key')
+    .action(() => {
+        runLogout();
+    });
+
+authCmd
+    .command('status')
+    .description('Show current authentication status')
+    .action(async () => {
+        await runStatus();
     });
 
 program.parse();

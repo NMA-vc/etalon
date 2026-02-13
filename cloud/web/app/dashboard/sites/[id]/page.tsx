@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ScoreRing } from "@/components/dashboard/score-ring";
 import Link from "next/link";
 import { ScanTrigger } from "@/components/dashboard/scan-trigger";
+import { TrustCenterSettings } from "@/components/dashboard/trust-center-settings";
 
 export default async function SiteDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -143,6 +144,13 @@ export default async function SiteDetailPage({ params }: { params: Promise<{ id:
                     </Card>
                 )}
             </div>
+
+            {/* Trust Center */}
+            <TrustCenterSettings
+                siteId={site.id}
+                slug={site.slug}
+                isPublic={site.public ?? false}
+            />
         </div>
     );
 }

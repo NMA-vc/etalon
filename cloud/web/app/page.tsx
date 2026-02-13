@@ -733,7 +733,7 @@ function CTA() {
             <p className="mt-4 text-muted-foreground max-w-lg mx-auto mb-8">
               Install in 30 seconds. 10 commands. Complete GDPR coverage. No credit card required.
             </p>
-            <InstallCommand label="Install the CLI" command="npm install -g @etalon/cli" light={true} />
+            <InstallCommand label="Install the CLI" command="npm install -g @etalon/cli" />
           </div>
         </div>
       </div>
