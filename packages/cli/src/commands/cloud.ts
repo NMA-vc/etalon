@@ -205,3 +205,79 @@ function readLine(prompt: string): Promise<string> {
         });
     });
 }
+
+/**
+ * Fetch user's sites from the cloud API.
+ */
+export async function listSites(
+    config: CloudConfig
+): Promise<{ success: boolean; sites?: Array<{ id: string; name: string; url: string; slug: string; last_scanned_at: string | null }>; error?: string }> {
+    try {
+        const response = await fetch(`${config.apiUrl}/sites`, {
+            headers: {
+                Authorization: `Bearer ${config.apiKey}`,
+            },
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            return { success: false, error: data.error || response.statusText };
+        }
+
+        return { success: true, sites: data.sites };
+    } catch (err) {
+        return { success: false, error: err instanceof Error ? err.message : 'Network error' };
+    }
+}
+
+/**
+ * List sites flow.
+ */
+export async function runListSites(): Promise<void> {
+    const config = loadCloudConfig();
+
+    if (!config) {
+        console.log(chalk.yellow('❌ Not logged in'));
+        console.log(chalk.gray('\nRun: etalon auth login'));
+        return;
+    }
+
+    const spinner = (await import('ora')).default;
+    const s = spinner('Fetching sites...').start();
+
+    const result = await listSites(config);
+
+    if (!result.success || !result.sites) {
+        s.fail(`Failed: ${result.error}`);
+        return;
+    }
+
+    s.stop();
+
+    if (result.sites.length === 0) {
+        console.log(chalk.yellow('No sites found.'));
+        console.log(chalk.gray('Add a site at: https://etalon.nma.vc/dashboard/sites'));
+        return;
+    }
+
+    console.log('');
+    console.log(chalk.bold('📋 Your Sites'));
+    console.log(chalk.dim('═══════════════════════════════════════════════════════'));
+    console.log('');
+
+    for (const site of result.sites) {
+        const name = site.name || new URL(site.url).hostname;
+        const lastScan = site.last_scanned_at
+            ? chalk.gray(`Last scan: ${new Date(site.last_scanned_at).toLocaleDateString()}`)
+            : chalk.gray('Never scanned');
+
+        console.log(`  ${chalk.cyan(site.id)}  ${chalk.bold(name)}`);
+        console.log(`  ${chalk.dim(site.url)}  ${lastScan}`);
+        console.log('');
+    }
+
+    console.log(chalk.dim('Use the ID with: etalon scan <url> --upload --site <id>'));
+    console.log('');
+}
+

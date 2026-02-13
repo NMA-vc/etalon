@@ -19,7 +19,8 @@ import { formatAuditText } from './formatters/audit-text.js';
 import { generateHtmlReport } from './formatters/html-report.js';
 import { loadConfig } from './config.js';
 import { runInit } from './commands/init.js';
-import { runLogin, runLogout, runStatus, loadCloudConfig, uploadScan } from './commands/cloud.js';
+import { runLogin, runLogout, runStatus, loadCloudConfig, uploadScan, runListSites } from './commands/cloud.js';
+import { runPush } from './commands/push.js';
 
 const VERSION = '1.0.0';
 
@@ -824,6 +825,33 @@ authCmd
     .description('Show current authentication status')
     .action(async () => {
         await runStatus();
+    });
+
+// ─── Push Command ─────────────────────────────────────────────────
+
+program
+    .command('push')
+    .description('Scan a website, audit codebase, and upload results to ETALON Cloud')
+    .argument('<url>', 'URL to scan')
+    .argument('[dir]', 'Directory to audit', './')
+    .option('--site <id>', 'Site ID (from dashboard or `etalon sites`)')
+    .option('-t, --timeout <ms>', 'Navigation timeout in milliseconds', '30000')
+    .option('-d, --deep', 'Deep scan mode', false)
+    .action(async (url: string, dir: string, options: Record<string, string | boolean>) => {
+        await runPush(url, dir, {
+            site: options.site as string | undefined,
+            timeout: options.timeout as string | undefined,
+            deep: options.deep as boolean | undefined,
+        });
+    });
+
+// ─── Sites Command ────────────────────────────────────────────────
+
+program
+    .command('sites')
+    .description('List your cloud sites and their IDs')
+    .action(async () => {
+        await runListSites();
     });
 
 program.parse();

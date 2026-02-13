@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { runScan } from './scan-runner.js';
 import { generateAlerts } from './alert-generator.js';
+import { checkScheduledScans } from './scheduler.js';
 
 const SUPABASE_URL = process.env.SUPABASE_URL!;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -131,11 +132,21 @@ async function processScan(supabase: SupabaseClient, scan: { id: string; url: st
 }
 
 // Main loop
+const CRON_INTERVAL_MS = 5 * 60 * 1000; // Check scheduled scans every 5 minutes
+let lastCronCheck = 0;
+
 async function main() {
     // eslint-disable-next-line no-constant-condition
     while (true) {
         try {
             await pollForScans();
+
+            // Run cron check periodically
+            const now = Date.now();
+            if (now - lastCronCheck >= CRON_INTERVAL_MS) {
+                lastCronCheck = now;
+                await checkScheduledScans(supabase);
+            }
         } catch (err: unknown) {
             console.error('[main] Poll error:', err instanceof Error ? err.message : String(err));
         }
