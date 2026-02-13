@@ -4,7 +4,7 @@ import { auditProject, applyContextScoring } from '@etalon/core';
 import { scanSite, type ScanOptions } from '../scanner.js';
 import { loadCloudConfig, uploadScan } from './cloud.js';
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 export interface PushOptions {
     site?: string;

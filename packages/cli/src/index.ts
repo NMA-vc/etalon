@@ -22,7 +22,7 @@ import { runInit } from './commands/init.js';
 import { runLogin, runLogout, runStatus, loadCloudConfig, uploadScan, runListSites } from './commands/cloud.js';
 import { runPush } from './commands/push.js';
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 function showBanner() {
     const blue = chalk.hex('#3B82F6');

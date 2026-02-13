@@ -1,6 +1,6 @@
 {
   "name": "@etalon/cli",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "ETALON — Privacy audit tool for websites. Scan any site for trackers and GDPR compliance.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
