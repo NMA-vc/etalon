@@ -6,7 +6,6 @@ Audit code, scan websites, detect 111k+ trackers, map PII data flows, and auto-g
 
 [![CI](https://github.com/NMA-vc/etalon/actions/workflows/ci.yml/badge.svg)](https://github.com/NMA-vc/etalon/actions/workflows/ci.yml)
 [![crates.io](https://img.shields.io/crates/v/etalon-cli.svg)](https://crates.io/crates/etalon-cli)
-[![Docker](https://img.shields.io/badge/ghcr.io-etalon-blue)](https://ghcr.io/nma-vc/etalon)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/NMA-vc/etalon.svg?style=social)](https://github.com/NMA-vc/etalon)
 
@@ -15,9 +14,6 @@ Audit code, scan websites, detect 111k+ trackers, map PII data flows, and auto-g
 ```bash
 # Install via cargo
 cargo install etalon-cli
-
-# Or run via Docker
-docker run --rm -v $(pwd):/workspace ghcr.io/nma-vc/etalon audit /workspace
 
 # Audit your project
 etalon audit ./

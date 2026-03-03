@@ -44,6 +44,15 @@ enum Commands {
         email: String,
     },
 
+    /// Extract universal markdown from a URL or supported document (PDF, DOCX, etc)
+    Extract {
+        #[arg(
+            required = true,
+            help = "The URL or local file path to extract content from"
+        )]
+        target: String,
+    },
+
     /// Start the MCP intelligence server
     Mcp {
         // Run as stdio server
@@ -156,6 +165,34 @@ async fn main() -> Result<()> {
                 dir
             );
             println!("Policy generation scaffolded.");
+        }
+        Commands::Extract { target } => {
+            tracing::info!("Extracting universal markdown from target: {}", target);
+
+            // Exine conflicts with SQLx at the static linker level due to libsqlite3-sys version mismatches.
+            // We invoke the exine CLI binary directly instead of compiling it as a crate.
+            let mut cmd = std::process::Command::new("exine");
+
+            if target.starts_with("http") {
+                cmd.arg("fetch").arg(&target);
+            } else {
+                cmd.arg("convert").arg(&target);
+            }
+
+            let status = cmd.status();
+
+            match status {
+                Ok(s) if s.success() => {
+                    tracing::info!("Extraction successful.");
+                }
+                Ok(s) => {
+                    eprintln!("Exine extraction failed with exit code: {}", s);
+                }
+                Err(e) => {
+                    eprintln!("Failed to invoke Exine extraction engine: {}", e);
+                    eprintln!("Make sure it is installed via: cargo install exine");
+                }
+            }
         }
         Commands::Mcp {} => {
             tracing::info!("Booting MCP Agentic Intelligence Engine");
