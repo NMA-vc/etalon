@@ -22,6 +22,25 @@ function getSupabase() {
  */
 export async function POST(request: NextRequest) {
     try {
+        const supabase = getSupabase();
+
+        // WARN: TRUSTED_PROXY=true enables IP spoofing via x-forwarded-for if not protected by a trusted Edge/WAF.
+        // Only enable if ETALON runs strictly behind a trusted reverse proxy (e.g. Cloudflare, Nginx, Traefik).
+        const trustedProxy = process.env.TRUSTED_PROXY === "true";
+        const ip = (request as any).ip
+            ?? (trustedProxy ? request.headers.get("x-vercel-forwarded-for")?.split(",")[0] : null)
+            ?? (trustedProxy ? request.headers.get("x-real-ip") : null);
+
+        if (!ip) {
+            console.warn("Ingest Route: request.ip is missing and TRUSTED_PROXY is false/missing. Rejecting to prevent global rate limit collapse.");
+            return NextResponse.json({ error: "Unable to securely identify request origin" }, { status: 400 });
+        }
+
+        const { data: allowed, error: rlError } = await supabase.rpc("check_rate_limit", { client_ip: ip });
+        if (rlError || allowed === false) {
+            return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+        }
+
         // 1. Verify API Key
         const authHeader = request.headers.get("authorization");
         if (!authHeader?.startsWith("Bearer ")) {
@@ -44,18 +63,63 @@ export async function POST(request: NextRequest) {
         // 2. Touch API key last_used_at
         await touchApiKey(keyId);
 
-        // 3. Parse request body
-        const body = await request.json();
-        const { siteId, url, results, cliVersion } = body;
-
-        if (!siteId || !url || !results) {
+        // 3. Parse request body with size limits
+        const contentLength = request.headers.get("content-length");
+        if (contentLength && parseInt(contentLength, 10) > 5 * 1024 * 1024) {
             return NextResponse.json(
-                { error: "Missing required fields: siteId, url, results" },
+                { error: "Payload too large. Max 5MB allowed." },
+                { status: 413 }
+            );
+        }
+
+        const reader = request.body?.getReader();
+        if (!reader) {
+            return NextResponse.json({ error: "Missing body" }, { status: 400 });
+        }
+
+        let bytesRead = 0;
+        const chunks: Uint8Array[] = [];
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            if (value) {
+                bytesRead += value.length;
+                if (bytesRead > 5 * 1024 * 1024) {
+                    reader.releaseLock();
+                    return NextResponse.json(
+                        { error: "Payload too large. Max 5MB allowed." },
+                        { status: 413 }
+                    );
+                }
+                chunks.push(value);
+            }
+        }
+
+        let rawBody = "";
+        const decoder = new TextDecoder("utf-8");
+        for (const chunk of chunks) {
+            rawBody += decoder.decode(chunk, { stream: true });
+        }
+        rawBody += decoder.decode();
+
+        let body;
+        try {
+            body = JSON.parse(rawBody);
+        } catch {
+            return NextResponse.json(
+                { error: "Malformed JSON payload" },
                 { status: 400 }
             );
         }
 
-        const supabase = getSupabase();
+        const { siteId, url, results, cliVersion } = body;
+
+        if (!siteId || !url || !results || typeof results !== 'object' || Array.isArray(results)) {
+            return NextResponse.json(
+                { error: "Invalid payload schema. Missing required Object fields: siteId, url, results" },
+                { status: 400 }
+            );
+        }
 
         // 4. Verify site belongs to this user
         const { data: site } = await supabase
@@ -72,89 +136,65 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // 5. Check usage limits
-        const { data: profile } = await supabase
-            .from("profiles")
-            .select("scans_this_month, scan_limit")
-            .eq("id", userId)
-            .single();
-
-        if (profile && profile.scans_this_month >= profile.scan_limit) {
-            return NextResponse.json(
-                {
-                    error: `Monthly scan limit reached (${profile.scan_limit}). Upgrade your plan for more scans.`,
-                },
-                { status: 429 }
-            );
-        }
-
-        // 6. Extract score/grade/counts from the ScanReport
+        // 5. Extract scores and transact Atomic Limit Check + Insert
         const summary = results.summary || {};
         const score = calculateSimpleScore(results);
         const grade = calculateGrade(score);
 
-        // 7. Insert scan record
         const now = new Date().toISOString();
-        const { data: scan, error: scanError } = await supabase
-            .from("scans")
-            .insert({
-                site_id: siteId,
-                user_id: userId,
-                url,
-                status: "completed",
-                score,
-                grade,
-                total_findings: (results.vendors?.length ?? 0) + (results.unknown?.length ?? 0),
-                critical_count: summary.highRisk ?? 0,
-                high_count: 0,
-                medium_count: summary.mediumRisk ?? 0,
-                low_count: summary.lowRisk ?? 0,
-                trackers_found: results.vendors?.map((v: any) => ({
-                    id: v.vendor?.id,
-                    name: v.vendor?.name,
-                    category: v.vendor?.category,
-                    risk_score: v.vendor?.risk_score,
-                    domains: v.requests?.map((r: any) => r.domain).filter(Boolean),
-                })) ?? [],
-                unknown_domains: results.unknown?.map((u: any) => ({
-                    domain: u.domain,
-                    suggestedAction: u.suggestedAction,
-                    requestCount: u.requests?.length ?? 0,
-                })) ?? [],
-                full_report: results,
-                duration_ms: results.meta?.scanDurationMs ?? null,
-                triggered_by: "cli",
-                cli_version: cliVersion ?? null,
-                started_at: results.meta?.scanDate ?? now,
-                completed_at: now,
-            })
-            .select("id")
-            .single();
+        const { data: atomicResult, error: atomicError } = await supabase.rpc("ingest_atomic_scan", {
+            p_user_id: userId,
+            p_site_id: siteId,
+            p_url: url,
+            p_score: score,
+            p_grade: grade,
+            p_total_findings: (results.vendors?.length ?? 0) + (results.unknown?.length ?? 0),
+            p_critical_count: 0,
+            p_high_count: summary.highRisk ?? 0,
+            p_medium_count: summary.mediumRisk ?? 0,
+            p_low_count: summary.lowRisk ?? 0,
+            p_trackers_found: results.vendors?.map((v: any) => ({
+                id: v.vendor?.id,
+                name: v.vendor?.name,
+                category: v.vendor?.category,
+                risk_score: v.vendor?.risk_score,
+                domains: v.requests?.map((r: any) => r.domain).filter(Boolean),
+            })) ?? [],
+            p_unknown_domains: results.unknown?.map((u: any) => ({
+                domain: u.domain,
+                suggestedAction: u.suggestedAction,
+                requestCount: u.requests?.length ?? 0,
+            })) ?? [],
+            p_cli_version: cliVersion ?? null,
+            p_duration_ms: results.meta?.scanDurationMs ?? null,
+            p_started_at: results.meta?.scanDate ?? now,
+            p_completed_at: now
+        });
 
-        if (scanError) {
-            console.error("Ingest scan insert error:", scanError);
-            return NextResponse.json(
-                { error: "Failed to save scan results" },
-                { status: 500 }
-            );
+        if (atomicError) {
+            console.error("Ingest atomic error:", atomicError);
+            return NextResponse.json({ error: "Failed to save scan results atomically" }, { status: 500 });
         }
 
-        // 8. Increment scan count
-        await supabase.rpc("increment_scan_count", { uid: userId });
+        if (!atomicResult.success) {
+            if (atomicResult.error_code === "limit_reached") {
+                return NextResponse.json(
+                    { error: `Monthly scan limit reached (${atomicResult.limit}). Upgrade your plan for more scans.` },
+                    { status: 429 }
+                );
+            }
+            return NextResponse.json({ error: "Atomic operation failed" }, { status: 500 });
+        }
 
-        // 9. Update site's last_scanned_at
-        await supabase
-            .from("sites")
-            .update({ last_scanned_at: now })
-            .eq("id", siteId);
+        const scanId = atomicResult.scan_id;
 
         // 10. Return success
         return NextResponse.json({
             success: true,
-            scanId: scan.id,
+            scanId: scanId,
             score,
             grade,
-            dashboardUrl: `https://etalon.nma.vc/dashboard/scans/${scan.id}`,
+            dashboardUrl: `https://etalon.nma.vc/dashboard/scans/${scanId}`,
         });
     } catch (error) {
         console.error("Ingest error:", error);

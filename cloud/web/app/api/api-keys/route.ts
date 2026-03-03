@@ -10,7 +10,22 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { name } = await request.json();
+    const contentLength = request.headers.get("content-length");
+    if (contentLength && parseInt(contentLength, 10) > 1048576) {
+        return NextResponse.json({ error: "Payload too large. Max 1MB allowed." }, { status: 413 });
+    }
+    const rawBody = await request.text();
+    if (rawBody.length > 1048576) {
+        return NextResponse.json({ error: "Payload too large. Max 1MB allowed." }, { status: 413 });
+    }
+
+    let body;
+    try {
+        body = JSON.parse(rawBody);
+    } catch {
+        return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+    }
+    const { name } = body;
     if (!name) {
         return NextResponse.json({ error: "Name is required" }, { status: 400 });
     }
@@ -23,7 +38,7 @@ export async function POST(request: Request) {
     const { data: apiKey, error } = await supabase
         .from("api_keys")
         .insert({ user_id: user.id, name, key_hash: keyHash, prefix })
-        .select()
+        .select("id, name, prefix, created_at")
         .single();
 
     if (error) {

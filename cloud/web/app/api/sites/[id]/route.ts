@@ -29,7 +29,21 @@ export async function PATCH(
         return NextResponse.json({ error: "Site not found" }, { status: 404 });
     }
 
-    const body = await request.json();
+    const contentLength = request.headers.get("content-length");
+    if (contentLength && parseInt(contentLength, 10) > 1048576) {
+        return NextResponse.json({ error: "Payload too large. Max 1MB allowed." }, { status: 413 });
+    }
+    const rawBody = await request.text();
+    if (rawBody.length > 1048576) {
+        return NextResponse.json({ error: "Payload too large. Max 1MB allowed." }, { status: 413 });
+    }
+
+    let body;
+    try {
+        body = JSON.parse(rawBody);
+    } catch {
+        return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+    }
 
     // Only allow specific fields to be updated
     const allowedFields = ["name", "public", "schedule"] as const;

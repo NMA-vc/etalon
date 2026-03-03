@@ -216,3 +216,92 @@ CLI-Flags überschreiben Config: `--format`, `--severity`, `--timeout`, `--idle`
 | Dynamic Badge | ✅ `/api/badge/[slug]` — SVG shields.io style |
 | Lead Capture Form | ✅ Request compliance report |
 | Embeddable Badge Code | ✅ Markdown + HTML Copy in Dashboard |
+
+---
+
+## 7. Intelligence Layer ✅ (Competitive Moat)
+
+**All 7 phases complete.** 40/40 integration tests passing.
+
+### Architecture
+
+```
+packages/core/src/
+├── auto-fix/                  ← Phase 1: Auto-Fix Engine
+│   ├── index.ts               ← AutoFixEngine class (305 lines)
+│   ├── templates.ts           ← 20 tracker fix templates (factory pattern)
+│   ├── templates/
+│   │   └── google-analytics.ts ← Hand-crafted AST template (GA)
+│   ├── types.ts               ← FixTemplate, FixSuggestion, FixResult
+│   └── utils/                 ← AST utils (find patterns, wrap consent)
+├── detection/                 ← Phase 2: Framework Detection
+│   ├── react-detector.ts      ← React AST detection
+│   ├── nextjs-detector.ts     ← Next.js detection
+│   ├── vue-detector.ts        ← Vue detection
+│   └── index.ts               ← runFrameworkDetection()
+├── patterns/                  ← Phase 3: Pattern Library
+│   ├── safe-patterns.ts       ← 54 known-safe domains (9 categories)
+│   ├── false-positives.ts     ← 20 false positive suppression rules
+│   ├── context-rules.ts       ← 12 context-based severity adjusters
+│   └── index.ts               ← shouldSuppress(), checkPatterns()
+├── scoring/                   ← Phase 4: Context-Aware Scoring
+│   ├── context-detector.ts    ← Detects industry, region, sensitivity
+│   ├── industry-rules.ts      ← Rules for 10 industries
+│   ├── region-rules.ts        ← Rules for 8 regions (GDPR, CCPA, UK, etc.)
+│   └── index.ts               ← applyContextScoring(), adjustFindingSeverity()
+├── intelligence/              ← Phase 5: Intelligence Engine
+│   ├── telemetry.ts           ← Opt-in telemetry (user-controlled)
+│   ├── learning-engine.ts     ← Pattern learning from usage
+│   ├── feedback.ts            ← False-positive feedback collector
+│   └── index.ts               ← analyzePatterns(), getLearningStats()
+├── policy-generator/          ← Phase 6: Policy Generation
+│   ├── index.ts               ← generatePrivacyPolicy(), generateFormattedPolicy()
+│   ├── sections/              ← Section generators
+│   │   ├── data-collection.ts
+│   │   ├── cookies.ts
+│   │   ├── third-parties.ts
+│   │   ├── user-rights.ts
+│   │   └── contact-info.ts
+│   └── formatters/
+│       ├── markdown.ts        ← Markdown formatter (with TOC)
+│       └── html.ts            ← Standalone HTML (with CSS + TOC)
+└── ...
+
+packages/integrations/        ← Phase 7: CI/CD Integration
+├── github-action/
+│   ├── action.yml             ← GitHub Action definition
+│   ├── index.js               ← Action runner (PR comments, fail threshold)
+│   └── etalon.yml.example     ← Example workflow
+└── pre-commit/
+    └── install.sh             ← Pre-commit hook installer
+```
+
+### Key APIs
+
+| Export | Description |
+|--------|------------|
+| `AutoFixEngine` | Scans files, suggests + applies consent-wrapping fixes |
+| `ALL_TEMPLATES` | 20 tracker fix templates (React/Next.js/Vue/Vanilla) |
+| `isSafePattern(domain)` | Check if domain is known-safe (CDN, payment, etc.) |
+| `isFalsePositive(code, file)` | Suppress false positives (performance API, etc.) |
+| `shouldSuppress(domain, code, file)` | Combined safe-pattern + false-positive check |
+| `detectProjectContext(dir)` | Detect industry, region, sensitivity from project |
+| `adjustFindingSeverity(finding, ctx)` | Escalate/reduce severity based on context |
+| `getRegionRule(region)` | Get GDPR/CCPA/LGPD rules + user rights |
+| `getIndustryRule(industry)` | Get industry-specific compliance requirements |
+| `generatePrivacyPolicy(opts)` | Generate region-aware privacy policy (structured) |
+| `generateFormattedPolicy(opts)` | Generate policy as Markdown or HTML string |
+| `reportFalsePositive(fp)` | Report false positive for learning |
+| `analyzePatterns(entries)` | Learn new safe patterns from usage data |
+
+### Competitive Moat
+
+| Capability | Time to Replicate |
+|-----------|----------|
+| Auto-fix engine (20 trackers, 4 frameworks) | ~6 months |
+| Framework-specific AST detection | ~3 months |
+| Context-aware scoring (10 industries, 8 regions) | ~2 months |
+| Learning engine (impossible without usage data) | ∞ |
+| Policy generation (region-aware, section-based) | ~2 months |
+| CI/CD integration (GitHub Action + pre-commit) | ~1 month |
+| **Total** | **12+ months** |

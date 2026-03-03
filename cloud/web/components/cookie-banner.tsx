@@ -12,7 +12,7 @@ export function CookieBanner() {
     useEffect(() => {
         const stored = localStorage.getItem('etalon_analytics_consent')
         if (stored === 'granted' || stored === 'revoked') {
-            setConsent(stored)
+            setTimeout(() => setConsent(stored), 10)
         } else {
             // Show banner after a short delay for better UX
             const timer = setTimeout(() => setVisible(true), 1000)

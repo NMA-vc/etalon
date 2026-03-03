@@ -1,0 +1,3 @@
+https://stripe.com
+https://github.com
+https://supabase.com

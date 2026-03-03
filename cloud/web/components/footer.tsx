@@ -22,9 +22,7 @@ export function Footer() {
                     <div>
                         <h4 className="text-sm font-semibold mb-4">Product</h4>
                         <ul className="space-y-2.5 text-sm text-muted-foreground">
-                            <li><a href="/#features" className="hover:text-primary transition-colors">Features</a></li>
-                            <li><a href="/#pricing" className="hover:text-primary transition-colors">Pricing</a></li>
-                            <li><a href="/#how-it-works" className="hover:text-primary transition-colors">How It Works</a></li>
+                            <li><Link href="/#features" className="hover:text-primary transition-colors">Features</Link></li>
                             <li><Link href="/login" className="hover:text-primary transition-colors">Dashboard</Link></li>
                         </ul>
                     </div>
@@ -41,9 +39,7 @@ export function Footer() {
                     <div>
                         <h4 className="text-sm font-semibold mb-4">Legal</h4>
                         <ul className="space-y-2.5 text-sm text-muted-foreground">
-                            <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-                            <li><Link href="/agb" className="hover:text-primary transition-colors">AGB</Link></li>
-                            <li><Link href="/cookies" className="hover:text-primary transition-colors">Cookie Policy</Link></li>
+                            <li><a href="https://github.com/NMA-vc/etalon/blob/main/LICENSE" className="hover:text-primary transition-colors">License (MIT)</a></li>
                             <li><Link href="/imprint" className="hover:text-primary transition-colors">Imprint</Link></li>
                         </ul>
                     </div>
@@ -53,10 +49,10 @@ export function Footer() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-xs text-muted-foreground">
-                        © {new Date().getFullYear()} ETALON. Open-source under MIT License.
+                        © {new Date().getFullYear()} NMA Venture Capital GmbH. All rights reserved.
                     </p>
                     <p className="text-xs text-muted-foreground">
-                        Built by <a href="https://nma.vc" className="text-primary hover:underline">NMA</a>
+                        Made with ❤️ and 🤖 in Hamburg.
                     </p>
                 </div>
             </div>

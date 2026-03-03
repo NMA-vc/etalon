@@ -4,35 +4,40 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScoreRing } from "@/components/dashboard/score-ring";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
-    // Fetch sites with latest scan
-    const { data: sites } = await supabase
-        .from("sites")
-        .select("*, scans(id, score, grade, status, created_at, total_findings)")
-        .eq("user_id", user!.id)
-        .order("created_at", { referencedTable: "scans", ascending: false })
-        .limit(1, { referencedTable: "scans" });
+    if (!user) {
+        redirect("/login");
+    }
 
-    // Fetch recent alerts
-    const { data: alerts } = await supabase
-        .from("alerts")
-        .select("*")
-        .eq("user_id", user!.id)
-        .eq("read", false)
-        .order("created_at", { ascending: false })
-        .limit(5);
-
-    // Fetch recent scans
-    const { data: recentScans } = await supabase
-        .from("scans")
-        .select("*, sites(name, url)")
-        .eq("user_id", user!.id)
-        .order("created_at", { ascending: false })
-        .limit(5);
+    // Parallelize backend fetch waterfalls
+    const [
+        { data: sites },
+        { data: alerts },
+        { count: totalScans }
+    ] = await Promise.all([
+        supabase
+            .from("sites")
+            .select("id, name, url, scans(score, grade, status, created_at, total_findings)")
+            .eq("user_id", user!.id)
+            .order("created_at", { referencedTable: "scans", ascending: false })
+            .limit(1, { referencedTable: "scans" }),
+        supabase
+            .from("alerts")
+            .select("id, created_at, read, type, title, message")
+            .eq("user_id", user!.id)
+            .eq("read", false)
+            .order("created_at", { ascending: false })
+            .limit(5),
+        supabase
+            .from("scans")
+            .select("id", { count: "exact", head: true })
+            .eq("user_id", user!.id)
+    ]);
 
     // Calculate average score
     const scoredSites = (sites ?? []).filter((s: any) => s.scans?.[0]?.score != null);
@@ -80,7 +85,7 @@ export default async function DashboardPage() {
                         <CardDescription>Total Scans</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-3xl font-bold">{recentScans?.length ?? 0}</div>
+                        <div className="text-3xl font-bold">{totalScans ?? 0}</div>
                     </CardContent>
                 </Card>
 

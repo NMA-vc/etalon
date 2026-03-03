@@ -7,7 +7,7 @@ export default async function SitesPage() {
 
     const { data: sites } = await supabase
         .from("sites")
-        .select("*, scans(id, score, grade, status, total_findings, created_at)")
+        .select("id, name, url, scans(id, score, grade, status, total_findings, created_at)")
         .eq("user_id", user!.id)
         .order("created_at", { ascending: false })
         .order("created_at", { referencedTable: "scans", ascending: false })

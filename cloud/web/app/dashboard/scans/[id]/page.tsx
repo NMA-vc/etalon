@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -11,10 +11,16 @@ export default async function ScanDetailPage({ params }: { params: Promise<{ id:
     const { id } = await params;
     const supabase = await createClient();
 
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+        redirect("/login");
+    }
+
     const { data: scan } = await supabase
         .from("scans")
-        .select("*, sites(name, url)")
+        .select("id, site_id, url, status, score, grade, created_at, trackers_found, unknown_domains, full_report, critical_count, high_count, medium_count, low_count, total_findings, duration_ms, error, sites(name, url)")
         .eq("id", id)
+        .eq("user_id", user.id)
         .single();
 
     if (!scan) notFound();

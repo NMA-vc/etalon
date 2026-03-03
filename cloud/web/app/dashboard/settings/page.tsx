@@ -2,7 +2,6 @@ import { createClient } from "@/lib/supabase/server";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { UpgradeButton, ManageBillingButton } from "@/components/dashboard/billing-buttons";
 
 export default async function SettingsPage() {
     const supabase = await createClient();
@@ -10,20 +9,12 @@ export default async function SettingsPage() {
 
     const { data: profile } = await supabase
         .from("profiles")
-        .select("*")
+        .select("id, scans_this_month, scan_limit, display_name, created_at")
         .eq("id", user!.id)
         .single();
 
-    const planLimits: Record<string, { scans: number; price: string }> = {
-        free: { scans: 10, price: "Free" },
-        cloud: { scans: 100, price: "€29/mo" },
-        pro: { scans: 1000, price: "€99/mo" },
-        enterprise: { scans: 99999, price: "Custom" },
-    };
-
-    const plan = profile?.plan || "free";
-    const limits = planLimits[plan] || planLimits.free;
-    const hasBilling = !!profile?.stripe_customer_id;
+    const plan = "open-source";
+    const limits = { scans: 99999, price: "Free forever" };
 
     return (
         <div className="space-y-8 max-w-2xl">
@@ -78,25 +69,9 @@ export default async function SettingsPage() {
 
                     <Separator />
 
-                    {plan === "free" ? (
-                        <div className="flex flex-col items-center gap-3 py-2">
-                            <p className="text-sm text-muted-foreground">Upgrade for hosted scanning, email alerts, and more</p>
-                            <div className="flex gap-3">
-                                <UpgradeButton plan="cloud" />
-                                <UpgradeButton plan="pro" />
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="flex items-center justify-between py-2">
-                            <p className="text-sm text-muted-foreground">
-                                {plan === "cloud" ? "Want more? Upgrade to Pro for 1,000 scans/mo" : "You're on our most powerful plan"}
-                            </p>
-                            <div className="flex gap-3">
-                                {plan === "cloud" && <UpgradeButton plan="pro" />}
-                                {hasBilling && <ManageBillingButton />}
-                            </div>
-                        </div>
-                    )}
+                    <div className="flex flex-col items-center gap-3 py-2">
+                        <p className="text-sm text-muted-foreground">ETALON is running natively via your hosted infrastructure.</p>
+                    </div>
                 </CardContent>
             </Card>
         </div>

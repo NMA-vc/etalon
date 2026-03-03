@@ -1,23 +1,33 @@
 # ETALON
 
-**Privacy audit tool built for AI coding agents (and developers)**
+**Privacy engineering platform for AI agents and developers**
 
-Free CLI for GDPR compliance. Built for Claude Code, Cursor, Antigravity, and AI workflows.
+Audit code, scan websites, detect 111k+ trackers, map PII data flows, and auto-generate GDPR policies — all from one Rust-native CLI.
 
 [![CI](https://github.com/NMA-vc/etalon/actions/workflows/ci.yml/badge.svg)](https://github.com/NMA-vc/etalon/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/etalon.svg)](https://www.npmjs.com/package/etalon)
-[![ETALON Score](https://img.shields.io/badge/ETALON-A%20(97%2F100)-brightgreen?style=flat-square)](https://etalon.nma.vc)
+[![crates.io](https://img.shields.io/crates/v/etalon-cli.svg)](https://crates.io/crates/etalon-cli)
+[![Docker](https://img.shields.io/badge/ghcr.io-etalon-blue)](https://ghcr.io/nma-vc/etalon)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/NMA-vc/etalon.svg?style=social)](https://github.com/NMA-vc/etalon)
 
-```bash
-# AI agents can run this automatically
-npx @etalon/cli audit ./ --format json
-npx @etalon/cli audit ./ --fix
-npx @etalon/cli generate-policy ./ --company "Acme"
-```
+## Quick Start
 
-**Works with:** Claude Code • Cursor • Windsurf • Cline • Antigravity • Aider
+```bash
+# Install via cargo
+cargo install etalon-cli
+
+# Or run via Docker
+docker run --rm -v $(pwd):/workspace ghcr.io/nma-vc/etalon audit /workspace
+
+# Audit your project
+etalon audit ./
+
+# Generate a GDPR privacy policy from your code
+etalon generate-policy ./ --company "Acme Inc" --email privacy@acme.com
+
+# Map PII data flows
+etalon data-flow ./ --format mermaid
+```
 
 ---
 
@@ -26,39 +36,15 @@ npx @etalon/cli generate-policy ./ --company "Acme"
 ETALON is designed for AI coding agents like Claude Code, Cursor, and Windsurf.
 
 **Why AI agents love ETALON:**
-- 🤖 **MCP server integration** - Claude Desktop, Cline
-- 📊 **Machine-readable output** - JSON, SARIF
-- 🔧 **Auto-fix capabilities** - Apply patches automatically
-- 📦 **Programmatic API** - @etalon/core
-- ✅ **Exit codes** - Check success/failure
-- 🎯 **Skills marketplace** - One-click install
+- 🤖 **MCP server** — Native integration with Claude Desktop, Cursor, Cline
+- 📊 **Machine-readable output** — JSON, SARIF for GitHub Code Scanning
+- 📦 **Rust crate API** — `etalon-core` for programmatic use
+- ✅ **Exit codes** — CI/CD quality gate (exits 1 on critical findings)
+- 🎯 **Skills marketplace** — One-click install on [skills.sh](https://skills.sh)
 
-**Example with Claude Code:**
-```typescript
-import { auditProject } from '@etalon/core';
-const results = await auditProject('./src');
-if (results.violations.length > 0) {
-  await autoFix('./src');
-}
-```
-
-**Example with MCP:**
-```
-You: "Check my app for GDPR violations"
-Claude: *uses ETALON* Found 3 issues. Should I fix?
-You: "Yes"
-Claude: *runs etalon audit ./ --fix* Fixed 2/3 issues.
-```
-
----
-
-## Quick Start
-
-### For AI Agents
-
-**MCP Server (Claude Desktop, Cline):**
+**MCP Server Setup:**
 ```bash
-npm install -g @etalon/mcp-server
+cargo install etalon-mcp-server
 ```
 
 Add to `claude_desktop_config.json`:
@@ -70,31 +56,6 @@ Add to `claude_desktop_config.json`:
     }
   }
 }
-```
-
-### For Developers
-
-```bash
-# Install globally
-npm install -g @etalon/cli
-
-# Scan a website for trackers
-etalon scan https://example.com
-
-# Audit your codebase for GDPR issues
-etalon audit ./
-
-# Auto-generate a GDPR privacy policy
-etalon generate-policy ./ --company "Acme Inc" --email privacy@acme.com
-
-# Verify cookie consent compliance
-etalon consent-check https://example.com
-```
-
-Or use without installing:
-
-```bash
-npx @etalon/cli scan https://example.com
 ```
 
 ---
@@ -160,7 +121,7 @@ etalon scan https://example.com --deep --format json
 | `-f, --format` | `text`, `json`, `sarif` | `text` |
 | `-d, --deep` | Scroll page, interact with consent dialogs | `false` |
 | `-t, --timeout <ms>` | Navigation timeout | `30000` |
-| `--no-idle` | Don't wait for network idle | - |
+| `--idle` | Wait for network idle before capturing | `false` |
 | `--config <path>` | Path to etalon.yaml config | auto-detect |
 
 ---
@@ -319,7 +280,7 @@ ETALON provides an MCP server for AI agents.
 
 ### Installation
 ```bash
-npm install -g @etalon/mcp-server
+cargo install etalon-mcp-server
 ```
 
 ### Configuration
@@ -337,13 +298,10 @@ npm install -g @etalon/mcp-server
 
 ### Available Tools
 
-- `etalon_audit` - Scan codebase for privacy violations
-- `etalon_scan` - Scan website for third-party trackers
-- `etalon_generate_policy` - Auto-generate GDPR privacy policy
-- `etalon_consent_check` - Test cookie consent compliance
-- `etalon_policy_check` - Compare privacy policy vs actual trackers
-- `etalon_data_flow` - Map PII data flows
-- `etalon_lookup` - Query vendor database
+- `etalon_lookup_vendor` - Check if a domain is a known tracker
+- `etalon_search_vendors` - Search vendor registry by name or company
+- `etalon_get_vendor_info` - Get detailed vendor information by ID
+- `etalon_registry_stats` - Get registry metadata and statistics
 
 ### Skills Marketplace
 
@@ -354,19 +312,17 @@ Available on [skills.sh](https://skills.sh) for one-click install.
 ## Programmatic API
 
 ```typescript
-import { auditProject, scanUrl, generatePolicy } from '@etalon/core';
+import { auditProject, VendorRegistry, calculateScore, analyzeDataFlow } from '@etalon/core';
 
 // Audit codebase
-const results = await auditProject('./src', { format: 'json' });
+const report = await auditProject('./src');
 
-// Scan website
-const scan = await scanUrl('https://example.com', { deep: true });
+// Look up a vendor
+const registry = VendorRegistry.load();
+const vendor = registry.lookupDomain('google-analytics.com');
 
-// Generate policy
-const policy = await generatePolicy('./src', {
-  company: 'Acme Inc',
-  email: 'privacy@acme.com'
-});
+// Map data flows
+const flows = await analyzeDataFlow('./src');
 ```
 
 ---
@@ -434,29 +390,22 @@ scan:
   timeout: 30000
 ```
 
+### Self-Hosted Edge & Proxy Configurations
+
+If you deploy ETALON locally or behind a trusted reverse-proxy chain (e.g. Nginx, Cloudflare, Traefik), you must set the `TRUSTED_PROXY=true` environment variable to securely accept `x-forwarded-for` and `x-real-ip` headers for API rate limiting. This avoids DoS-oriented bucket collapse while guarding natively against arbitrary spoofed proxy inputs originating from malicious users outside proxy-constrained environments.
+
 ## CI/CD Integration
 
 ### GitHub Actions
 
 ```yaml
 - name: Privacy audit
-  run: npx etalon audit ./ --format sarif > results.sarif
+  run: etalon audit ./ --format sarif > results.sarif
 
 - name: Upload SARIF
   uses: github/codeql-action/upload-sarif@v3
   with:
     sarif_file: results.sarif
-```
-
-### ETALON GitHub Action
-
-```yaml
-- uses: etalon/action@v1
-  with:
-    fail-on: 'high'
-    comment-pr: 'true'
-    github-token: ${{ github.token }}
-    baseline-ref: 'main'
 ```
 
 The `audit` command exits with code 1 if critical/high findings are found.
@@ -466,6 +415,7 @@ The `audit` command exits with code 1 if critical/high findings are found.
 ```
 etalon/
 ├── packages/
+│   ├── etalon/      # Umbrella package (npm install -g etalon)
 │   ├── core/        # @etalon/core - detection engine
 │   ├── cli/         # etalon CLI (10 commands)
 │   └── mcp-server/  # MCP server for AI assistants
@@ -485,4 +435,4 @@ MIT - see [LICENSE](LICENSE).
 
 ---
 
-**Made with ❤️ and 🤖 by [nma.vc](https://nma.vc)**
+**© 2026 NMA Venture Capital GmbH. All rights reserved. Made with ❤️ and 🤖 in Hamburg.**

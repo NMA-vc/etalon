@@ -9,7 +9,7 @@ export default async function ApiKeysPage() {
 
     const { data: keys } = await supabase
         .from("api_keys")
-        .select("*")
+        .select("id, name, prefix, created_at")
         .eq("user_id", user!.id)
         .order("created_at", { ascending: false });
 

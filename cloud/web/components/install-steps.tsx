@@ -70,7 +70,7 @@ function TerminalPreview() {
                     <span className="text-zinc-100">npx etalon audit ./ --format json</span>
                 </div>
                 <div className="mt-4 text-zinc-400">
-                    <p className="text-blue-400">// Machine-readable output for AI agents</p>
+                    <p className="text-blue-400">&#47;&#47; Machine-readable output for AI agents</p>
                     <p className="mt-2 text-zinc-300">{'{"violations": ['}</p>
                     <p className="text-zinc-300 ml-4">{'{"severity": "critical", "rule": "tracker-without-consent", "file": "src/tracking.ts:12"},'}</p>
                     <p className="text-zinc-300 ml-4">{'{"severity": "high", "rule": "insecure-cookie", "file": "src/auth/session.ts:45"},'}</p>

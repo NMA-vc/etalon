@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps) {
         return { title: "Trust Center Not Found | ETALON" };
     }
 
-    const siteName = site.name || new URL(site.url).hostname;
+    const siteName = site.name || (() => { try { return new URL(site.url).hostname; } catch { return site.url; } })();
 
     return {
         title: `${siteName} — Privacy & Compliance | ETALON Trust Center`,
@@ -55,7 +55,7 @@ export default async function TrustCenterPage({ params }: PageProps) {
         notFound();
     }
 
-    const siteName = site.name || new URL(site.url).hostname;
+    const siteName = site.name || (() => { try { return new URL(site.url).hostname; } catch { return site.url; } })();
 
     // 2. Get latest completed scan
     const { data: latestScan } = await supabase

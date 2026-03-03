@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import {
@@ -62,9 +63,7 @@ export function AppSidebar({ user, profile }: { user: User; profile: Profile | n
         <Sidebar>
             <SidebarHeader className="border-b border-border/40 p-4">
                 <Link href="/dashboard" className="flex items-center gap-2.5">
-                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">◎</span>
-                    </div>
+                    <Image src="/logo.png" alt="ETALON" width={32} height={32} className="rounded" />
                     <div>
                         <span className="font-bold text-sm tracking-tight">ETALON</span>
                         <Badge variant="outline" className="ml-2 text-[10px] px-1.5 py-0 capitalize border-emerald-500/30 text-emerald-400">

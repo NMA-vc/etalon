@@ -74,7 +74,7 @@ export function ApiKeysClient({ initialKeys }: { initialKeys: any[] }) {
                                     <DialogTitle>Your API key</DialogTitle>
                                     <DialogDescription>Copy this key now — you won&apos;t be able to see it again.</DialogDescription>
                                 </DialogHeader>
-                                <div className="p-3 rounded-lg bg-zinc-900 border border-border/40 font-mono text-sm break-all select-all">
+                                <div className="p-3 rounded-lg bg-zinc-900 border border-border/40 font-mono text-sm text-zinc-200 break-all select-all">
                                     {newKey}
                                 </div>
                                 <DialogFooter>

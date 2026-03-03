@@ -4,15 +4,20 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function ScansPage() {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
+    if (!user) {
+        redirect("/login");
+    }
+
     const { data: scans } = await supabase
         .from("scans")
-        .select("*, sites(name, url)")
-        .eq("user_id", user!.id)
+        .select("id, status, score, grade, total_findings, created_at, url, sites(name, url)")
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false })
         .limit(50);
 
@@ -52,7 +57,9 @@ export default async function ScansPage() {
                                 <TableRow key={scan.id}>
                                     <TableCell>
                                         <div>
-                                            <p className="font-medium text-sm">{scan.sites?.name || new URL(scan.url).hostname}</p>
+                                            <p className="font-medium text-sm">
+                                                {scan.sites?.name || (scan.url ? (() => { try { return new URL(scan.url).hostname; } catch { return scan.url; } })() : "Unknown")}
+                                            </p>
                                             <p className="text-xs text-muted-foreground truncate max-w-xs">{scan.url}</p>
                                         </div>
                                     </TableCell>

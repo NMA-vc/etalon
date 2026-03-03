@@ -40,3 +40,4 @@ cloud/worker/.env.local
 cloud/web/.next/
 cloud/web/.vercel/
 cloud/worker/.vercel/
+target/

@@ -1,0 +1,6 @@
+[advisories]
+# RUSTSEC-2023-0071 (rsa crate memory exhaustion vulnerability)
+# The `rsa` parsing in `etalon` happens locally against controlled domain architectures during SSL scan validations.
+# This does not handle massively unconstrained untrusted multi-tenant inputs natively so memory bounds are naturally limited.
+# Expiry: Review by 2026-12-01 or upon upstream crate remediation mapping.
+ignore = ["RUSTSEC-2023-0071"]

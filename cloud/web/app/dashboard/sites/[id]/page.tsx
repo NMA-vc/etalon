@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,19 +12,25 @@ import { TrustCenterSettings } from "@/components/dashboard/trust-center-setting
 export default async function SiteDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
     const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+        redirect("/login");
+    }
 
     const { data: site } = await supabase
         .from("sites")
-        .select("*")
+        .select("id, name, url, slug, public")
         .eq("id", id)
+        .eq("user_id", user.id)
         .single();
 
     if (!site) notFound();
 
     const { data: scans } = await supabase
         .from("scans")
-        .select("*")
+        .select("id, created_at, status, score, grade, total_findings, duration_ms, critical_count, high_count, medium_count, low_count")
         .eq("site_id", id)
+        .eq("user_id", user.id)
         .order("created_at", { ascending: false })
         .limit(20);
 

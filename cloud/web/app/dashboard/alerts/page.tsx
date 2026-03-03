@@ -9,19 +9,12 @@ export default async function AlertsPage() {
 
     const { data: alerts } = await supabase
         .from("alerts")
-        .select("*, sites(name, url)")
+        .select("id, site_id, title, message, read, type, created_at, sites(name, url)")
         .eq("user_id", user!.id)
         .order("created_at", { ascending: false })
         .limit(50);
 
-    // Mark all as read
-    if (alerts && alerts.some((a: any) => !a.read)) {
-        await supabase
-            .from("alerts")
-            .update({ read: true })
-            .eq("user_id", user!.id)
-            .eq("read", false);
-    }
+    // Action intentionally removed. Mark as Read should be triggered actively by the user via a POST/PUT endpoint, not implicitly loaded on GET.
 
     const typeIcons: Record<string, string> = {
         new_tracker: "🔴",

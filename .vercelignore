@@ -1,0 +1,42 @@
+# Dependencies (Vercel runs npm install itself)
+node_modules
+
+# Build artifacts
+.next
+.tsbuildinfo
+*.tsbuildinfo
+coverage
+dist
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Large data directories (70k+ files)
+data
+
+# Packages not needed for web deploy
+packages/cli
+packages/mcp-server
+cloud/worker
+
+# Rust workspace
+target/
+crates/
+
+# Other non-web directories
+.git
+.github
+.agent
+.gemini
+scripts

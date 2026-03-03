@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/core",
+    "crates/cli",
+    "crates/techscan",
+    "crates/mcp-server"
+]
+
+[workspace.dependencies]
+tokio = { version = "1.37", features = ["full"] }
+anyhow = "1"
+tracing = "0.1"
+
+# Optimize release builds as per Techscan guide
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"

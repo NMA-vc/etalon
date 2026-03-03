@@ -15,6 +15,24 @@ function getSupabase() {
  * Used by `etalon sites` CLI command.
  */
 export async function GET(request: NextRequest) {
+    // WARN: TRUSTED_PROXY=true enables IP spoofing via x-forwarded-for if not protected by a trusted Edge/WAF.
+    // Only enable if ETALON runs strictly behind a trusted reverse proxy (e.g. Cloudflare, Nginx, Traefik).
+    const trustedProxy = process.env.TRUSTED_PROXY === "true";
+    const ip = (request as any).ip
+        ?? (trustedProxy ? request.headers.get("x-vercel-forwarded-for")?.split(",")[0] : null)
+        ?? (trustedProxy ? request.headers.get("x-real-ip") : null);
+
+    if (!ip) {
+        console.warn("Sites Route: request.ip is missing and TRUSTED_PROXY is false/missing. Rejecting to prevent global rate limit collapse.");
+        return NextResponse.json({ error: "Unable to securely identify request origin" }, { status: 400 });
+    }
+
+    const supabase = getSupabase();
+    const { data: allowed, error: rlError } = await supabase.rpc("check_rate_limit", { client_ip: ip });
+    if (rlError || allowed === false) {
+        return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    }
+
     const authHeader = request.headers.get("authorization");
 
     if (!authHeader?.startsWith("Bearer ")) {
@@ -29,8 +47,6 @@ export async function GET(request: NextRequest) {
     }
 
     await touchApiKey(keyId);
-
-    const supabase = getSupabase();
 
     const { data: sites, error } = await supabase
         .from("sites")

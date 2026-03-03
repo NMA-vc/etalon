@@ -9,33 +9,52 @@ on:
 jobs:
   lint-test-build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18, 20, 22]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@ad397744b0d591a723ab90405b7247fac0e6b8db
         with:
-          node-version: ${{ matrix.node-version }}
+          components: rustfmt, clippy
+
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@f87935cf1fdb7ef4e5cf4595fa6f1e164629e469
+
+      - name: Check Formatting
+        run: cargo fmt --all -- --check
+
+      - name: Lint (Clippy)
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit --locked
+
+      - name: Cargo Audit
+        run: cargo audit
+
+      - name: Run Tests
+        run: cargo test --workspace
+
+      - name: Build Workspace
+        run: cargo build --release --workspace
+
+      # The Next.js web application CI
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
           cache: 'npm'
+          cache-dependency-path: cloud/web/package-lock.json
 
-      - name: Install dependencies
+      - name: Install Web Dependencies
         run: npm ci
+        working-directory: cloud/web
 
-      - name: Lint
-        run: npm run lint
+      - name: Web Dependency Audit
+        run: npm audit
+        working-directory: cloud/web
 
-      - name: Test
-        run: npm test
-
-      - name: Build core
-        run: npm run build -w packages/core
-
-      - name: Build CLI
-        run: npm run build -w packages/cli
-
-      - name: Build worker
-        run: npm run build -w cloud/worker
+      - name: Build Web
+        run: npm run build
+        working-directory: cloud/web

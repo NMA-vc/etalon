@@ -2,6 +2,12 @@
 
 Thank you for your interest in contributing to ETALON! 🔍
 
+## Prerequisites
+
+- [Rust](https://rustup.rs/) (latest stable, edition 2024)
+- [Node.js](https://nodejs.org/) 22+ (for the cloud dashboard)
+- [Chromium](https://www.chromium.org/) (for live URL scanning — `etalon scan`)
+
 ## Development Setup
 
 ```bash
@@ -9,33 +15,46 @@ Thank you for your interest in contributing to ETALON! 🔍
 git clone https://github.com/NMA-vc/etalon.git
 cd etalon
 
-# Install dependencies
-npm install
-
-# Install Playwright browsers
-npx playwright install chromium
+# Build the Rust workspace
+cargo build --workspace
 
 # Run tests
-npm test
+cargo test --workspace
 
-# Run lint
-npm run lint
+# Check formatting
+cargo fmt --all -- --check
 
-# Build all packages
-npm run build
+# Lint
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+```
+
+### Cloud Dashboard (optional)
+
+```bash
+cd cloud/web
+npm ci
+npm run dev      # Start dev server at localhost:3000
+npm run lint     # ESLint
+npx tsc --noEmit # Type check
 ```
 
 ## Project Structure
 
 ```
 etalon/
-├── packages/
-│   ├── core/          # Shared vendor matching engine
-│   ├── cli/           # CLI scanner (etalon on npm)
-│   └── mcp-server/    # MCP server (etalon-mcp on npm)
+├── crates/
+│   ├── core/          # etalon-core — vendor matching + scoring engine
+│   ├── techscan/      # etalon-techscan — async technology fingerprinting
+│   ├── cli/           # etalon-cli — 10-command CLI scanner
+│   └── mcp-server/    # etalon-mcp-server — MCP server for AI agents
+├── cloud/
+│   └── web/           # Next.js 16 cloud dashboard
 ├── data/
-│   └── vendors.json   # Vendor/tracker database
-└── templates/         # Compliance templates
+│   ├── vendors.json           # 26,800+ vendor profiles
+│   └── tracker-patterns.json  # 137 detection patterns
+├── templates/                 # GDPR legal templates
+├── docs/                      # Documentation
+└── Dockerfile                 # Container image
 ```
 
 ## Adding a Vendor
@@ -57,8 +76,8 @@ etalon/
 }
 ```
 
-3. Run `npm test` to verify
-4. Submit a PR
+3. Run `cargo test --workspace` to verify
+4. Submit a PR using the [Vendor Submission](https://github.com/NMA-vc/etalon/issues/new?template=vendor_submission.md) template
 
 ## Categories
 
@@ -75,13 +94,14 @@ Valid categories: `analytics`, `advertising`, `social`, `cdn`, `payments`, `chat
 
 ## Code Style
 
-- TypeScript strict mode
-- ESLint + Prettier formatting
-- Run `npm run lint:fix` before committing
+- Rust: `cargo fmt` + `cargo clippy` with `-D warnings`
+- TypeScript: ESLint strict mode
+- Run checks before committing
 
 ## Pull Request Guidelines
 
-1. Keep PRs focused - one feature or fix per PR
+1. Keep PRs focused — one feature or fix per PR
 2. Add tests for new functionality
 3. Update `data/vendors.json` if adding trackers
-4. Ensure `npm test` and `npm run lint` pass
+4. Update `CHANGELOG.md` for user-facing changes
+5. Ensure `cargo fmt`, `cargo clippy`, and `cargo test` pass

@@ -1,0 +1,57 @@
+{
+  "Google Analytics": {
+    "cats": [10],
+    "headers": {
+      "set-cookie": "_ga"
+    },
+    "scripts": [
+      "google-analytics\.com/analytics\.js",
+      "googletagmanager\.com/gtag/js"
+    ]
+  },
+  "Facebook Pixel": {
+    "cats": [10, 36],
+    "scripts": [
+      "connect\.facebook\.net/[a-z_]+/fbevents\.js"
+    ]
+  },
+  "Hotjar": {
+    "cats": [10],
+    "scripts": [
+      "static\.hotjar\.com/c/hotjar"
+    ],
+    "cookies": {
+      "_hj.*": ""
+    }
+  },
+  "Stripe": {
+    "cats": [41],
+    "scripts": [
+      "js\.stripe\.com"
+    ]
+  },
+  "Mixpanel": {
+    "cats": [10],
+    "scripts": [
+      "cdn\.mxpnl\.com/libs/mixpanel-[0-9-]+\.min\.js"
+    ]
+  },
+  "Datadog": {
+    "cats": [10],
+    "scripts": [
+      "www\.datadoghq-browser-agent\.com/datadog-rum"
+    ]
+  },
+  "PostHog": {
+    "cats": [10],
+    "scripts": [
+      "eu\.posthog\.com/static/array\.js"
+    ]
+  },
+  "HubSpot": {
+    "cats": [36],
+    "scripts": [
+      "js\.hs-scripts\.com"
+    ]
+  }
+}
