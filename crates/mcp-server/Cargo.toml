@@ -1,6 +1,6 @@
 [package]
 name = "etalon-mcp-server"
-version = "0.9.1"
+version = "0.9.2"
 edition = "2024"
 description = "ETALON Model Context Protocol (MCP) Server for AI native privacy analysis"
 license = "MIT"
@@ -8,8 +8,8 @@ repository = "https://github.com/NMA-vc/etalon"
 
 [dependencies]
 anyhow.workspace = true
-etalon-core = { version = "0.9.1", path = "../core" }
-etalon-techscan = { version = "0.9.1", path = "../techscan" }
+etalon-core = { version = "0.9.2", path = "../core" }
+etalon-techscan = { version = "0.9.2", path = "../techscan" }
 regex = "1.10.4"
 reqwest = { version = "0.13.2", default-features = false, features = ["rustls"] }
 serde = { version = "1.0.228", features = ["derive"] }

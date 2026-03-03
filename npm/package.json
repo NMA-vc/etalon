@@ -1,6 +1,6 @@
 {
     "name": "etalon-cli",
-    "version": "0.9.1",
+    "version": "0.9.2",
     "description": "Privacy engineering CLI for AI agents and developers. Audits websites, traces data flows, generates GDPR Trust Centers.",
     "scripts": {
         "postinstall": "node install.js"

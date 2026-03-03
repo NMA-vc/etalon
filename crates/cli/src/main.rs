@@ -6,6 +6,28 @@ use etalon_core::scoring::detect_project_context;
 mod scanner;
 use crate::scanner::{ScanOptions, scan_site};
 
+fn print_banner() {
+    let dim = "\x1b[90m";
+    let cyan = "\x1b[36;1m";
+    let blue = "\x1b[34;1m";
+    let white = "\x1b[37;1m";
+    let reset = "\x1b[0m";
+
+    let version = env!("CARGO_PKG_VERSION");
+
+    println!();
+    println!("{blue}  ███████╗████████╗ ██████╗ ██╗      ██████╗ ███╗   ██╗{reset}");
+    println!("{blue}  ██╔════╝╚══██╔══╝██╔════╝ ██║     ██╔═══██╗████╗  ██║{reset}");
+    println!("{cyan}  █████╗     ██║   ██║  ███╗██║     ██║   ██║██╔██╗ ██║{reset}");
+    println!("{cyan}  ██╔══╝     ██║   ██║   ██║██║     ██║   ██║██║╚██╗██║{reset}");
+    println!("{blue}  ███████╗   ██║   ╚██████╔╝███████╗╚██████╔╝██║ ╚████║{reset}");
+    println!("{blue}  ╚══════╝   ╚═╝    ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═══╝{reset}");
+    println!();
+    println!("{dim}  v{version}  {white}Privacy audit tool for AI coding agents{reset}");
+    println!("{dim}  Open-source GDPR compliance scanner  {cyan}etalon.nma.vc{reset}");
+    println!();
+}
+
 #[derive(Parser)]
 #[command(name = "etalon")]
 #[command(about = "The blazingly fast privacy engine.", long_about = None)]
@@ -93,6 +115,8 @@ enum Commands {
 async fn main() -> Result<()> {
     // Initialize tracing
     tracing_subscriber::fmt::init();
+
+    print_banner();
 
     let cli = Cli::parse();
 
