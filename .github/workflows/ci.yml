@@ -11,15 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+      - uses: actions/checkout@v4
 
       - name: Setup Rust
-        uses: dtolnay/rust-toolchain@ad397744b0d591a723ab90405b7247fac0e6b8db
+        uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
 
       - name: Cache dependencies
-        uses: Swatinem/rust-cache@f87935cf1fdb7ef4e5cf4595fa6f1e164629e469
+        uses: Swatinem/rust-cache@v2
 
       - name: Check Formatting
         run: cargo fmt --all -- --check
@@ -41,7 +41,7 @@ jobs:
 
       # The Next.js web application CI
       - name: Setup Node
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'npm'
