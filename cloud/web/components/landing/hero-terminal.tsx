@@ -53,11 +53,16 @@ function InstallBar() {
     const [copied, setCopied] = useState(false);
     const cmd = "cargo install etalon-cli";
 
-    function handleCopy() {
-        navigator.clipboard.writeText(cmd);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    }
+    const handleCopy = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        try {
+            await navigator.clipboard.writeText(cmd);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error("Failed to copy text: ", err);
+        }
+    };
 
     return (
         <div className="flex flex-col gap-2">

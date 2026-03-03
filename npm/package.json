@@ -1,0 +1,29 @@
+{
+    "name": "etalon-cli",
+    "version": "0.9.0",
+    "description": "Privacy engineering CLI for AI agents and developers. Audits websites, traces data flows, generates GDPR Trust Centers.",
+    "scripts": {
+        "postinstall": "node install.js"
+    },
+    "bin": {
+        "etalon": "./bin/etalon.js",
+        "etalon-cli": "./bin/etalon.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/NMA-vc/etalon"
+    },
+    "keywords": [
+        "privacy",
+        "gdpr",
+        "compliance",
+        "cli",
+        "audit",
+        "scanner"
+    ],
+    "author": "NMA Venture Capital",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    }
+}
