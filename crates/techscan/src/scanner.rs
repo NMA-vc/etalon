@@ -158,17 +158,15 @@ async fn writer_task(mut rx: mpsc::Receiver<ScanResult>, pool: Option<PgPool>) -
                     );
                 }
             }
+        } else if res.error.is_none() {
+            println!(
+                "✅ Scanned {}: {} techs found in {}ms",
+                res.domain,
+                res.techs.len(),
+                res.scan_ms
+            );
         } else {
-            if res.error.is_none() {
-                println!(
-                    "✅ Scanned {}: {} techs found in {}ms",
-                    res.domain,
-                    res.techs.len(),
-                    res.scan_ms
-                );
-            } else {
-                println!("❌ Failed {}: {:?}", res.domain, res.error);
-            }
+            println!("❌ Failed {}: {:?}", res.domain, res.error);
         }
     }
     Ok(())
