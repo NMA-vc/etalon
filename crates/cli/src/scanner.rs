@@ -24,6 +24,11 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
     // Launch headless browser
     let (mut browser, mut handler) = Browser::launch(
         BrowserConfig::builder()
+            .arg("--disable-cache")
+            .arg("--incognito")
+            .arg("--disable-application-cache")
+            .arg("--disable-offline-load-stale-cache")
+            .arg("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36")
             .build()
             .map_err(|e| anyhow::anyhow!(e))?,
     )
@@ -56,7 +61,11 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
     });
 
     // Wait for the page to load or timeout
-    page.wait_for_navigation().await?;
+    let _ = page.wait_for_navigation().await;
+
+    // The key missing piece from Node.js is waiting for network-idle, 
+    // where trackers fire *after* the DOM loads. 
+    tracing::info!("Waiting for data aggregators and trackers to fire beacons...");
 
     if options.deep {
         tracing::info!("Deep scanning mode: Scrolling...");
@@ -65,18 +74,39 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
             let _ = page
                 .evaluate("window.scrollBy(0, window.innerHeight);")
                 .await;
-            tokio::time::sleep(tokio::time::Duration::from_millis(500)).await;
+            tokio::time::sleep(tokio::time::Duration::from_millis(1500)).await;
         }
     } else {
-        tokio::time::sleep(tokio::time::Duration::from_millis(3000)).await;
+        // Hard wait to allow React/Vue/GTM to bootstrap and fire their analytics
+        tokio::time::sleep(tokio::time::Duration::from_millis(5000)).await;
     }
+
+    // Capture requests via Performance API, which catches cross-origin iframe requests
+    // and tracker beacons that Chromiumoxide's main-frame event listener misses.
+    let js_resources = match page
+        .evaluate("Array.from(window.performance.getEntries()).map(e => e.name)")
+        .await
+    {
+        Ok(v) => v.into_value::<Vec<String>>().unwrap_or_default(),
+        Err(e) => {
+            tracing::warn!("Failed to extract Performance Timing resources: {}", e);
+            vec![]
+        }
+    };
+    
+    let duration = start_time.elapsed();
 
     browser.close().await?;
     let _ = browser_handle.await;
-    let duration = start_time.elapsed();
 
     // Process requests
-    let reqs = captured_requests.lock().await;
+    let mut reqs = captured_requests.lock().await.clone();
+    
+    for res_url in js_resources {
+        if let Some(domain) = extract_domain(&res_url) {
+            reqs.push(CapturedRequest { domain });
+        }
+    }
     let mut third_party_reqs = Vec::new();
     let mut domain_counts: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
 
@@ -116,7 +146,7 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
         if let Some(v) = &item.vendor {
             if v.risk_score >= 6 {
                 high_risk.push(item);
-            } else if v.risk_score >= 4 {
+            } else if v.risk_score >= 3 {
                 medium_risk.push(item);
             } else {
                 low_risk.push(item);
