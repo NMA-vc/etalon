@@ -10,7 +10,6 @@ etalon/
 │   └── mcp-server/    ← MCP Server for AI agents
 ├── cloud/
 │   ├── web/           ← Next.js Dashboard (Vercel) — etalon.nma.vc
-│   └── worker/        ← Scan Worker (Railway) + Scheduled Scans
 └── data/
     └── vendors.json   ← 26,886 Vendors, 111,603 Domains, 23 Kategorien
 ```
@@ -124,8 +123,6 @@ GeneratedPolicy {
 | Komponente | Stack | Status |
 |-----------|-------|--------|
 | **Dashboard** (`cloud/web/`) | Next.js + Supabase | ✅ Live auf `etalon.nma.vc` |
-| **Scan Worker** (`cloud/worker/`) | Node.js + Playwright auf Railway | ✅ Läuft |
-| **Scheduled Scans** | Cron im Worker (5-min Intervall) | ✅ Implementiert |
 | **API Routes** | Next.js API Routes | ✅ Live |
 | **Auth** | Supabase Auth (GitHub + Email) | ✅ Funktioniert |
 | **Stripe Billing** | Stripe Checkout + Webhooks | ✅ Konfiguriert (Test Mode) |

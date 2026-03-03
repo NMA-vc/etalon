@@ -68,7 +68,6 @@ function InstallBar() {
         <div className="flex flex-col gap-2">
             <div className="flex justify-between items-baseline mb-1 text-sm">
                 <p className="font-semibold text-foreground">Install via Cargo</p>
-                <p className="text-muted-foreground text-xs"><span className="text-zinc-500">or via npm:</span> npx etalon-cli</p>
             </div>
             <button
                 onClick={handleCopy}
