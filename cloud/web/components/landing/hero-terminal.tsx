@@ -53,14 +53,36 @@ function InstallBar() {
     const [copied, setCopied] = useState(false);
     const cmd = "cargo install etalon-cli";
 
-    const handleCopy = async (e: React.MouseEvent) => {
+    const handleCopy = (e: React.MouseEvent) => {
         e.preventDefault();
-        try {
-            await navigator.clipboard.writeText(cmd);
+
+        const triggerSuccess = () => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
-        } catch (err) {
-            console.error("Failed to copy text: ", err);
+        };
+
+        const copyFallback = () => {
+            const textArea = document.createElement("textarea");
+            textArea.value = cmd;
+            textArea.style.position = "absolute";
+            textArea.style.left = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand("copy");
+                triggerSuccess();
+            } catch (err) {
+                console.error("Fallback copy failed", err);
+            }
+            textArea.remove();
+        };
+
+        if (navigator?.clipboard?.writeText) {
+            navigator.clipboard.writeText(cmd)
+                .then(triggerSuccess)
+                .catch(copyFallback);
+        } else {
+            copyFallback();
         }
     };
 

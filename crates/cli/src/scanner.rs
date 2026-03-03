@@ -17,6 +17,7 @@ pub struct ScanOptions {
 }
 
 pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistry) -> Result<()> {
+    let start_time = std::time::Instant::now();
     tracing::info!("Starting scan for {} (deep={})", url, options.deep);
     let site_domain = extract_domain(url).unwrap_or_else(|| url.to_string());
 
@@ -67,51 +68,152 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
             tokio::time::sleep(tokio::time::Duration::from_millis(500)).await;
         }
     } else {
-        tokio::time::sleep(tokio::time::Duration::from_millis(2000)).await;
+        tokio::time::sleep(tokio::time::Duration::from_millis(3000)).await;
     }
 
     browser.close().await?;
     let _ = browser_handle.await;
+    let duration = start_time.elapsed();
 
     // Process requests
     let reqs = captured_requests.lock().await;
     let mut third_party_reqs = Vec::new();
+    let mut domain_counts: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
 
     for req in reqs.iter() {
         if !is_first_party(&req.domain, &site_domain) {
             third_party_reqs.push(req.clone());
+            *domain_counts.entry(req.domain.clone()).or_insert(0) += 1;
         }
     }
 
-    tracing::info!(
-        "Captured {} total requests, {} third-party",
-        reqs.len(),
-        third_party_reqs.len()
-    );
+    struct OutputItem {
+        domain: String,
+        count: usize,
+        vendor: Option<etalon_core::types::Vendor>,
+    }
 
+    let mut items = Vec::new();
     let mut known_vendors = 0;
-    let mut unknown_domains = 0;
 
-    for req in third_party_reqs {
-        if let Some(vendor) = registry.lookup_domain(&req.domain) {
-            tracing::info!(
-                "Detected Vendor: {} ({}) via {}",
-                vendor.name,
-                vendor.category,
-                req.domain
-            );
+    for (domain, count) in domain_counts {
+        let vendor = registry.lookup_domain(&domain).cloned();
+        if vendor.is_some() {
             known_vendors += 1;
+        }
+        items.push(OutputItem {
+            domain,
+            count,
+            vendor,
+        });
+    }
+
+    let mut high_risk = Vec::new();
+    let mut medium_risk = Vec::new();
+    let mut low_risk = Vec::new();
+
+    for item in items {
+        if let Some(v) = &item.vendor {
+            if v.risk_score >= 6 {
+                high_risk.push(item);
+            } else if v.risk_score >= 4 {
+                medium_risk.push(item);
+            } else {
+                low_risk.push(item);
+            }
         } else {
-            tracing::debug!("Unknown third-party: {}", req.domain);
-            unknown_domains += 1;
+            low_risk.push(item); // Unknown defaults to low risk to match legacy behavior
         }
     }
 
-    println!("\n--- Scan Results ---");
-    println!("Target: {}", url);
-    println!("Third-party requests: {}", known_vendors + unknown_domains);
-    println!("Identified Vendors: {}", known_vendors);
-    println!("Unknown Trackers: {}", unknown_domains);
+    let dim = "\x1b[90m";
+    let cyan = "\x1b[36;1m";
+    let red_bold = "\x1b[31;1m";
+    let yellow_bold = "\x1b[33;1m";
+    let green_bold = "\x1b[32;1m";
+    let reset = "\x1b[0m";
+
+    println!("\n\n{}ETALON Privacy Audit{}", cyan, reset);
+    println!("{}═══════════════════════════════════════════════════════{}", dim, reset);
+    println!("{dim}Site:{reset}       {}", url);
+    let now = chrono::Local::now();
+    println!("{dim}Scanned:{reset}    {}", now.format("%-d.%-m.%Y, %H:%M:%S"));
+    println!("{dim}Duration:{reset}   {:.1} seconds", duration.as_secs_f32());
+    println!();
+
+    println!("📊 Summary");
+    println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+    println!("✓ {} third-party requests", third_party_reqs.len());
+    println!("✓ {} matched to known vendors", known_vendors);
+    if !high_risk.is_empty() {
+        println!("✗ {} high-risk tracker detected", high_risk.len());
+    } else {
+        println!("✓ 0 high-risk trackers detected");
+    }
+    println!();
+
+    if !high_risk.is_empty() {
+        println!("{}🔴 High Risk ({}){}", red_bold, high_risk.len(), reset);
+        println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+        for item in high_risk {
+            let v = item.vendor.unwrap();
+            println!("{:<35} {}", item.domain, v.name);
+            println!("{}├─ Category:{reset}   {}", dim, v.category);
+            let gdpr_str = if v.gdpr_compliant { "Compliant" } else { "Non-compliant" };
+            println!("{}├─ GDPR:{reset}       {}", dim, gdpr_str);
+            if let Some(data) = v.data_collected {
+                println!("{}├─ Data:{reset}       {}", dim, data.join(", "));
+            }
+            if let Some(dpa) = v.dpa_url {
+                println!("{}├─ DPA:{reset}        {}", dim, dpa);
+            }
+            if let Some(alts) = v.alternatives {
+                println!("{}├─ Alt:{reset}        {}", dim, alts.join(", "));
+            }
+            println!("{}└─ Requests:{reset}   {}\n", dim, item.count);
+        }
+    }
+
+    if !medium_risk.is_empty() {
+        println!("{}🟡 Medium Risk ({}){}", yellow_bold, medium_risk.len(), reset);
+        println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+        for item in medium_risk {
+            let v = item.vendor.unwrap();
+            println!("{:<35} {}", item.domain, v.name);
+            println!("{}├─ Category:{reset}   {}", dim, v.category);
+            let gdpr_str = if v.gdpr_compliant { "Compliant (with DPA)" } else { "Non-compliant" };
+            println!("{}├─ GDPR:{reset}       {}", dim, gdpr_str);
+            if let Some(data) = v.data_collected {
+                println!("{}├─ Data:{reset}       {}", dim, data.join(", "));
+            }
+            if let Some(dpa) = v.dpa_url {
+                println!("{}├─ DPA:{reset}        {}", dim, dpa);
+            }
+            if let Some(alts) = v.alternatives {
+                println!("{}├─ Alt:{reset}        {}", dim, alts.join(", "));
+            }
+            println!("{}└─ Requests:{reset}   {}\n", dim, item.count);
+        }
+    }
+
+    if !low_risk.is_empty() {
+        println!("{}🟢 Low Risk ({}){}", green_bold, low_risk.len(), reset);
+        println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+        for item in low_risk {
+            if let Some(v) = item.vendor {
+                println!("{:<35} {}", item.domain, v.name);
+                println!("{}├─ Category:{reset}   {}", dim, v.category);
+            } else {
+                println!("{:<35} {}", item.domain, "Unknown Tracker");
+            }
+            println!("{}└─ Requests:{reset}   {}\n", dim, item.count);
+        }
+    }
+
+    println!("💡 Recommendations");
+    println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+    println!("Run with --format json for machine-readable output");
+    println!("Report issues: github.com/NMA-vc/etalon/issues\n");
 
     Ok(())
 }
