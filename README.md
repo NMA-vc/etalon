@@ -37,6 +37,10 @@ ETALON is designed for AI coding agents like Claude Code, Cursor, and Windsurf.
 - 📦 **Rust crate API** — `etalon-core` for programmatic use
 - ✅ **Exit codes** — CI/CD quality gate (exits 1 on critical findings)
 - 🎯 **Skills marketplace** — One-click install on [skills.sh](https://skills.sh)
+* 🦞 **OpenClaw skill** — Autonomous GDPR auditing for OpenClaw agents.
+  Fetches URLs, runs audits, delivers results to your human via WhatsApp.
+  `clawhub install rednix/etalon-gdpr`
+  → [LobstrHunt listing](https://lobstrhunt.com/skills/rednix/etalon-gdpr)
 
 **MCP Server Setup:**
 ```bash

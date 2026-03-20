@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- OpenClaw skill (`skills/openclaw/SKILL.md`) — autonomous GDPR auditing
+  for OpenClaw agents. Teaches agents to run scans, consent checks,
+  codebase audits, and policy generation. Listed on LobstrHunt.
+- Claude Code skill (`skills/claude-code/SKILL.md`) — ETALON integration
+  for Claude Code, Cursor, and Codex CLI coding agents.
+- `skills/README.md` — documentation for the skills directory.
+
+### Changed
+- `README.md` — added OpenClaw skill to "Built for AI Coding Agents" section.
+- `mcp-setup.md` — added note clarifying MCP server scope and linking to
+  OpenClaw skill for full audit capability.
+
 ## [0.9.0] - 2026-03-03
 
 ### 🎉 First Open Source Release

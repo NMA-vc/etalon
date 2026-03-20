@@ -27,3 +27,23 @@ Open your Claude Desktop configuration file (typically `~/Library/Application Su
 6. Click **Save**.
 
 The agent will immediately have access to `etalon_lookup_vendor`, `etalon_search_vendors`, `etalon_get_vendor_info`, `etalon_registry_stats`, and `etalon_scan_domain`.
+
+## OpenClaw Skill (Full Audit Capability)
+
+The ETALON MCP server covers vendor lookups only (4 tools).
+For full audit capability with OpenClaw agents — scanning websites,
+testing consent violations, auditing codebases, generating policies —
+use the OpenClaw skill instead:
+
+```bash
+clawhub install rednix/etalon-gdpr
+```
+
+The skill teaches your OpenClaw agent to:
+- Run `etalon scan` autonomously when you share a URL
+- Check consent violations before you launch a product
+- Audit your codebase when new dependencies are added
+- Deliver structured reports to your WhatsApp/Telegram
+
+[View on LobstrHunt →](https://lobstrhunt.com/skills/rednix/etalon-gdpr)
+[OpenClaw documentation →](https://lobstrhunt.com/docs/agents)
