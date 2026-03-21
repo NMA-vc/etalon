@@ -8,9 +8,11 @@ Each skill teaches an agent how to use the ETALON CLI autonomously.
 ```
 skills/
   openclaw/
-    SKILL.md    → For OpenClaw agents (autonomous, messaging-app output)
+    SKILL.md              → GDPR audit (autonomous, messaging-app output)
+    SKILL-techscan.md     → Tech stack detection (autonomous)
   claude-code/
-    SKILL.md    → For Claude Code (IDE context, no heartbeat)
+    SKILL.md              → GDPR audit (IDE context)
+    SKILL-techscan.md     → Tech stack detection (IDE context)
 ```
 
 ## Install
@@ -18,23 +20,31 @@ skills/
 ### OpenClaw
 ```bash
 clawhub install rednix/etalon-gdpr
+clawhub install rednix/etalon-techscan
 ```
 [View on LobstrHunt](https://lobstrhunt.com/skills/rednix/etalon-gdpr)
 
 ### Claude Code / Cursor / Codex CLI
 ```bash
-# Copy skills/claude-code/SKILL.md to your agent's skills directory
+# Copy skill files to your agent's skills directory
 # Claude Code: ~/.claude/skills/etalon-gdpr/SKILL.md
-# Cursor:      ~/.cursor/skills/etalon-gdpr/SKILL.md
+# Claude Code: ~/.claude/skills/etalon-techscan/SKILL.md
+# Cursor:      ~/.cursor/skills/etalon-*/SKILL.md
 ```
 
-## What the skills do
+## Available skills
 
-Both skills teach the agent to:
+### etalon-gdpr
 - Run `etalon scan <URL>` to detect trackers (111k+ domain database)
 - Run `etalon consent-check <URL>` to test for consent violations
 - Run `etalon audit ./` to audit codebases for PII handling
 - Run `etalon generate-policy` to create GDPR-compliant privacy policies
+
+### etalon-techscan
+- Run `etalon techscan <domain>` to detect 5,259 technologies
+- Run `etalon techscan --batch <file>` to scan many domains
+- Detects frameworks, CDNs, CMS, analytics, payment, hosting, and more
+- MIT-licensed fingerprint database (wappalyzergo + hand-curated)
 
 No API key required. ETALON runs entirely locally.
 
