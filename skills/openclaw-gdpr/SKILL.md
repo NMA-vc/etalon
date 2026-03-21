@@ -1,6 +1,6 @@
 ---
 name: Etalon GDPR Scan
-version: 0.9.5
+version: 0.9.6
 description: >
   Full GDPR compliance audit for any website or codebase using the ETALON CLI.
   Scans for trackers (111k+ domain database), tests consent violations, checks
@@ -65,10 +65,10 @@ scenarios:
       Critical finding if Google Analytics or Facebook Pixel fires pre-consent.
     avg_seconds: 8
 
-  - trigger: "Human mentions a competitor's website"
+  - trigger: "Human asks about a competitor's compliance"
     action: >
-      Run etalon scan autonomously in background while human continues.
-      Run: etalon scan <competitor-URL> --format json
+      Ask user to confirm, then run:
+      etalon scan <competitor-URL> --format json
     output: >
       Compliance comparison: "Competitor has N critical violations.
       Your site is cleaner — worth highlighting in sales conversations."
@@ -156,10 +156,8 @@ sample_output: |
 chains:
   - skill: "rednix/lobstr"
     why: "Validate the startup idea before auditing its compliance exposure"
-  - skill: "someone/markdown-report"
-    why: "Format the JSON audit output as a polished client-ready PDF report"
-  - skill: "someone/github-pr"
-    why: "Automatically open a PR with ETALON's --fix suggestions applied"
+  - skill: "rednix/etalon-techscan"
+    why: "Detect the tech stack before running a GDPR audit"
   - skill: "rednix/lobstrhunt"
     why: "Discover more GDPR and compliance skills in the LobstrHunt registry"
 
