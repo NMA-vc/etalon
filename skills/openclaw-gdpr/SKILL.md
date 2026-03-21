@@ -1,6 +1,6 @@
 ---
 name: etalon-gdpr
-version: 0.9.4
+version: 0.9.5
 description: >
   Full GDPR compliance audit for any website or codebase using the ETALON CLI.
   Scans for trackers (111k+ domain database), tests consent violations, checks

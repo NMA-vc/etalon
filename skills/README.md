@@ -7,29 +7,30 @@ Each skill teaches an agent how to use the ETALON CLI autonomously.
 
 ```
 skills/
-  openclaw/
-    SKILL.md              → GDPR audit (autonomous, messaging-app output)
-    SKILL-techscan.md     → Tech stack detection (autonomous)
-  claude-code/
-    SKILL.md              → GDPR audit (IDE context)
-    SKILL-techscan.md     → Tech stack detection (IDE context)
+  openclaw-gdpr/
+    SKILL.md     → GDPR audit (OpenClaw, autonomous)
+  openclaw-techscan/
+    SKILL.md     → Tech stack detection (OpenClaw, autonomous)
+  claude-code-gdpr/
+    SKILL.md     → GDPR audit (Claude Code, IDE context)
+  claude-code-techscan/
+    SKILL.md     → Tech stack detection (Claude Code, IDE context)
 ```
 
 ## Install
 
-### OpenClaw
+### OpenClaw (via ClawHub)
 ```bash
 clawhub install rednix/etalon-gdpr
 clawhub install rednix/etalon-techscan
 ```
-[View on LobstrHunt](https://lobstrhunt.com/skills/rednix/etalon-gdpr)
+Or import from GitHub at [clawhub.ai/import](https://clawhub.ai/import).
 
 ### Claude Code / Cursor / Codex CLI
 ```bash
 # Copy skill files to your agent's skills directory
-# Claude Code: ~/.claude/skills/etalon-gdpr/SKILL.md
-# Claude Code: ~/.claude/skills/etalon-techscan/SKILL.md
-# Cursor:      ~/.cursor/skills/etalon-*/SKILL.md
+cp skills/claude-code-gdpr/SKILL.md ~/.claude/skills/etalon-gdpr/SKILL.md
+cp skills/claude-code-techscan/SKILL.md ~/.claude/skills/etalon-techscan/SKILL.md
 ```
 
 ## Available skills

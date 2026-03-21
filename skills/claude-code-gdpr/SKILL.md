@@ -1,6 +1,6 @@
 ---
 name: etalon-gdpr
-version: 0.9.4
+version: 0.9.5
 description: >
   GDPR compliance auditing for Claude Code. Scans websites for trackers
   (111k+ domains), tests consent violations, audits codebases for PII

@@ -1,6 +1,6 @@
 [package]
 name = "etalon-cli"
-version = "0.9.4"
+version = "0.9.5"
 edition = "2024"
 description = "Lightning-fast privacy compliance and tracking detection CLI"
 license = "MIT"
@@ -15,8 +15,8 @@ anyhow.workspace = true
 chromiumoxide = "0.9.1"
 chrono = "0.4.44"
 clap = { version = "4.5.60", features = ["derive"] }
-etalon-core = { version = "0.9.4", path = "../core" }
-etalon-techscan = { version = "0.9.4", path = "../techscan" }
+etalon-core = { version = "0.9.5", path = "../core" }
+etalon-techscan = { version = "0.9.5", path = "../techscan" }
 futures = "0.3.32"
 futures-util = "0.3.32"
 sqlx = { version = "0.8.6", default-features = false, features = ["runtime-tokio-rustls", "postgres", "macros"] }
