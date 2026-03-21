@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { ScoreRing } from "@/components/dashboard/score-ring";
+import { ScoreRing } from "@/components/ui/score-ring";
 
 /* ═══════════════════════════════════════════════════════════
    Trust Center Preview — The Cloud Outcome

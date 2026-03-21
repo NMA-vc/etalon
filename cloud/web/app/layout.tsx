@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://etalon.nma.vc"),
   openGraph: {
     title: "ETALON — Privacy Auditing for the Modern Web",
-    description: "Open-source privacy auditor with CLI, MCP server, and cloud dashboard.",
+    description: "Open-source privacy auditor with CLI and MCP server.",
     siteName: "ETALON",
   },
 };

@@ -29,11 +29,6 @@ export function Navbar() {
 
                 {/* CTA */}
                 <div className="flex items-center gap-3">
-                    <Link href="/login">
-                        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-                            Dashboard
-                        </Button>
-                    </Link>
                     <a href="https://github.com/NMA-vc/etalon" target="_blank" rel="noopener">
                         <Button size="sm" className="gap-2 dark:shadow-[0_0_20px_rgb(26_107_122/0.3)] dark:hover:shadow-[0_0_30px_rgb(26_107_122/0.5)]">
                             <GithubIcon className="w-4 h-4" />

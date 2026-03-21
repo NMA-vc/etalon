@@ -1,6 +1,6 @@
 "use client";
 
-import { ScoreRing } from "@/components/dashboard/score-ring";
+import { ScoreRing } from "@/components/ui/score-ring";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, CheckCircle, Clock } from "lucide-react";
 
