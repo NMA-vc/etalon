@@ -1,8 +1,8 @@
 # ETALON
 
-**Privacy engineering platform for AI agents and developers**
+**Privacy engineering and tech intelligence platform for AI agents and developers**
 
-Audit code, scan websites, detect 111k+ trackers, map PII data flows, and auto-generate GDPR policies — all from one Rust-native CLI.
+Audit code, scan websites, detect 111k+ trackers, fingerprint 5,200+ technologies, map PII data flows, and auto-generate GDPR policies — all from one Rust-native CLI.
 
 [![CI](https://github.com/NMA-vc/etalon/actions/workflows/ci.yml/badge.svg)](https://github.com/NMA-vc/etalon/actions/workflows/ci.yml)
 [![crates.io](https://img.shields.io/crates/v/etalon-cli.svg)](https://crates.io/crates/etalon-cli)
@@ -17,6 +17,9 @@ cargo install etalon-cli
 
 # Audit your project
 etalon audit ./
+
+# Detect what tech stack a website runs
+etalon techscan example.com
 
 # Generate a GDPR privacy policy from your code
 etalon generate-policy ./ --company "Acme Inc" --email privacy@acme.com
@@ -37,9 +40,9 @@ ETALON is designed for AI coding agents like Claude Code, Cursor, and Windsurf.
 - 📦 **Rust crate API** — `etalon-core` for programmatic use
 - ✅ **Exit codes** — CI/CD quality gate (exits 1 on critical findings)
 - 🎯 **Skills marketplace** — One-click install on [skills.sh](https://skills.sh)
-* 🦞 **OpenClaw skill** — Autonomous GDPR auditing for OpenClaw agents.
-  Fetches URLs, runs audits, delivers results to your human via WhatsApp.
-  `clawhub install rednix/etalon-gdpr`
+* 🦞 **OpenClaw skills** — Autonomous auditing for OpenClaw agents:
+  * **GDPR skill** — Privacy auditing. `clawhub install rednix/etalon-gdpr`
+  * **Techscan skill** — Tech stack detection. `clawhub install rednix/etalon-techscan`
   → [LobstrHunt listing](https://lobstrhunt.com/skills/rednix/etalon-gdpr)
 
 **MCP Server Setup:**
@@ -105,7 +108,7 @@ facebook.com                    Facebook Pixel
 
 ---
 
-## All 10 Commands
+## All Commands
 
 ### `etalon scan <url>` - Network Tracker Scanner
 
@@ -123,6 +126,44 @@ etalon scan https://example.com --deep --format json
 | `-t, --timeout <ms>` | Navigation timeout | `30000` |
 | `--idle` | Wait for network idle before capturing | `false` |
 | `--config <path>` | Path to etalon.yaml config | auto-detect |
+
+---
+
+### `etalon techscan <domain>` - Technology Fingerprinting ⚡
+
+Detect the technology stack of any domain in under 2 seconds. Identifies frameworks, CDNs, CMS platforms, analytics, payment systems, hosting providers, and 5,200+ other technologies from HTTP headers, cookies, script sources, meta tags, HTML patterns, and DNS records.
+
+```bash
+# Single domain scan
+etalon techscan example.com
+
+# Batch scan from file
+etalon techscan --batch domains.txt
+
+# Batch with concurrency control
+etalon techscan --batch domains.txt -c 10
+
+# Save results to database
+etalon techscan --batch domains.txt --db-url "postgres://..."
+```
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--batch` | Treat target as a file (one domain per line) | `false` |
+| `-c, --concurrency` | Parallel scan limit | `20` |
+| `--db-url <url>` | Postgres connection for result persistence | - |
+
+**Sample output:**
+```
+✅ Scanned grid.nma.vc: 5 techs found in 776ms
+   ├─ Next.js (confidence: 100, via: header:x-powered-by)
+   ├─ Vercel (confidence: 100, via: header:server)
+   ├─ Twitter Cards (confidence: 90, via: meta)
+   ├─ React (confidence: 100, via: implied:Next.js)
+   ├─ JavaScript (confidence: 100, via: implied:React)
+```
+
+**Fingerprint database:** 5,259 technologies from MIT-licensed [wappalyzergo](https://github.com/projectdiscovery/wappalyzergo) + hand-curated entries.
 
 ---
 
@@ -331,14 +372,14 @@ const flows = await analyzeDataFlow('./src');
 
 | Metric | Count |
 |--------|-------|
-| Known vendor profiles | **26,800+** |
-| Tracked domains | **111,000+** |
+| Known vendor profiles (GDPR) | **26,800+** |
+| Tracked domains (GDPR) | **111,000+** |
+| Technology fingerprints (techscan) | **5,259** |
 | Vendor categories | **23** |
 | Tracker patterns (npm, pip, cargo, env, HTML, imports) | **137** |
 | PII field patterns | **36** |
 | Schema formats supported | **6** |
 | Languages scanned | **3** (JS/TS, Python, Rust) |
-| Frameworks detected | **10+** |
 | GDPR articles mapped | **30+** |
 
 ### Vendor Categories
@@ -414,11 +455,13 @@ The `audit` command exits with code 1 if critical/high findings are found.
 
 ```
 etalon/
-├── packages/
-│   ├── etalon/      # Umbrella package (npm install -g etalon)
-│   ├── core/        # @etalon/core - detection engine
-│   ├── cli/         # etalon CLI (10 commands)
-│   └── mcp-server/  # MCP server for AI assistants
+├── crates/
+│   ├── cli/         # etalon CLI binary
+│   ├── core/        # GDPR detection engine (26,800+ vendors)
+│   └── techscan/    # Technology fingerprinting (5,259 techs)
+├── skills/
+│   ├── openclaw/    # OpenClaw agent skills (GDPR + techscan)
+│   └── claude-code/ # Claude Code agent skills
 ├── data/
 │   ├── vendors.json          # 26,800+ vendors, 111,000+ domains
 │   └── tracker-patterns.json # 137 patterns
