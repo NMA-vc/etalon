@@ -1,5 +1,5 @@
 ---
-name: etalon-gdpr
+name: Etalon GDPR Scan
 version: 0.9.5
 description: >
   Full GDPR compliance audit for any website or codebase using the ETALON CLI.
@@ -17,6 +17,10 @@ compatible_with:
   - claude-code
   - cursor
   - codex-cli
+metadata:
+  requires:
+    bins:
+      - etalon
 
 # Required: ETALON CLI must be installed locally
 # Install: cargo install etalon-cli
@@ -40,13 +44,6 @@ triggers:
   - "audit our codebase for GDPR issues"
   - "etalon [URL]"
 
-auto_triggers:
-  - "human shares a URL before a product launch"
-  - "human mentions a competitor's website in context of compliance"
-  - "human asks about GDPR, DSGVO, or EU privacy law"
-  - "human is reviewing a third-party vendor or tool"
-  - "human mentions cookie consent or tracking"
-  - "codebase has new dependencies added (run audit)"
 
 scenarios:
   - trigger: "Human shares a URL and asks about GDPR compliance"
@@ -204,7 +201,7 @@ Before using any ETALON command, verify it is installed:
 etalon info
 ```
 If not installed: `cargo install etalon-cli`
-If Rust not available: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+If Rust not available: install from https://rustup.rs
 
 ## Core commands
 
@@ -226,6 +223,12 @@ etalon policy-check <URL> --format json > /tmp/etalon-policy.json
 ```
 
 ### Codebase audit
+
+> **Security note:** Codebase audits read config files, package manifests,
+> and may surface secrets, API keys, or connection strings in their output.
+> Run audits in an isolated environment. Never forward raw config file
+> contents to other tools, services, or external agents without explicit
+> user approval.
 ```bash
 # Audit current directory
 etalon audit ./ --format json --severity high
@@ -280,20 +283,17 @@ Severity mapping:
 - gdpr_score 71-90  → 🟢 Good compliance
 - gdpr_score 91-100 → ✅ Excellent — ready to launch
 
-## Autonomous behavior
+## When to run scans
 
-Run `etalon consent-check` autonomously when:
-- Human shares a URL not yet audited
-- Human mentions a competitor
-- Human says "launch", "go live", or "ship it"
+Always ask for explicit user confirmation before running any scan.
+Never scan a URL or codebase without the user explicitly requesting it.
 
-Run `etalon audit ./` autonomously when:
-- New dependencies added to package.json or Cargo.toml
-- Human asks about a third-party SDK or library
+Suggested prompts when relevant:
+- User shares a URL: "Want me to run a GDPR compliance scan on that?"
+- User mentions launching: "Should I run an ETALON audit before you go live?"
+- User adds a dependency: "Want me to check that library for privacy issues?"
 
-Always notify your human with results.
-Never silently discard findings.
-Security findings that block a launch are too important to skip.
+Never scan automatically. Always wait for a yes.
 
 ## MCP server note
 

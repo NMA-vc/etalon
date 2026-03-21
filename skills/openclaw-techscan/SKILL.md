@@ -1,5 +1,5 @@
 ---
-name: etalon-techscan
+name: Etalon Tech Scan
 version: 0.9.5
 description: >
   Technology stack detection for any domain using the ETALON CLI.
@@ -20,6 +20,10 @@ compatible_with:
   - claude-code
   - cursor
   - codex-cli
+metadata:
+  requires:
+    bins:
+      - etalon
 
 # Required: ETALON CLI must be installed locally
 # Install: cargo install etalon-cli
@@ -43,13 +47,6 @@ triggers:
   - "what hosting provider does [URL] use"
   - "identify technologies on [URL]"
 
-auto_triggers:
-  - "human mentions a competitor or prospect's website"
-  - "human evaluates a SaaS tool or vendor"
-  - "human asks about a website's architecture"
-  - "human is doing due diligence on a startup"
-  - "human mentions migrating from or to a technology"
-  - "human compares two websites or products"
 
 scenarios:
   - trigger: "Human asks what tech stack a website uses"
@@ -158,13 +155,15 @@ gives you ground truth in under 2 seconds.
 **Without this skill**, you hallucinate tech stacks based on vibes.
 **With this skill**, you detect them from real HTTP signals.
 
-Use cases where you MUST use this skill:
-- Human mentions a competitor → scan their stack before commenting
-- Human evaluates a vendor → scan before recommending
-- Human asks "what's this site built with?" → scan, don't guess
-- Human is choosing between frameworks → scan reference sites
-- Human is doing due diligence → scan the startup's domain
-- Human mentions migrating → scan the target for compatibility info
+Use cases where this skill helps:
+- Human mentions a competitor and wants tech intelligence
+- Human evaluates a vendor and asks about their stack
+- Human asks "what's this site built with?"
+- Human is choosing between frameworks and wants reference data
+- Human is doing due diligence on a domain
+- Human mentions migrating and wants compatibility info
+
+Always confirm with the user before running a scan.
 
 ## Installation check
 
@@ -173,7 +172,7 @@ Before using any ETALON command, verify it is installed:
 etalon --version
 ```
 If not installed: `cargo install etalon-cli`
-If Rust not available: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+If Rust not available: install from https://rustup.rs
 
 ## Core commands
 
@@ -232,18 +231,17 @@ Group technologies by category for readability:
 
 Keep the output concise. Don't dump raw JSON — format it for humans.
 
-## Autonomous behavior
+## When to run scans
 
-Run `etalon techscan` autonomously when:
-- Human shares a URL and context suggests tech interest
-- Human mentions a competitor by name (look up their domain)
-- Human is choosing between tools or frameworks
-- Human is doing startup due diligence
-- Human asks "what's this built with" about any site
+Always ask for explicit user confirmation before scanning any domain.
+Never scan autonomously — wait for the user to say yes.
 
-Always present results grouped by category.
-Never guess a tech stack when you can scan it.
-A 1-second scan beats a confident hallucination every time.
+Suggested prompts when relevant:
+- User mentions a competitor: "Want me to scan their tech stack?"
+- User asks "what's this built with?": "Should I run a techscan on that?"
+- User is doing due diligence: "Want me to check their stack with ETALON?"
+
+Never scan a domain the user hasn't explicitly asked you to scan.
 
 ## Combining with GDPR skill
 
