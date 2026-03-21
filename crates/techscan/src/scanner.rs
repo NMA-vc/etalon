@@ -165,6 +165,21 @@ async fn writer_task(mut rx: mpsc::Receiver<ScanResult>, pool: Option<PgPool>) -
                 res.techs.len(),
                 res.scan_ms
             );
+            for tech in &res.techs {
+                let via_str = match &tech.via {
+                    crate::types::DetectionMethod::Header(s) => format!("header:{}", s),
+                    crate::types::DetectionMethod::Cookie(s) => format!("cookie:{}", s),
+                    crate::types::DetectionMethod::Html => "html".to_string(),
+                    crate::types::DetectionMethod::ScriptSrc => "script".to_string(),
+                    crate::types::DetectionMethod::Meta => "meta".to_string(),
+                    crate::types::DetectionMethod::Dns => "dns".to_string(),
+                    crate::types::DetectionMethod::Implied(s) => format!("implied:{}", s),
+                };
+                println!(
+                    "   ├─ {} (confidence: {}, via: {})",
+                    tech.name, tech.confidence, via_str
+                );
+            }
         } else {
             println!("❌ Failed {}: {:?}", res.domain, res.error);
         }

@@ -80,15 +80,22 @@ enum Commands {
         // Run as stdio server
     },
 
-    /// Run a high-performance batch scan using etalon-techscan
-    ScanBatch {
-        #[arg(short, long)]
-        input: String,
+    /// Detect third-party tech frameworks, trackers and SDKs on a domain
+    Techscan {
+        /// Domain to scan, or file path when used with --batch
+        #[arg(required = true)]
+        target: String,
 
+        /// Treat target as a file containing one domain per line
+        #[arg(long)]
+        batch: bool,
+
+        /// Number of concurrent scans (only relevant with --batch)
         #[arg(short, long, default_value_t = 20)]
         concurrency: usize,
 
-        #[arg(short, long)]
+        /// Postgres connection string to persist results
+        #[arg(long)]
         db_url: Option<String>,
     },
 
@@ -222,18 +229,21 @@ async fn main() -> Result<()> {
             tracing::info!("Booting MCP Agentic Intelligence Engine");
             println!("MCP Server booted.");
         }
-        Commands::ScanBatch {
-            input,
+        Commands::Techscan {
+            target,
+            batch,
             concurrency,
             db_url,
         } => {
-            tracing::info!(
-                "Starting batch scan with concurrency {} using techscan",
-                concurrency
-            );
-
             let mut domains = Vec::new();
-            if let Ok(content) = std::fs::read_to_string(input) {
+
+            if *batch {
+                tracing::info!(
+                    "Starting batch techscan from file '{}' with concurrency {}",
+                    target, concurrency
+                );
+                let content = std::fs::read_to_string(target)
+                    .map_err(|e| anyhow::anyhow!("Could not read batch file '{}': {}", target, e))?;
                 for line in content.lines() {
                     let d = line.trim();
                     if !d.is_empty() {
@@ -241,11 +251,10 @@ async fn main() -> Result<()> {
                     }
                 }
             } else {
-                domains.push(input.clone());
+                tracing::info!("Starting techscan for domain: {}", target);
+                domains.push(target.clone());
             }
 
-            // Initialize an empty Techscan database since we stripped the GPL submodule.
-            // A real architecture might fetch this securely from the API or a bundled DB.
             let db = std::sync::Arc::new(
                 etalon_techscan::fingerprints::FingerprintDB::load_bundled()
                     .unwrap_or_else(|_| etalon_techscan::fingerprints::FingerprintDB::empty()),
