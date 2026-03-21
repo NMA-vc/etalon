@@ -205,9 +205,9 @@ async fn main() -> Result<()> {
             let mut cmd = std::process::Command::new("exine");
 
             if target.starts_with("http") {
-                cmd.arg("fetch").arg(&target);
+                cmd.arg("fetch").arg(target);
             } else {
-                cmd.arg("convert").arg(&target);
+                cmd.arg("convert").arg(target);
             }
 
             let status = cmd.status();
@@ -240,10 +240,12 @@ async fn main() -> Result<()> {
             if *batch {
                 tracing::info!(
                     "Starting batch techscan from file '{}' with concurrency {}",
-                    target, concurrency
+                    target,
+                    concurrency
                 );
-                let content = std::fs::read_to_string(target)
-                    .map_err(|e| anyhow::anyhow!("Could not read batch file '{}': {}", target, e))?;
+                let content = std::fs::read_to_string(target).map_err(|e| {
+                    anyhow::anyhow!("Could not read batch file '{}': {}", target, e)
+                })?;
                 for line in content.lines() {
                     let d = line.trim();
                     if !d.is_empty() {

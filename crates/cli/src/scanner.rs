@@ -63,8 +63,8 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
     // Wait for the page to load or timeout
     let _ = page.wait_for_navigation().await;
 
-    // The key missing piece from Node.js is waiting for network-idle, 
-    // where trackers fire *after* the DOM loads. 
+    // The key missing piece from Node.js is waiting for network-idle,
+    // where trackers fire *after* the DOM loads.
     tracing::info!("Waiting for data aggregators and trackers to fire beacons...");
 
     if options.deep {
@@ -93,7 +93,7 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
             vec![]
         }
     };
-    
+
     let duration = start_time.elapsed();
 
     browser.close().await?;
@@ -101,14 +101,15 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
 
     // Process requests
     let mut reqs = captured_requests.lock().await.clone();
-    
+
     for res_url in js_resources {
         if let Some(domain) = extract_domain(&res_url) {
             reqs.push(CapturedRequest { domain });
         }
     }
     let mut third_party_reqs = Vec::new();
-    let mut domain_counts: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
+    let mut domain_counts: std::collections::HashMap<String, usize> =
+        std::collections::HashMap::new();
 
     for req in reqs.iter() {
         if !is_first_party(&req.domain, &site_domain) {
@@ -164,15 +165,27 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
     let reset = "\x1b[0m";
 
     println!("\n\n{}ETALON Privacy Audit{}", cyan, reset);
-    println!("{}═══════════════════════════════════════════════════════{}", dim, reset);
+    println!(
+        "{}═══════════════════════════════════════════════════════{}",
+        dim, reset
+    );
     println!("{dim}Site:{reset}       {}", url);
     let now = chrono::Local::now();
-    println!("{dim}Scanned:{reset}    {}", now.format("%-d.%-m.%Y, %H:%M:%S"));
-    println!("{dim}Duration:{reset}   {:.1} seconds", duration.as_secs_f32());
+    println!(
+        "{dim}Scanned:{reset}    {}",
+        now.format("%-d.%-m.%Y, %H:%M:%S")
+    );
+    println!(
+        "{dim}Duration:{reset}   {:.1} seconds",
+        duration.as_secs_f32()
+    );
     println!();
 
     println!("📊 Summary");
-    println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+    println!(
+        "{}───────────────────────────────────────────────────────{}",
+        dim, reset
+    );
     println!("✓ {} third-party requests", third_party_reqs.len());
     println!("✓ {} matched to known vendors", known_vendors);
     if !high_risk.is_empty() {
@@ -184,12 +197,19 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
 
     if !high_risk.is_empty() {
         println!("{}🔴 High Risk ({}){}", red_bold, high_risk.len(), reset);
-        println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+        println!(
+            "{}───────────────────────────────────────────────────────{}",
+            dim, reset
+        );
         for item in high_risk {
             let v = item.vendor.unwrap();
             println!("{:<35} {}", item.domain, v.name);
             println!("{}├─ Category:{reset}   {}", dim, v.category);
-            let gdpr_str = if v.gdpr_compliant { "Compliant" } else { "Non-compliant" };
+            let gdpr_str = if v.gdpr_compliant {
+                "Compliant"
+            } else {
+                "Non-compliant"
+            };
             println!("{}├─ GDPR:{reset}       {}", dim, gdpr_str);
             if let Some(data) = v.data_collected {
                 println!("{}├─ Data:{reset}       {}", dim, data.join(", "));
@@ -205,13 +225,25 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
     }
 
     if !medium_risk.is_empty() {
-        println!("{}🟡 Medium Risk ({}){}", yellow_bold, medium_risk.len(), reset);
-        println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+        println!(
+            "{}🟡 Medium Risk ({}){}",
+            yellow_bold,
+            medium_risk.len(),
+            reset
+        );
+        println!(
+            "{}───────────────────────────────────────────────────────{}",
+            dim, reset
+        );
         for item in medium_risk {
             let v = item.vendor.unwrap();
             println!("{:<35} {}", item.domain, v.name);
             println!("{}├─ Category:{reset}   {}", dim, v.category);
-            let gdpr_str = if v.gdpr_compliant { "Compliant (with DPA)" } else { "Non-compliant" };
+            let gdpr_str = if v.gdpr_compliant {
+                "Compliant (with DPA)"
+            } else {
+                "Non-compliant"
+            };
             println!("{}├─ GDPR:{reset}       {}", dim, gdpr_str);
             if let Some(data) = v.data_collected {
                 println!("{}├─ Data:{reset}       {}", dim, data.join(", "));
@@ -228,20 +260,26 @@ pub async fn scan_site(url: &str, options: ScanOptions, registry: &VendorRegistr
 
     if !low_risk.is_empty() {
         println!("{}🟢 Low Risk ({}){}", green_bold, low_risk.len(), reset);
-        println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+        println!(
+            "{}───────────────────────────────────────────────────────{}",
+            dim, reset
+        );
         for item in low_risk {
             if let Some(v) = item.vendor {
                 println!("{:<35} {}", item.domain, v.name);
                 println!("{}├─ Category:{reset}   {}", dim, v.category);
             } else {
-                println!("{:<35} {}", item.domain, "Unknown Tracker");
+                println!("{:<35} Unknown Tracker", item.domain);
             }
             println!("{}└─ Requests:{reset}   {}\n", dim, item.count);
         }
     }
 
     println!("💡 Recommendations");
-    println!("{}───────────────────────────────────────────────────────{}", dim, reset);
+    println!(
+        "{}───────────────────────────────────────────────────────{}",
+        dim, reset
+    );
     println!("Run with --format json for machine-readable output");
     println!("Report issues: github.com/NMA-vc/etalon/issues\n");
 

@@ -11,18 +11,17 @@ pub fn match_all(signals: &Signals, db: &FingerprintDB) -> Vec<DetectedTech> {
             // --- Header matching ---
             if let Some(headers) = &raw.headers {
                 for (k, v) in headers {
-                    if let Some(sig_v) = signals.headers.get(&k.to_lowercase()) {
-                        if v.is_empty() || sig_v.to_lowercase().contains(&v.to_lowercase()) {
-                            if seen.insert(tech.name.clone()) {
-                                detected.push(DetectedTech {
-                                    name: tech.name.clone(),
-                                    categories: tech.cats.clone(),
-                                    confidence: 100,
-                                    version: None,
-                                    via: DetectionMethod::Header(k.clone()),
-                                });
-                            }
-                        }
+                    if let Some(sig_v) = signals.headers.get(&k.to_lowercase())
+                        && (v.is_empty() || sig_v.to_lowercase().contains(&v.to_lowercase()))
+                        && seen.insert(tech.name.clone())
+                    {
+                        detected.push(DetectedTech {
+                            name: tech.name.clone(),
+                            categories: tech.cats.clone(),
+                            confidence: 100,
+                            version: None,
+                            via: DetectionMethod::Header(k.clone()),
+                        });
                     }
                 }
             }
@@ -32,16 +31,16 @@ pub fn match_all(signals: &Signals, db: &FingerprintDB) -> Vec<DetectedTech> {
                 for k in cookies.keys() {
                     let k_lower = k.to_lowercase();
                     for cookie_name in &signals.cookies {
-                        if cookie_name.to_lowercase().starts_with(&k_lower) {
-                            if seen.insert(tech.name.clone()) {
-                                detected.push(DetectedTech {
-                                    name: tech.name.clone(),
-                                    categories: tech.cats.clone(),
-                                    confidence: 100,
-                                    version: None,
-                                    via: DetectionMethod::Cookie(k.clone()),
-                                });
-                            }
+                        if cookie_name.to_lowercase().starts_with(&k_lower)
+                            && seen.insert(tech.name.clone())
+                        {
+                            detected.push(DetectedTech {
+                                name: tech.name.clone(),
+                                categories: tech.cats.clone(),
+                                confidence: 100,
+                                version: None,
+                                via: DetectionMethod::Cookie(k.clone()),
+                            });
                         }
                     }
                 }
@@ -55,19 +54,18 @@ pub fn match_all(signals: &Signals, db: &FingerprintDB) -> Vec<DetectedTech> {
                 };
                 'script_outer: for pattern in &patterns {
                     for src in &signals.script_srcs {
-                        if let Ok(re) = regex::Regex::new(pattern) {
-                            if re.is_match(src) {
-                                if seen.insert(tech.name.clone()) {
-                                    detected.push(DetectedTech {
-                                        name: tech.name.clone(),
-                                        categories: tech.cats.clone(),
-                                        confidence: 100,
-                                        version: None,
-                                        via: DetectionMethod::ScriptSrc,
-                                    });
-                                }
-                                break 'script_outer;
-                            }
+                        if let Ok(re) = regex::Regex::new(pattern)
+                            && re.is_match(src)
+                            && seen.insert(tech.name.clone())
+                        {
+                            detected.push(DetectedTech {
+                                name: tech.name.clone(),
+                                categories: tech.cats.clone(),
+                                confidence: 100,
+                                version: None,
+                                via: DetectionMethod::ScriptSrc,
+                            });
+                            break 'script_outer;
                         }
                     }
                 }
@@ -79,28 +77,20 @@ pub fn match_all(signals: &Signals, db: &FingerprintDB) -> Vec<DetectedTech> {
                     if let Some(meta_val) = signals.meta_tags.get(&meta_name.to_lowercase()) {
                         let matched = match meta_pattern {
                             StringOrVec::String(s) => {
-                                s.is_empty()
-                                    || meta_val
-                                        .to_lowercase()
-                                        .contains(&s.to_lowercase())
+                                s.is_empty() || meta_val.to_lowercase().contains(&s.to_lowercase())
                             }
                             StringOrVec::Vec(v) => v.iter().any(|s| {
-                                s.is_empty()
-                                    || meta_val
-                                        .to_lowercase()
-                                        .contains(&s.to_lowercase())
+                                s.is_empty() || meta_val.to_lowercase().contains(&s.to_lowercase())
                             }),
                         };
-                        if matched {
-                            if seen.insert(tech.name.clone()) {
-                                detected.push(DetectedTech {
-                                    name: tech.name.clone(),
-                                    categories: tech.cats.clone(),
-                                    confidence: 90,
-                                    version: None,
-                                    via: DetectionMethod::Meta,
-                                });
-                            }
+                        if matched && seen.insert(tech.name.clone()) {
+                            detected.push(DetectedTech {
+                                name: tech.name.clone(),
+                                categories: tech.cats.clone(),
+                                confidence: 90,
+                                version: None,
+                                via: DetectionMethod::Meta,
+                            });
                         }
                     }
                 }
@@ -119,16 +109,14 @@ pub fn match_all(signals: &Signals, db: &FingerprintDB) -> Vec<DetectedTech> {
                     } else {
                         signals.html.contains(*pattern)
                     };
-                    if matched {
-                        if seen.insert(tech.name.clone()) {
-                            detected.push(DetectedTech {
-                                name: tech.name.clone(),
-                                categories: tech.cats.clone(),
-                                confidence: 75,
-                                version: None,
-                                via: DetectionMethod::Html,
-                            });
-                        }
+                    if matched && seen.insert(tech.name.clone()) {
+                        detected.push(DetectedTech {
+                            name: tech.name.clone(),
+                            categories: tech.cats.clone(),
+                            confidence: 75,
+                            version: None,
+                            via: DetectionMethod::Html,
+                        });
                         break;
                     }
                 }
